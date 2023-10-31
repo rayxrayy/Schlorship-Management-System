@@ -19,6 +19,12 @@
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                <img src="{{ asset('./Images/logo.png') }}" alt="Logo">
+                <a href = "" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"> Benifits </a>
+                <a href = "" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"> How it Works </a>
+                <a href = "" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"> Blog </a>
+                <a href = "" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"> Contact Us </a>
+
                     @auth
                         <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                     @else
@@ -28,8 +34,13 @@
                             <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
                         @endif
                     @endauth
+                    
                 </div>
             @endif
+
+            <div>
+                
+            </div>
 
             <!-- <div class="max-w-7xl mx-auto p-6 lg:p-8">
                 <div class="flex justify-center">
@@ -133,8 +144,8 @@
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                     </div>
-                </div> -->
-            </div>
+                </div> 
+            </div> -->         
         </div>
     </body>
 </html>
