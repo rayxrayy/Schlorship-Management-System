@@ -54,7 +54,7 @@
         .dropdown a {
             text-decoration: none;
             color: #000; /* Adjust the color as needed */
-            /* padding: 10px; */
+            padding: 10px;
             display: inline-block;
         }
 
