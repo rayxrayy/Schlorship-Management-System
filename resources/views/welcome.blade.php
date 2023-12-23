@@ -44,6 +44,47 @@
             margin-top: 100px; /* Adjust this value to control the space between buttons and footer content */
             font-size: 18px;
         }
+         /* Style for the dropdown container */
+         .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Style for the link */
+        .dropdown a {
+            text-decoration: none;
+            color: #000; /* Adjust the color as needed */
+            /* padding: 10px; */
+            display: inline-block;
+        }
+
+        /* Style for the dropdown content (hidden by default) */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Style for the dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9; /* Adjust the background color as needed */
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* Style for the dropdown items */
+        .dropdown-content a {
+            color: #000; /* Adjust the color as needed */
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+        }
+
+        /* Change color on hover for the dropdown items */
+        .dropdown-content a:hover {
+            background-color: #ddd; /* Adjust the background color as needed */
+        }
           /* Mobile-specific styles */
           @media only screen and (max-width: 600px) {
             .button-container {
@@ -68,7 +109,13 @@
 
     <div class="button-container">
         <a href="#" onclick="toggleDarkMode()"style="margin-left: 10px;">Blog </a>
-        <a href="#" onclick="toggleDarkMode()"style="margin-left: 50px;">Dark Mode</a>
+        <div class="dropdown">
+            <a href="#" onclick="toggleDarkMode()"style="margin-left: 50px;">Company</a>
+            <div class="dropdown-content">
+            <a href="#">About us</a>
+            <a href="#">Careers</a>
+            </div>
+        </div>    
         @if (Route::has('login'))
             <div>
                 @auth
