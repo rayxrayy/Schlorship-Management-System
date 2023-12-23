@@ -19,6 +19,17 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
 
+              <!-- Add the role dropdown field -->
+            <div class="mt-4">
+            <x-label for="role" value="{{ __('Select Role') }}" />
+            <select id="role" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" name="role" required>
+                <option value="----">-- Select Role --</option>
+                <option value="college">College</option>
+                <option value="student">Student</option>
+                <option value="public">Public</option>
+            </select>
+        </div>
+
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
