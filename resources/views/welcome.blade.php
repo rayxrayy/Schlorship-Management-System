@@ -12,6 +12,26 @@
             /* background: url("{{ asset('./Images/images.png') }}"); */
         }
 
+        .navbar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff; /* Set your desired background color */
+            padding: 13px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for a subtle effect */
+            z-index: 1000; /* Ensure it appears above other content */
+        }
+
+        .logo-container {
+            margin-left: 100px; /* Adjust as needed */
+        }
+
+        .button-container {
+            margin-left: 10px; /* Adjust as needed */
+        }
+
+
         .dark-mode {
             background-color: #212124; /* Dark background color */
             color: #fff; /* Light text color */
@@ -19,7 +39,7 @@
         .button-container {
             display: flex;
             justify-content: flex-end;
-            margin-top: 40px;
+            margin-top: 20px;
             margin-right: 40px;
             font-size: 18px;
         }
@@ -54,7 +74,7 @@
         .dropdown a {
             text-decoration: none;
             color: #000; /* Adjust the color as needed */
-            padding: 10px;
+            /* padding: 10px; */
             display: inline-block;
         }
 
@@ -85,27 +105,20 @@
         .dropdown-content a:hover {
             background-color: #ddd; /* Adjust the background color as needed */
         }
-          /* Mobile-specific styles */
-          @media only screen and (max-width: 600px) {
-            .button-container {
-                justify-content: center; /* Center buttons on small screens */
-                margin-right: 0; /* Remove right margin on small screens */
-            }
 
-            .footer-container {
-                justify-content: center; /* Center content in the footer on small screens */
-                margin-right: 0; /* Remove right margin on small screens */
-            }
-        }
     </style>
 </head>
 <body class="antialiased">
+<div class="navbar-container">
     <!-- Logo -->
-    <div style="position: absolute; top: 10px; left: 100px;">
+    <div style="position: absolute; top: 0px; left: 100px;">
         <a href="#">
-        <img src="{{ asset('./Images/Logo.png') }}" alt="Logo"  style="width: 100px; height: auto;"/>
+        <img src="{{ asset('./Images/Logo.png') }}" alt="Logo"  style="width: 80px; height: auto;"/>
         </a>
-</div>
+        <!-- <span style="position: absolute; top: 10px; margin-left: 0px; margin-top: 30px; font-weight: bold; font-size: 15px; white-space: nowrap; overflow: visible;">
+    Edu-Hope
+</span> -->
+    </div>
 
     <div class="button-container">
         <a href="#" onclick="toggleDarkMode()"style="margin-left: 10px;">Blog </a>
@@ -130,6 +143,7 @@
             </div>
         @endif
         <a href="#" onclick="toggleDarkMode()"style="margin-left: 50px;">Dark Mode</a>
+    </div>
     </div>
     <div style="display: flex;">
         <img src="{{ asset('./Images/images.png') }}" alt="Description of Image 1" style="width: 50%;">
