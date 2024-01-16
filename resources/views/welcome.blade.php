@@ -145,14 +145,15 @@
         <a href="#" onclick="toggleDarkMode()"style="margin-left: 50px;">Dark Mode</a>
     </div>
     </div>
+
+
+
+
+<!-- 
     <div style="display: flex;">
-        <img src="{{ asset('./Images/images.png') }}" alt="Description of Image 1" style="width: 50%;">
-        <img src="{{ asset('./Images/Images.png') }}" alt="Description of Image 2" style="width: 50%;">
-    </div>
-    <div style="display: flex;">
-        <img src="{{ asset('./Images/images.png') }}" alt="Description of Image 1" style="width: 50%;">
-        <img src="{{ asset('./Images/Images.png') }}" alt="Description of Image 2" style="width: 50%;">
-    </div>
+     <img src="{{ asset('./Images/images.png') }}" alt="Description of Image 1" style="width: 50%;"> -->
+        <!-- <img src="{{ asset('./Images/Images.png') }}" alt="Description of Image 2" style="width: 50%;"> -->
+    <!-- </div>  -->
     <div class="footer-container">
         <div>
             <a href="https://github.com/rayxrayy/Schlorship-Management-System" target="_blank" style="margin-left: 50px;">Sponsor</a>

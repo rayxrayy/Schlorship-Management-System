@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // $admin = User::whereName('Admin')->first();
+    // dd(admin->toArray());
     return view('welcome');
 });
 
