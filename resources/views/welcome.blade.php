@@ -42,13 +42,14 @@
             margin-top: 20px;
             margin-right: 40px;
             font-size: 18px;
+            margin-left:40px;
         }
         .button-container a {
             margin-left: 10px;
             padding-bottom: 5px; /* Adjust this value to control the underline thickness */
             text-decoration: none;
             border-bottom: 2px solid transparent; /* Adjust this value to control the underline color and thickness */
-            color: #000000;
+            color: #c21807;
             font-weight: 600;
             transition: border-bottom 0.3s, color 0.3s;
         }
@@ -95,7 +96,7 @@
 
         /* Style for the dropdown items */
         .dropdown-content a {
-            color: #000; /* Adjust the color as needed */
+            color: #c21807; /* Adjust the color as needed */
             padding: 12px 16px;
             display: block;
             text-decoration: none;
@@ -106,66 +107,114 @@
             background-color: #ddd; /* Adjust the background color as needed */
         }
 
+        .top-section {
+            padding: 150px 0 0 0;
+            text-align: center;
+            /* margin-top: 100px; */
+        }
+        .image-slider {
+            width: 100%;
+            max-width: 600px; /* Set a max-width for better responsiveness */
+            margin: 0 auto; /* Center the slider horizontally */
+            height: 300px; /* Adjust height as needed */
+            overflow: hidden;
+        }
+        .image-slider img {
+            width: 100%;
+            height: auto;
+        }
+        .main {
+            margin-top: 70px; /* Adjust as needed to create space between header and content */
+            padding: 20px;
+        }
+
     </style>
 </head>
-<body class="antialiased">
-<div class="navbar-container">
+
+<header class="antialiased">
+    <div class="navbar-container">
     <!-- Logo -->
     <div style="position: absolute; top: 0px; left: 100px;">
         <a href="#">
         <img src="{{ asset('./Images/Logo.png') }}" alt="Logo"  style="width: 80px; height: auto;"/>
         </a>
-        <!-- <span style="position: absolute; top: 10px; margin-left: 0px; margin-top: 30px; font-weight: bold; font-size: 15px; white-space: nowrap; overflow: visible;">
-    Edu-Hope
-</span> -->
     </div>
-
-    <div class="button-container">
-        <a href="#" onclick="toggleDarkMode()"style="margin-left: 10px;">Blog </a>
-        <div class="dropdown">
-            <a href="#" onclick="toggleDarkMode()"style="margin-left: 50px;">Company</a>
-            <div class="dropdown-content">
-            <a href="#">About us</a>
-            <a href="#">Careers</a>
-            </div>
-        </div>    
+    <div>
+    <h3 style="position: absolute; right: 49%; botttom:2%; font-size:150%; color: #280290e8;">Edu-Hope</h3>
+    </div>
+    <div class="button-container">   
         @if (Route::has('login'))
             <div>
                 @auth
                     <a href="{{ url('/dashboard') }}">Dashboard</a>
                 @else
-                    <a href="{{ route('login') }}" style="margin-left: 50px;">Log in</a>
+                    <a href="{{ route('login') }}" style="font-style: lato; margin-left: 80px; color:#c21807;">Log in</a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" style="margin-left: 50px;"> Register</a>
+                        <a href="{{ route('register') }}" style="font-style: lato; margin-left: 40px; margin-right: 60px; color:#c21807;"> Register</a>
                     @endif
                 @endauth
             </div>
         @endif
-        <a href="#" onclick="toggleDarkMode()"style="margin-left: 50px;">Dark Mode</a>
+
     </div>
-    </div>
-
-
-
-
-<!-- 
-    <div style="display: flex;">
-     <img src="{{ asset('./Images/images.png') }}" alt="Description of Image 1" style="width: 50%;"> -->
-        <!-- <img src="{{ asset('./Images/Images.png') }}" alt="Description of Image 2" style="width: 50%;"> -->
-    <!-- </div>  -->
-    <div class="footer-container">
-        <div>
-            <a href="https://github.com/rayxrayy/Schlorship-Management-System" target="_blank" style="margin-left: 50px;">Sponsor</a>
+    <div class="button-container" style="margin-right:400px; font:initial;">   
+        <a href="#" onclick="toggleDarkMode()"style="margin-left: 50%;margin-right: 50px">Home</a>
+          <a href="#" onclick="toggleDarkMode()"style="margin-left: 50px;margin-right:50px">Blog </a>
+            <div class="dropdown">
+            <a href="#" onclick="toggleDarkMode()"style="margin-left: 50px;margin-right: 50px; color:#c21807;">Company</a>
+            <div class="dropdown-content">
+            <a href="#">About us</a>
+            <a href="#">Careers</a>
+            </div>
+            </div> 
+            <a href="#" onclick="toggleDarkMode()"style="margin-left: 50px;margin-right: 50px">Review</a>
+            <a href="#" onclick="toggleDarkMode()"style="margin-left:50px; margin-right: 50px; white-space: nowrap;">Contact Us</a>
 
         </div>
-        <div style= "margin-right: 100px; margin-bottom: 50px;">Edu-Hope</div>
     </div>
+</header>
+
+
+<main class="landing-page">
+<section class="top-section">
+            <div class="image-slider">
+                <img src="{{ asset('./Images/slider.png') }}" alt="Image 1">
+                <!-- Add more images for the slider -->
+            </div>
+        </section>
+        <section class="three-sections">
+            <!-- Section 1 -->
+            <div class="section">
+                <h2>Section 1</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vestibulum, turpis nec consequat consequat.</p>
+            </div>
+            <!-- Section 2 -->
+            <div class="section">
+                <h2>Section 2</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vestibulum, turpis nec consequat consequat.</p>
+            </div>
+            <!-- Section 3 -->
+            <div class="section">
+                <h2>Section 3</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vestibulum, turpis nec consequat consequat.</p>
+            </div>
+        </section>
+
+
+<footer>
+    <div class="footer-content">
+    <div>
+            <a href="https://github.com/rayxrayy/Schlorship-Management-System" target="_blank" style="margin-left: 560px;">© Copyright 2024 FundMe Inc. | All rights reserved</a>
+
+        </div>
+    </div> 
+</footer>
+
+</main>
+
     <script>
-        // Toggle dark mode
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
+      
     </script>
 </body>
 </html>
