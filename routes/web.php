@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Usercontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +28,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::post('user/store',[Usercontroller::class,'store']);

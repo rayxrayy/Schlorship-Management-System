@@ -205,7 +205,7 @@
 <footer>
     <div class="footer-content">
     <div>
-            <a href="https://github.com/rayxrayy/Schlorship-Management-System" target="_blank" style="margin-left: 560px;">© Copyright 2024 FundMe Inc. | All rights reserved</a>
+            <a href="https://github.com/rayxrayy/Schlorship-Management-System" target="_blank" style="margin-left: 560px;">© Copyright 2024 Edu-Hope Inc. | All rights reserved</a>
 
         </div>
     </div> 

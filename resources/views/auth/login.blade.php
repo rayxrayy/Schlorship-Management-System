@@ -31,7 +31,15 @@
                     <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
             </div>
-
+             
+            <div class="block m-5">
+                <strong>Google recaptcha:</strong>
+                {!! NoCaptcha::renderJs() !!}
+                {!! NoCaptcha::display() !!}
+            <!-- <button class="g-recaptcha" data-sitekey="6LdZLXIpAAAAAI5bXWf13LzX1t8SSnjHc5KRRb8T" data-callback='onSubmit' data-action='submit'>
+                    Submit
+                </button> -->
+            </div>
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
@@ -44,5 +52,20 @@
                 </x-button>
             </div>
         </form>
+       
+  <script src="https://www.google.com/recaptcha/enterprise.js?render=6LdZLXIpAAAAAI5bXWf13LzX1t8SSnjHc5KRRb8T">
+
+//        function onClick(e) {
+//         e.preventDefault();
+//         grecaptcha.enterprise.ready(async () => {
+//       const token = await grecaptcha.enterprise.execute('6LdZLXIpAAAAAI5bXWf13LzX1t8SSnjHc5KRRb8T', {action: 'LOGIN'});
+//     });
+//   }
+
+//   function onSubmit(token) {
+//     document.getElementById("demo-form").submit();
+//   }
+
+  </script>
     </x-authentication-card>
 </x-guest-layout>
