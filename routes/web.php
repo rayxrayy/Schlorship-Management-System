@@ -29,4 +29,4 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::post('user/store',[Usercontroller::class,'store']);
+// Route::post('user/store',[Usercontroller::class,'store']);
