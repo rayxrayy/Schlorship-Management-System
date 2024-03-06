@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usercontroller;
+use App\Http\Controllers\BlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,4 +30,4 @@ Route::middleware([
     })->name('dashboard');
 });
 
-// Route::post('user/store',[Usercontroller::class,'store']);
+Route::get('/blog', [BlogController::class, 'index']);

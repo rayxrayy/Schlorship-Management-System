@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{asset('cssfile/forgot.css')}}">
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
@@ -15,7 +16,8 @@
 
             <div>
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" autofocus />
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                    autocomplete="current-password" autofocus />
             </div>
 
             <div class="flex justify-end mt-4">

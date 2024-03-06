@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{asset('cssfile/forgot.css')}}">
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">

@@ -28,6 +28,7 @@ input {
 .login-header h1 {
     font-size: 40px;
     margin-bottom: 10px;
+    color: #16012f;
 }
 
 .login-header p {
@@ -94,7 +95,7 @@ input[type=email] {
 input[type=text]:focus,
 input[type=password]:focus,
 input[type=email]:focus {
-    border-color: #131086;
+    border-color: #595bd4;
 }
 
 .checkbox {
@@ -106,10 +107,10 @@ input[type=email]:focus {
 input[type=checkbox] {
     width: 20px;
     height: 20px;
-    accent-color: #131086;
+    accent-color: #595bd4;
 }
 
-button {
+/* button {
     border: none;
     background: linear-gradient(45deg, #131086, #b621f3);
     color: white;
@@ -121,7 +122,7 @@ button {
     font-size: 18px;
     height: 55px;
     cursor: pointer;
-}
+} */
 
 .forms-container {
     position: absolute;
@@ -188,7 +189,7 @@ form.sign-in-form {
     top: -10%;
     right: 48%;
     transform: translateY(-50%);
-    background-image: linear-gradient(-45deg, #0b1fb4 5%, #dd04fe 60%);
+    background-image: linear-gradient(45deg, #595bd4 5%, #16012f 60%);
     transition: 1.8s ease-in-out;
     border-radius: 50%;
     z-index: 6;
