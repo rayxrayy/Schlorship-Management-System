@@ -59,7 +59,7 @@
 
                 <form method="POST" action="{{ route('register') }}" class="sign-up-form">
                     <div class="login-header">
-                        <h4>Welcome to Our Application</h4>
+                        <!-- <h4>Welcome to Our Application</h4> -->
                         @csrf
 
                         <div>
@@ -147,7 +147,7 @@
                     Register
                 </button>
             </div>
-            <img src="  images/log.svg.svg" class="image" alt="" />
+            <img src="  images/svg.svg" class="image" alt="" />
         </div>
         <div class="panel right-panel">
             <div class="content">
@@ -159,7 +159,7 @@
                     login
                 </button>
             </div>
-            <img src="images/log.svg" class="image" alt="" />
+            <img src="images/svg.svg" class="image" alt="" />
         </div>
     </div>
     <script src="{{asset('jsfile/login.js')}}"></script>
