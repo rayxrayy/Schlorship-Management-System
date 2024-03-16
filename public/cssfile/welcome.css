@@ -13152,12 +13152,19 @@ section {
 }
 
 .ai-nepal-top {
-  background: url("/assets/img/ai-fellowship/bg-top.webp"), #16012f;
+  background: url(""), #16012f;
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: contain;
 }
 
+#careers {
+    background: url("/images/careers.jpg");
+    background-position: center top;
+    background-size: cover;
+    position: relative;
+    z-index: 1
+}
 .form-control, .form-select, #aifelloship-form .select2-container--default .select2-selection--single,
 .custom-select2 .select2-container--default .select2-selection--single {
   border: 1px solid #C8D8E0;
@@ -13427,14 +13434,6 @@ section.page-404 .error-img .compass-rotate {
   }
 }
 
-@-ms-keyframes rotation {
-  section.page-404 .error-img 0% {
-    -ms-transform: rotate(0deg);
-  }
-  section.page-404 .error-img 50% {
-    -ms-transform: rotate(45deg);
-  }
-}
 
 @keyframes rotation {
   0% {

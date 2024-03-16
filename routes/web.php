@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usercontroller;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CollegeController;
+use App\Http\Controllers\ReviewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +33,6 @@ Route::middleware([
 });
 
 Route::get('/blog', [BlogController::class, 'index']);
+Route::get('/college', [CollegeController::class, 'index']);
+Route::get('/review', [ReviewController::class, 'index']);
+Route::get('/careers', [ReviewController::class, 'career']);
