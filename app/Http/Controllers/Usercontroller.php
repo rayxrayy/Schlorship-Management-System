@@ -29,10 +29,7 @@ class Usercontroller extends Controller
      */
     public function store(Request $request)
     {
-        $validate = Validator::make(Input::all(), [
-            'g-recaptcha-response' => 'required|captcha'
-        ]);
-        
+      
     }
 
     /**

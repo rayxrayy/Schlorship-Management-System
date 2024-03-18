@@ -2,7 +2,7 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form method="post" action='/login' class="sign-in-form">
+                <form method="post" action='/login' class="sign-in-form" id='loginform'>
                     <x-validation-errors class="mb-4" />
 
                     @if (session('status'))
@@ -35,13 +35,12 @@
                                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                             </label>
                         </div>
-
                         <div class="block m-5">
                             <strong>Google recaptcha:</strong>
                             {!! NoCaptcha::renderJs() !!}
                             {!! NoCaptcha::display() !!}
-
                         </div>
+
                         <div class="flex items-center justify-end mt-4">
                             @if (Route::has('password.request'))
                             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -120,6 +119,11 @@
                         </div>
                         @endif
 
+                        <div class="block m-5">
+                            <strong>Google recaptcha:</strong>
+                            {!! NoCaptcha::renderJs() !!}
+                            {!! NoCaptcha::display() !!}
+                        </div>
                         <div class="flex items-center justify-end mt-4">
                             <!-- <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                     href="{{ route('login') }}">
@@ -163,4 +167,10 @@
         </div>
     </div>
     <script src="{{asset('jsfile/login.js')}}"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+    function onSubmit(token) {
+        document.getElementById("loginform").submit();
+    }
+    </script>
 </x-guest-layout>
