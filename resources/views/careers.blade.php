@@ -19,7 +19,4 @@
     </article>
 </section>
 
-
-
-
 @endsection
