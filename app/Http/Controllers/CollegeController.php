@@ -10,5 +10,7 @@ class CollegeController extends Controller
         return view('college');
     }
 
-    
+    public function addcollege(){
+        return view('users.colleges');
+    }
 }

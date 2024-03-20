@@ -3,7 +3,7 @@
         <div class="recent-updates">
             <h1>Status</h1>
             <div class="updates">
-                you have just applied.
+                <h2>You have just Applied </h2>
             </div>
         </div>
         <div class="insights">
@@ -11,7 +11,7 @@
                 <span class="material-icons-sharp">student</span>
                 <div class="middle">
                     <div class="left">
-                        <h3>Total Applied Students</h3>
+                        <h2>Total Students</h2>
                     </div>
                     <div class="progress">
                         <div class="number">
@@ -27,7 +27,7 @@
                 <span class="material-icons-sharp">Colleges</span>
                 <div class="middle">
                     <div class="left">
-                        <h3>Total Colleges </h3>
+                        <h2>Total Colleges </h2>
                     </div>
                     <div class="progress">
                         <div class="number">
@@ -43,7 +43,7 @@
                 <span class="material-icons-sharp">courses</span>
                 <div class="middle">
                     <div class="left">
-                        <h3>Total Courses</h3>
+                        <h2>Total Courses</h2>
                     </div>
                     <div class="progress">
                         <div class="number">
@@ -57,7 +57,7 @@
                 <span class="material-icons-sharp">list</span>
                 <div class="middle">
                     <div class="left">
-                        <h3>updates</h3>
+                        <h2>updates</h2>
                     </div>
                     <div class="progress">
                         <div class="number">

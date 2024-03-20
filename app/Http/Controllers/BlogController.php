@@ -13,6 +13,10 @@ class BlogController extends Controller
         return view('blog');
     }
 
+    public function addblog(){
+        return view('users.postblog');
+    }
+
      public function show($id)
     {
         $post = Post::find($id);
