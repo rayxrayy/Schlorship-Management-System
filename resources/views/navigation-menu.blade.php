@@ -15,21 +15,34 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('course') }}" :active="request()->routeIs('course')">
                         {{ __('Courses') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('college') }}" :active="request()->routeIs('college')">
                         {{ __('Colleges') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('apply') }}" :active="request()->routeIs('apply')">
                         {{ __('Apply') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('blog') }}" :active="request()->routeIs('blog')">
                         {{ __('Blog') }}
                     </x-nav-link>
                 </div>
 
             </div>
+            <div class="search-box">
+                <div class="row">
+                    <input type="text" id="input-box" placeholder="Search..." autocomplete="off">
+                    <button class="search-btn"><i class="ph-magnifying-glass-bold"></i></button>
+                </div>
+                <div class="result-box" id="result-box">
+                    <ul id="autocomplete-results"></ul>
+                </div>
+            </div>
+            <div>
+                <x-button>n</x-button>
+            </div>
+
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Teams Dropdown -->
@@ -86,15 +99,7 @@
                     </x-dropdown>
                 </div>
                 @endif
-                <div class="search-box">
-                    <div class="row">
-                        <input type="text" id="input-box" placeholder="Search..." autocomplete="off">
-                        <button class="search-btn"><i class="ph-magnifying-glass-bold"></i></button>
-                    </div>
-                    <div class="result-box" id="result-box">
-                        <ul id="autocomplete-results"></ul>
-                    </div>
-                </div>
+
 
                 <!-- Settings Dropdown -->
                 <div class="ms-3 relative">
@@ -178,24 +183,24 @@
             </x-responsive-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('course') }}" :active="request()->routeIs('course')">
                 {{ __('Courses') }}
             </x-responsive-nav-link>
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('college') }}" :active="request()->routeIs('college')">
                 {{ __('Colleges') }}
             </x-responsive-nav-link>
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('apply') }}" :active="request()->routeIs('apply')">
                 {{ __('Apply') }}
             </x-responsive-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1" style="padding-bottom:40%">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('blog') }}" :active="request()->routeIs('blog')">
                 {{ __('Blog') }}
             </x-responsive-nav-link>
         </div>

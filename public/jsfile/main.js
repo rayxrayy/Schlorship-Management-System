@@ -75,3 +75,23 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+
+// Get the button and the popup form
+const addCourseBtn = document.querySelector('.add-course-btn');
+const popupForm = document.getElementById('popup-form');
+
+// Function to open the popup form
+function openForm() {
+    popupForm.style.display = 'block';
+    popupForm.style.visibility = 'visible'; // Ensure it's visible
+}
+
+// Function to close the popup form
+function closeForm() {
+    popupForm.style.display = 'none';
+    popupForm.style.visibility = 'hidden'; // Hide it
+}
+
+// Event listener to open the form when the button is clicked
+addCourseBtn.addEventListener('click', openForm);
