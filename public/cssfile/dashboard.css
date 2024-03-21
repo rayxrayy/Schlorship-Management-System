@@ -492,10 +492,14 @@ main .recent-orders h2 {
     margin-bottom: 0.8rem;
 }
 
+table#category_data {
+    font-size: 18px;
+}
+
 main .recent-orders table {
     background: var(--color-white);
     width: 100%;
-    /* border-radius: var(--card-borde-radius); */
+    border-radius: var(--card-borde-radius);
     padding: var(--card-padding);
     text-align: center;
     box-shadow: var(--box-shadow);
@@ -1201,6 +1205,8 @@ input {
 }
 
 .popup-form {
+    width: 60%;
+    height: 80%;
     display: none;
     position: fixed;
     top: 50%;

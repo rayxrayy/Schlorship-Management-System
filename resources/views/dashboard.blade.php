@@ -8,7 +8,7 @@
         </div>
         <div class="insights">
             <div class="sales">
-                <span class="material-icons-sharp">student</span>
+                <span class="material-icons-shar">student</span>
                 <div class="middle">
                     <div class="left">
                         <h2>Total Students</h2>
@@ -24,7 +24,7 @@
             </div>
 
             <div class="income a">
-                <span class="material-icons-sharp">Colleges</span>
+                <span class="material-icons-shar">Colleges</span>
                 <div class="middle">
                     <div class="left">
                         <h2>Total Colleges </h2>
@@ -40,7 +40,7 @@
             </div>
 
             <div class="order a">
-                <span class="material-icons-sharp">courses</span>
+                <span class="material-icons-shar">courses</span>
                 <div class="middle">
                     <div class="left">
                         <h2>Total Courses</h2>
@@ -54,7 +54,7 @@
 
             </div>
             <div class="order a">
-                <span class="material-icons-sharp">list</span>
+                <span class="material-icons-shar">list</span>
                 <div class="middle">
                     <div class="left">
                         <h2>updates</h2>
