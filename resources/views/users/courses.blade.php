@@ -38,7 +38,7 @@
                     <td>{{ $course->code }}</td>
                     <td>{{ $course->department }}</td>
                     <td class="action">
-                        <x-button onclick="editCategory({{ $category }})"><span class="material-icons-sharp">edit</span>
+                        <x-button onclick=""><span class="material-icons-sharp">edit</span>
                         </x-button>
                         <a href="{{ route('courses.destroy', $course->id) }}" onclick="return confirm('Are your sure?')"
                             style="margin-left: 5px;">
