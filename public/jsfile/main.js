@@ -76,7 +76,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
+// Event listener to open the form when the button is clicked
+addCourseBtn.addEventListener('click', openForm);
 // Get the button and the popup form
 const addCourseBtn = document.querySelector('.add-course-btn');
 const popupForm = document.getElementById('popup-form');
@@ -93,5 +94,45 @@ function closeForm() {
     popupForm.style.visibility = 'hidden'; // Hide it
 }
 
-// Event listener to open the form when the button is clicked
-addCourseBtn.addEventListener('click', openForm);
+
+
+function toggleFields(header) {
+    const personalinfo = header.nextElementSibling;
+    personalinfo.style.display = personalinfo.style.display === 'none' ? 'block' : 'none';
+}
+
+function toggleFieldsEdu(header) {
+    const edubackground = header.nextElementSibling;
+    edubackground.style.display = edubackground.style.display === 'none' ? 'block' : 'none';
+}
+
+function toggleFieldsDoc(header) {
+    const documentation = header.nextElementSibling;
+    documentation.style.display = documentation.style.display === 'none' ? 'block' : 'none';
+}
+
+
+//to get apply form
+// function toggleFormVisibility() {
+//         var form = document.getElementById("applicationForm");
+//         form.style.display = (form.style.display === "none") ? "block" : "none";
+//     }
+function openModal() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "block";
+}
+
+// Function to close the modal
+function closeModal() {
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
+
+// Close the modal when the user clicks anywhere outside of the modal
+window.onclick = function(event) {
+  var modal = document.getElementById("myModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+

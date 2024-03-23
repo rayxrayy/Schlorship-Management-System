@@ -7,6 +7,7 @@ use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApplyController;
+use App\Http\Controllers\FormController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +45,10 @@ Route::post('/store/course',[CourseController::class,'store'])->name('store.cour
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 Route::patch('/course',[CourseController::class,'update']);
 
+Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
+
 Route::get('/addcollege',[CollegeController::class,'addcollege'])->name("college");
 Route::get('/apply',[ApplyController::class,'index'])->name("apply");
+
+
 Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
