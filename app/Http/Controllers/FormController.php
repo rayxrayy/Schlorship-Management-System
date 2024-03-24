@@ -23,9 +23,9 @@ class FormController extends Controller
             'currentedu' => 'required|string|max:255',
             'major' => 'required|string|max:255',
             'result' => 'required|string|max:255',
-            'document-citizenship' => 'required|file|mimes:pdf,jpg,jpeg,png|max:10240', // Example validation for file upload
-            'document-sop' => 'required|file|mimes:pdf,jpg,jpeg,png|max:10240', // Example validation for file upload
-            'document-transcript' => 'required|file|mimes:pdf,jpg,jpeg,png|max:10240', // Example validation for file upload
+            'document_citizenship' => 'required|file|mimes:pdf,jpg,jpeg,png|max:10240', // Example validation for file upload
+            'document_sop' => 'required|file|mimes:pdf,jpg,jpeg,png|max:10240', // Example validation for file upload
+            'document_transcript' => 'required|file|mimes:pdf,jpg,jpeg,png|max:10240', // Example validation for file upload
             'document' => 'file|mimes:pdf,jpg,jpeg,png|max:10240', // Example validation for file upload
             'description' => 'nullable|string|max:100',
         ]);

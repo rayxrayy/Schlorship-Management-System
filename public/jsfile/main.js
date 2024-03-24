@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Event listener to open the form when the button is clicked
-addCourseBtn.addEventListener('click', openForm);
+
 // Get the button and the popup form
 const addCourseBtn = document.querySelector('.add-course-btn');
 const popupForm = document.getElementById('popup-form');
@@ -94,6 +94,7 @@ function closeForm() {
     popupForm.style.visibility = 'hidden'; // Hide it
 }
 
+addCourseBtn.addEventListener('click', openForm);
 
 
 function toggleFields(header) {

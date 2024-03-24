@@ -8,6 +8,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\StudentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,3 +53,5 @@ Route::get('/apply',[ApplyController::class,'index'])->name("apply");
 
 
 Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
+Route::get('/selectedstudents',[StudentController::class,'viewselectedstudents']);
+Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsingleselectedstudent']);
