@@ -185,28 +185,28 @@
                     <div class="row">
                         <div class="col-25">
 
-                            <label for="document-citizenship">Choose a Citizenship:</label>
+                            <label for="document_citizenship">Choose a Citizenship:</label>
                         </div>
                         <div class="col-75">
-                            <input type="file" id="document-citizenship" name="document-citizenship">
+                            <input type="file" id="document_citizenship" name="document_citizenship">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-25">
 
-                            <label for="document-sop">Choose a SOP:</label>
+                            <label for="document_sop">Choose a SOP:</label>
                         </div>
                         <div class="col-75">
-                            <input type="file" id="document-sop" name="document-sop">
+                            <input type="file" id="document_sop" name="document_sop">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-25">
 
-                            <label for="document-transcript">Choose a Transcripts:</label>
+                            <label for="document_transcript">Choose a Transcripts:</label>
                         </div>
                         <div class="col-75">
-                            <input type="file" id="document-transcript" name="document-transcript">
+                            <input type="file" id="document_transcript" name="document_transcript">
                         </div>
                     </div>
 
