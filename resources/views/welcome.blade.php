@@ -129,9 +129,24 @@
             <div class="vr opacity-25"></div>
             <a class="h6 ai-section-titles" href="#section-faqs">FAQs</a>
             <div class="vr opacity-25"></div>
+            @if (Route::has('login'))
+
+            @auth
+            <a class="btn fill-button text-white py-2 lh-sm" style="background: linear-gradient(#595bd4, #595bd4);"
+                role="button" aria-disabled="true" id="apply_button_tab-menu"
+                href="{{ route('register') }}">Dashboard</span></a>
+            @else
+            <a href="{{ route('login') }}" style=""></a>
+            @if (Route::has('register'))
+
+
             <a class="btn fill-button text-white py-2 lh-sm" style="background: linear-gradient(#595bd4, #595bd4);"
                 role="button" aria-disabled="true" id="apply_button_tab-menu" href="{{ route('register') }}">Get
                 Started</span></a>
+            @endif
+            @endauth
+
+            @endif
         </nav>
     </div>
 </section>

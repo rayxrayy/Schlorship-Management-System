@@ -4,23 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selected Student Details</title>
+    <title>Selected student</title>
     <style>
     body {
-        font-family: proxima-nova, sans-serif;
+        font-family: sans-serif;
         background-color: #f5f5f5;
+        font-size: 14px;
         color: #333;
         margin: 0;
         padding: 0;
-        max-width: 800px;
-        margin: 50px auto;
     }
 
-    h1,
-    h2,
-    h3 {
-        color: #595bd4;
-        margin-bottom: 10px;
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 2cm;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        justify-content: center;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 20px;
+    }
+
+    .profile img {
+        width: 150px;
+        height: auto;
+        margin-right: 20px;
+        border-radius: 10%;
+    }
+
+    .profile .profile-details {
+        margin: 0 auto;
+        /* Push to the right side */
+        text-align: center;
+        /* Center align text */
+    }
+
+    .profile-details {
+        margin-left: auto;
     }
 
     p {
@@ -29,97 +57,120 @@
 
     .section {
         margin-bottom: 20px;
+        line-height: 1.5;
     }
 
     .section-title {
         font-size: 20px;
         font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .resume-item {
         margin-bottom: 10px;
+        border-bottom: 2px solid #0000008a;
+        padding-bottom: 20px;
     }
 
-    .resume-item p {
-        margin-bottom: 5px;
+    .education {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 20px;
     }
 
-    button[type="submit"],
-    button[type="button"] {
-        background-color: #4caf50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-right: 10px;
+    .education .running {
+        margin-right: 20px;
     }
 
-    button[type="submit"]:hover,
-    button[type="button"]:hover {
-        background-color: #45a049;
+    .education span {
+        white-space: nowrap;
+        /* Prevent line breaks */
+    }
+
+    .edu-course {
+        padding-left: 25%;
+    }
+
+    .edu-college {
+        padding-left: 34.5%;
+    }
+
+    .button {
+        padding-top: 20px;
+    }
+
+    .fill-button {
+        padding: 12px 25px;
+        background-color: #595bd4 !important;
+        text-decoration: none;
+        color: #ffffff;
+        border-radius: 5px;
+        height: fit-content;
     }
     </style>
 </head>
 
 <body>
-    <nav></nav>
-    <form action="/viewsingleselectedstudents" method="post">
+    @foreach($selectedstudents as $student)
+    <div class="container">
+        <div class="profile">
+            <img src="/images/student.jpg" alt="Student Image">
+            <div class="profile-details">
+                <h2>{{ $student->fullname }}</h2>
+                <p>Address: {{ $student->address }}</p>
+                <p>Email: {{ $student->email }}</p>
+                <p>Phone number: {{ $student->number }}</p>
+                <p>Date of Birth: {{ $student->dob }}</p>
+            </div>
+        </div>
 
-        <h1>John Doe</h1>
-        <div class="resume-item">
-            <h2 class="section-title">Contact Information</h2>
-            <p>Email: johndoe@example.com</p>
-            <p>Phone: 123-456-7890</p>
-            <p>Address: 123 Main Street, Anytown, USA</p>
+        <div class="section">
+            <h2 class="section-title">Description</h2>
+            <p>{{ $student->description }}</p>
         </div>
-        <div class="resume-item">
-            <h2 class="section-title">Summary</h2>
-            <p>A self-motivated and diligent individual with a Bachelor's degree in Computer Science. Proficient in
-                Java, Python, and web development technologies. Strong problem-solving skills and a quick learner.</p>
-        </div>
-        <div class="resume-item">
+
+        <div class="section">
             <h2 class="section-title">Education</h2>
-            <p>Bachelor of Science in Computer Science</p>
-            <p>XYZ University, Anytown, USA</p>
-            <p>Graduated: May 2020</p>
-        </div>
-        <div class="resume-item">
-            <h2 class="section-title">Experience</h2>
-            <h3>Software Developer Intern</h3>
-            <p>ABC Company, Somewhere, USA</p>
-            <p>June 2019 - August 2019</p>
-            <ul>
-                <li>Assisted in developing and maintaining web applications using Python and Django framework.</li>
-                <li>Participated in daily stand-up meetings and contributed to team discussions.</li>
-                <li>Implemented new features and fixed bugs under the guidance of senior developers.</li>
-            </ul>
-        </div>
-        <div class="resume-item">
-            <h2 class="section-title">Skills</h2>
-            <ul>
-                <li>Programming Languages: Java, Python, JavaScript</li>
-                <li>Web Development: HTML/CSS, Bootstrap, React</li>
-                <li>Database Management: SQL, MongoDB</li>
-                <li>Version Control: Git</li>
-            </ul>
-        </div>
-        <div class="resume-item">
-            <h2 class="section-title">Projects</h2>
-            <h3>Online Bookstore</h3>
-            <p>Developed a web application for an online bookstore using Django framework. Implemented user
-                authentication, product listing, and shopping cart functionality.</p>
-            <h3>Personal Portfolio Website</h3>
-            <p>Designed and developed a responsive portfolio website using HTML, CSS, and Bootstrap. Showcased personal
-                projects and achievements.</p>
-        </div>
-        <button type="submit">Approve</button>
-        <button onclick="window.print()">Print</button>
-        <button onclick="window.history.back()">Cancel</button>
+            <p class="education">
+                <span class="running"> Running: <span class="edu-course">{{ $student->major }}</span> </span>
 
-    </form>
 
+                <span class="edu-college">{{ $student->currentedu }}</span>
+                <span class="edu-college">GPA: {{ $student->result }}</span>
+            </p>
+            <p class="education">
+                <span class="running"> Passed: <span class="edu-course"> {{ $student->major }}
+                    </span> </span>
+                <span class="edu-college">{{ $student->currentedu }}</span>
+                <span class="edu-college">GPA: {{ $student->result }}</span>
+            </p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Personal Information</h2>
+            <p>Gender: {{ $student->gender }}</p>
+            <p>Current Address: {{ $student->address }}</p>
+            <p>Parent's Name: {{ $student->pname }}</p>
+            <p>Parent's Number: {{ $student->pnumber }}</p>
+
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Documents</h2>
+            <p>Copy of citizenship: {{ $student->document_citizenship }}</p>
+            <p>Copy of Transcript: {{ $student->document_transcript }}</p>
+            <p>Copy of Sop: {{ $student->document_sop }}</p>
+            <p>Other document: {{ $student->document }}</p>
+        </div>
+
+
+
+        <h3>Make a desision !</h3>
+        <p> if you want to select the student just click the approve button if not then click the cancel button.</p>
+        <div class="button">
+            <x-button class="fill-button">Approve</x-button>
+            <x-button class="fill-button" onclick="window.print()">Print</x-button>
+            <x-button class="fill-button" onclick="window.history.back()">Cancel</x-button>
+        </div>
+
+    </div>
+    @endforeach
 </body>
 
 </html>
