@@ -53,5 +53,5 @@ Route::get('/apply',[ApplyController::class,'index'])->name("apply");
 
 
 Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
-Route::get('/selectedstudents',[StudentController::class,'viewselectedstudents']);
-Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsingleselectedstudent']);
+Route::get('/selectedstudents',[StudentController::class,'viewselectedstudents'])->name('selectedstudents');
+Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsingleselectedstudent'])->name('viewsingleselectedstudents');
