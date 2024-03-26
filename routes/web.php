@@ -44,7 +44,7 @@ Route::get('/careers', [ReviewController::class, 'career']);
 Route::get('/course',[CourseController::class,'index'])->name("course");
 Route::post('/store/course',[CourseController::class,'store'])->name('store.course');;
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
-Route::patch('/course',[CourseController::class,'update']);
+Route::patch('/course/{id}', [CourseController::class,'update'])->name('course.update');
 
 Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
 
@@ -55,3 +55,14 @@ Route::get('/apply',[ApplyController::class,'index'])->name("apply");
 Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
 Route::get('/selectedstudents',[StudentController::class,'viewselectedstudents'])->name('selectedstudents');
 Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsingleselectedstudent'])->name('viewsingleselectedstudents');
+
+
+// publicpart
+Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent']);
+
+// Route::get('/refresh', function () {
+//     // Perform any session-related actions here
+//     session()->flush(); // Example: Clear all session data
+
+//     return redirect()->back(); // Redirect back to the previous page
+// })->name('refresh');

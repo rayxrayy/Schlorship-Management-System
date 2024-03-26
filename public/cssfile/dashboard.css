@@ -1337,8 +1337,13 @@ input[type=submit]:hover {
 }
 
 .image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
 
+}
+
+#img-scholor {
+    border-radius: 50%;
 }

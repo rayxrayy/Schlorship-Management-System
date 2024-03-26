@@ -26,27 +26,29 @@ class CourseController extends Controller
         Course::create($validatedData);
         return redirect()->back()->with('success', 'Course created successfully!');
     }
-     public function update(Request $request)
+    
+    public function update(Request $request, $id)
     {
-        if(!$request->has('id')){
-            return redirect('/course')->with(['message' => 'Oops.. Something went wrong']);
-        }
-        $courses = courses::find($request->input('id'));
-        $courses->name = $request->input('coursename') ?? $courses->coursename;
-        $courses->status = $request->input('code') ?? $courses->code;
-        $courses->name = $request->input('module') ?? $courses->module;
-        $courses->status = $request->input('department') ?? $courses->department;
-        $courses->name = $request->input('fee') ?? $courses->fee;
-        $courses->status = $request->input('description') ?? $courses->description;
-        $courses->save();
+        $course = Course::find($id);
+    if(!$course){
+        return redirect('/course')->with(['message' => 'Course not found']);
+    }
 
-        return redirect('/course')->with(['message' => 'course updated successfully']);
+    $course->coursename = $request->input('coursename') ?? $course->coursename;
+    $course->code = $request->input('code') ?? $course->code;
+    $course->module = $request->input('module') ?? $course->module;
+    $course->department = $request->input('department') ?? $course->department;
+    $course->fee = $request->input('fee') ?? $course->fee;
+    $course->description = $request->input('description') ?? $course->description;
+    $course->save();
+
+    return redirect('/course')->with(['message' => 'Course updated successfully']);
     }
 
     public function destroy($id)
     {
-        $courses = Courses::find($id);
+        $courses = Course::find($id);
         $courses->delete();
-        return redirect('/courses')->with(['message'   => 'Courses deleted successfully']);
+        return redirect('/course')->with(['message'   => 'Courses deleted successfully']);
     }
 }
