@@ -20,8 +20,7 @@
             <tbody>
                 @foreach($selectedstudents as $student)
                 <tr>
-                    <td class="image-container"><img src="/images/college.png" alt=""
-                            style="border-radius: 50%; width: 50px; height: 50px;">
+                    <td class="image-container"><img src="/images/college.png" alt="">
                     </td>
                     <td>{{ $student->fullname }}</td>
                     <td>{{ $student->major }}</td>

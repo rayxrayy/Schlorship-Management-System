@@ -40,7 +40,7 @@
             </div>
 
             <div class="order a">
-                <span class="material-icons-shar">courses</span>
+                <span class="material-icons-shar">{{ \App\Models\Course::count() }}</span>
                 <div class="middle">
                     <div class="left">
                         <h2>Total Courses</h2>
