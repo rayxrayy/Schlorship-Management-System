@@ -68,6 +68,7 @@
             </tbody>
         </table>
     </div>
+    <div>{{ $courses->links() }}</div>
     <div class="foot" style="padding-top:20%" ;></div>
 
     <div id="popup-form" class="popup-form">

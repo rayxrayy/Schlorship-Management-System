@@ -26,8 +26,6 @@
 
                </div>
            </article>
-           <div style="text-align: center;">
-               <x-button>View All Colleges</x-button>
-           </div>
+
        </section>
    </x-app-layout>

@@ -2,12 +2,17 @@
 <x-app-layout>
 
     <section id="section-course" class="ai-felpx;lowship--course bg-white">
-        <h1>
+        <h1 style='font-size:41px;'>
             <p>lets start Scholorship journey</p>
         </h1>
         @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
+        </div>
+        @endif
+        @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
         </div>
         @endif
         <article class="container-xxl py-5">
@@ -68,7 +73,9 @@
                         </div>
                         <div class="col-75">
                             <input type="text" id="dob" name="dob" placeholder="Enter your date of birth ..">
-                            <span id="dob-error" class="text-danger"></span>
+                            @error('dob')
+                            <span id="dob-error" class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row">
@@ -109,7 +116,9 @@
                         </div>
                         <div class="col-75">
                             <input type="text" id="number" name="number" placeholder="Enter your phone number ..">
-                            <span id="number-error" class="text-danger"></span>
+                            @error('number')
+                            <span id="number-error" class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
 
@@ -119,7 +128,9 @@
                         </div>
                         <div class="col-75">
                             <input type="text" id="email" name="email" placeholder="Enter your email ..">
-                            <span id="email-error" class="text-danger"></span>
+                            @error('email')
+                            <span id="email-error" class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <h2>
@@ -145,7 +156,9 @@
                         <div class="col-75">
                             <input type="text" id="pnumber" name="pnumber"
                                 placeholder="Enter the number of your parents ..">
-                            <span id="pnumber-error" class="text-danger"></span>
+                            @error('pnumber')
+                            <span id="pnumber-error" class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
 
@@ -269,7 +282,9 @@
                             <label for="description">Description</label>
                         </div>
                         <div class="col-75">
-                            <span id="description-error" class="text-danger"></span>
+                            @error('description')
+                            <span id="description-error" class="text-danger">{{ $message }}</span>
+                            @enderror
                             <textarea id="description" name="description"
                                 placeholder="Write something not more than 100 words .."
                                 style="height:150px"></textarea>
