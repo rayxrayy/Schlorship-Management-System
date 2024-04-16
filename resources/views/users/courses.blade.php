@@ -9,8 +9,8 @@
         {{ session('message') }}
     </div>
     @endif
-    <h1>You can add any courses here!</h1>
-    <h2>
+    <h1 style='font-size:41px;'>You can add any courses here!</h1>
+    <h2 style='font-size:18px;'>
         <p>Just make sure that you have extra courses from other so that student would get limitted options and easy to
             apply.</p>
         <p>Don't forget to add all the details and description and make sure you add the actual fee.</p>
@@ -36,6 +36,7 @@
             <thead>
 
                 <tr>
+                    <th>S.N</th>
                     <th>Course Name</th>
                     <th>Course Code</th>
                     <th>Department</th>
@@ -45,6 +46,7 @@
             <tbody>
                 @foreach($courses as $course)
                 <tr>
+                    <td class="sn">1</td>
                     <td>{{ $course->coursename }}</td>
                     <td>{{ $course->code }}</td>
                     <td>{{ $course->department }}</td>
@@ -243,6 +245,12 @@ function openEditForm() {
 
 function closeEditForm() {
     document.getElementById('popup-form').style.display = 'none';
+
+}
+
+let get_me_sn = document.getElementsByClassName("sn")
+for (let i = 0; i < get_me_sn.length; i++) {
+    get_me_sn[i].textContent = i + 1
 
 }
 </script>

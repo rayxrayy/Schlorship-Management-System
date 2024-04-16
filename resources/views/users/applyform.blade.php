@@ -61,7 +61,8 @@
                             <label for="name">Full Name</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="fullname" name="fullname" placeholder="Enter your Full name..">
+                            <input type="text" id="fullname" name="fullname" placeholder="Enter your Full name.."
+                                value="{{old('fullname')}}" required>
                             @error('fullname')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -72,10 +73,10 @@
                             <label for="dob">Date of Birth</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="dob" name="dob" placeholder="Enter your date of birth ..">
-                            @error('dob')
-                            <span id="dob-error" class="text-danger">{{ $message }}</span>
-                            @enderror
+                            <input type="text" id="dob" name="dob" placeholder="Enter your date of birth .."
+                                value="{{old('dob')}}" required>
+                            <span id="dob-error" class="text-danger"></span>
+
                         </div>
                     </div>
                     <div class="row">
@@ -89,6 +90,7 @@
                                 <option value="Male">Male</option>
                                 <option value="notsay">Prefer not to say</option>
                                 <option value="others">Others</option>
+
                             </select>
                             @error('gender')
                             <span class="text-danger">{{ $message }}</span>
@@ -103,7 +105,8 @@
                             <label for="address">Address</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="address" name="address" placeholder="Enter your current address ..">
+                            <input type="text" id="address" name="address" placeholder="Enter your current address .."
+                                value="{{old('address')}}" required>
                             @error('address')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -115,10 +118,11 @@
                             <label for="number">Phone number</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="number" name="number" placeholder="Enter your phone number ..">
-                            @error('number')
-                            <span id="number-error" class="text-danger">{{ $message }}</span>
-                            @enderror
+                            <input type="text" id="number" name="number" placeholder="Enter your phone number .."
+                                value="{{old('number')}}">
+
+                            <span id="number-error" class="text-danger"></span>
+
                         </div>
                     </div>
 
@@ -127,10 +131,11 @@
                             <label for="email">Email</label>
                         </div>
                         <div class="col-75">
-                            <input type="text" id="email" name="email" placeholder="Enter your email ..">
-                            @error('email')
-                            <span id="email-error" class="text-danger">{{ $message }}</span>
-                            @enderror
+                            <input type="text" id="email" name="email" placeholder="Enter your email .."
+                                value="{{old('email')}}">
+
+                            <span id="email-error" class="text-danger"></span>
+
                         </div>
                     </div>
                     <h2>
@@ -142,7 +147,8 @@
 
                         </div>
                         <div class="col-75">
-                            <input type="text" id="pname" name="pname" placeholder="Enter your parent name ..">
+                            <input type="text" id="pname" name="pname" placeholder="Enter your parent name .."
+                                value="{{old('pname')}}">
                             @error('pname')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -155,10 +161,10 @@
                         </div>
                         <div class="col-75">
                             <input type="text" id="pnumber" name="pnumber"
-                                placeholder="Enter the number of your parents ..">
-                            @error('pnumber')
-                            <span id="pnumber-error" class="text-danger">{{ $message }}</span>
-                            @enderror
+                                placeholder="Enter the number of your parents .." value="{{old('pnumber')}}">
+
+                            <span id="pnumber-error" class="text-danger"></span>
+
                         </div>
                     </div>
 
@@ -191,7 +197,8 @@
                         </div>
                         <div class="col-75">
                             <input type="text" id="currentedu" name="currentedu"
-                                placeholder="Enter the name of school or college that you are studying (if any?) ..">
+                                placeholder="Enter the name of school or college that you are studying (if any?) .."
+                                value="{{old('currentedu')}}">
                         </div>
                     </div>
                     <div class="row">
@@ -200,7 +207,7 @@
                         </div>
                         <div class="col-75">
                             <input type="text" id="major" name="major"
-                                placeholder="Enter you course that you got graduate from...">
+                                placeholder="Enter you course that you got graduate from..." value="{{old('major')}}">
                             @error('major')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -213,7 +220,7 @@
                         </div>
                         <div class="col-75">
                             <input type="text" id="result" name="result"
-                                placeholder="Enter your GPA or Grades (if any ?)..">
+                                placeholder="Enter your GPA or Grades (if any ?).." value="{{old('result')}}">
                             @error('result')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -233,7 +240,8 @@
                             <label for="document_citizenship">Choose a Citizenship:</label>
                         </div>
                         <div class="col-75">
-                            <input type="file" id="document_citizenship" name="document_citizenship">
+                            <input type="file" id="document_citizenship" name="document_citizenship"
+                                value="{{old('document_citizenship')}}">
                             @error('document_citizenship')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -245,7 +253,7 @@
                             <label for="document_sop">Choose a SOP:</label>
                         </div>
                         <div class="col-75">
-                            <input type="file" id="document_sop" name="document_sop">
+                            <input type="file" id="document_sop" name="document_sop" value="{{old('document_sop')}}">
                             @error('document_sop')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -257,7 +265,8 @@
                             <label for="document_transcript">Choose a Transcripts:</label>
                         </div>
                         <div class="col-75">
-                            <input type="file" id="document_transcript" name="document_transcript">
+                            <input type="file" id="document_transcript" name="document_transcript"
+                                value="{{old('document_transcript')}}">
                             @error('document_transcript')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -273,7 +282,7 @@
                             <label for="document">Choose a document:</label>
                         </div>
                         <div class="col-75">
-                            <input type="file" id="document" name="document">
+                            <input type="file" id="document" name="document" value="{{old('document')}}">
                         </div>
                     </div>
 
@@ -282,11 +291,11 @@
                             <label for="description">Description</label>
                         </div>
                         <div class="col-75">
-                            @error('description')
-                            <span id="description-error" class="text-danger">{{ $message }}</span>
-                            @enderror
+
+                            <span id="description-error" class="text-danger"></span>
+
                             <textarea id="description" name="description"
-                                placeholder="Write something not more than 100 words .."
+                                placeholder="Write something not more than 100 words .." value="{{old('description')}}"
                                 style="height:150px"></textarea>
                         </div>
                     </div>
