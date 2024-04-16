@@ -72,23 +72,3 @@ function validateDescription() {
 
 // Listen for input event on description textarea field
 document.getElementById('description').addEventListener('input', validateDescription);
-
-// Function to validate all fields before form submission
-function validateForm() {
-    var isEmailValid = validateEmail();
-    var isDescriptionValid = validateDescription();
-    var isPhoneNumberValid = validatePhoneNumber('number', 'number-error');
-    var isParentPhoneNumberValid = validatePhoneNumber('pnumber', 'pnumber-error');
-
-    // If any validation fails, prevent form submission
-    if (!isEmailValid || !isDescriptionValid || !isPhoneNumberValid || !isParentPhoneNumberValid) {
-        alert('Please fix errors in the form before submitting.');
-        return false; // Prevent form submission
-    }
-
-    // If all validations pass, allow form submission
-    return true;
-}
-
-// Listen for form submission event
-document.getElementById('applicationForm').addEventListener('submit', validateForm);
