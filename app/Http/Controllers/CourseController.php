@@ -30,6 +30,7 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         $course = Course::find($id);
+        var_dump($course);
     if(!$course){
         return redirect('/course')->with(['message' => 'Course not found']);
     }

@@ -58,11 +58,5 @@ Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsinglese
 
 
 // publicpart
-Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent']);
-
-// Route::get('/refresh', function () {
-//     // Perform any session-related actions here
-//     session()->flush(); // Example: Clear all session data
-
-//     return redirect()->back(); // Redirect back to the previous page
-// })->name('refresh');
+Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');
+Route::get('khalti/verify',[StudentController::class, 'verify'])->name('ajax.khalti.verify_order');

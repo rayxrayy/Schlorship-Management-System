@@ -75,7 +75,7 @@
 
                         <!-- Add the role dropdown field -->
                         <div class="mt-4">
-                            <x-label for="role" value="{{ __('Select Role') }}" />
+                            <x-label for="role" value="{{ __('role') }}" />
                             <select id="role"
                                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
                                 name="role" required>
