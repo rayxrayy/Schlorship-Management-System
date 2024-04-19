@@ -9,15 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+   public function up(): void
+{
+    if (!Schema::hasTable('user_roles')) {
         Schema::create('user_roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('role_id')->constrained();
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('role_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }
+}
+
 
     /**
      * Reverse the migrations.

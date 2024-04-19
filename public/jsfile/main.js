@@ -84,6 +84,7 @@ const popupForm = document.getElementById('popup-form');
 
 // Function to open the popup form
 function openForm() {
+    console.log("inside open form fxn")
     popupForm.style.display = 'block';
     popupForm.style.visibility = 'visible'; // Ensure it's visible
 }
