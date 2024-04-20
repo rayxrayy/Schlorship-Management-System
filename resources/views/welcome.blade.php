@@ -15,9 +15,23 @@
                     in
                     advancing your career to the next level.</div>
                 <div class="d-flex py-4 gap-4 justify-content-center justify-content-lg-start">
-                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_top" href="">Apply
-                        Now</span></a>
+                    @if (Route::has('login'))
 
+                    @auth
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_tab-menu"
+                        href="{{ route('register') }}">Apply Now</span></a>
+                    @else
+                    <a href="{{ route('login') }}" style=""></a>
+                    @if (Route::has('register'))
+
+
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_tab-menu"
+                        href="{{ route('register') }}">Apply Now
+                        </span></a>
+                    @endif
+                    @endauth
+
+                    @endif
                 </div>
 
                 <div class="d-flex align-items-center justify-content-center justify-content-lg-start mt-5 pt-xl-5">
@@ -36,11 +50,11 @@
                     </div>
                     <div class="border-end border-light pe-3">
                         <div class="small">Application deadline:</div>
-                        <div class="fs-4 lh-sm">March 10 2024</div>
+                        <div class="fs-4 lh-sm">April 10 2024</div>
                     </div>
                     <div class="ps-3">
                         <div class="small">Class starts on:</div>
-                        <div class="fs-4 lh-sm">April 8 2024</div>
+                        <div class="fs-4 lh-sm">April 10 2025</div>
                     </div>
                 </div>
 
@@ -129,9 +143,24 @@
             <div class="vr opacity-25"></div>
             <a class="h6 ai-section-titles" href="#section-faqs">FAQs</a>
             <div class="vr opacity-25"></div>
+            @if (Route::has('login'))
+
+            @auth
+            <a class="btn fill-button text-white py-2 lh-sm" style="background: linear-gradient(#595bd4, #595bd4);"
+                role="button" aria-disabled="true" id="apply_button_tab-menu"
+                href="{{ route('register') }}">Dashboard</span></a>
+            @else
+            <a href="{{ route('login') }}" style=""></a>
+            @if (Route::has('register'))
+
+
             <a class="btn fill-button text-white py-2 lh-sm" style="background: linear-gradient(#595bd4, #595bd4);"
                 role="button" aria-disabled="true" id="apply_button_tab-menu" href="{{ route('register') }}">Get
                 Started</span></a>
+            @endif
+            @endauth
+
+            @endif
         </nav>
     </div>
 </section>
@@ -494,10 +523,24 @@
                     <li class="mt-2">You will be provided a review letter form the colleges.</li>
                 </ul>
 
-                <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
-                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button-course-overview"
-                        href="">Apply
-                        Now</span></a>
+                <div class="d-flex py-4 gap-4 justify-content-center justify-content-lg-start">
+                    @if (Route::has('login'))
+
+                    @auth
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_tab-menu"
+                        href="{{ route('register') }}">Apply Now</span></a>
+                    @else
+                    <a href="{{ route('login') }}" style=""></a>
+                    @if (Route::has('register'))
+
+
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_tab-menu"
+                        href="{{ route('register') }}">Apply Now
+                        </span></a>
+                    @endif
+                    @endauth
+
+                    @endif
                 </div>
             </div>
         </div>

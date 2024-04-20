@@ -1,6 +1,6 @@
    <link rel="stylesheet" href="{{asset('cssfile/welcome.css')}}">
    <x-app-layout>
-
+       <h1 style='font-size:41px;'>You can choose any college here to apply!</h1>
        <h1 style='font-size:41px;'>You can choose any college here to apply!</h1>
        <h2 style='font-size:18px;'>
            <p>Just make sure that you have extra courses from other so that student would get limitted options and easy
@@ -26,8 +26,6 @@
 
                </div>
            </article>
-           <div style="text-align: center;">
-               <x-button>View All Colleges</x-button>
-           </div>
+
        </section>
    </x-app-layout>

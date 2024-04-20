@@ -20,7 +20,7 @@ class FormController extends Controller
             'pname' => 'required|string|max:255',
             'pnumber' => 'required|string|max:20',
             'qualification' => 'required|string|max:255',
-            'currentedu' => 'required|string|max:255',
+            'currentedu' => 'string|max:255',
             'major' => 'required|string|max:255',
             'result' => 'required|string|max:255',
             'document_citizenship' => 'required|file|mimes:pdf,jpg,jpeg,png|max:10240', // Example validation for file upload

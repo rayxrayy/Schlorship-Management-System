@@ -59,7 +59,6 @@ Route::get('/addcollege',[CollegeController::class,'addcollege'])->name("college
 Route::get('/apply',[ApplyController::class,'index'])->name("apply");
 Route::post('/get-courses', [ApplyController::class, 'getCoursesByCollege']);
 
-
 //collegepart
 Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
 Route::get('/selectedstudents',[StudentController::class,'viewselectedstudents'])->name('selectedstudents');
