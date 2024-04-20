@@ -9,6 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\StudentController;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +33,12 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $studentCount = User::where('role', 'student')->count();
+        $collegecount = User::where('role', 'college')->count();
+        $publicCount = User::where('role', 'public')->count();
+        // Pass the count to the dashboard view
+        return view('dashboard', ['studentCount' => $studentCount, 'collegecount' => $collegecount, 'publicCount'=> $publicCount]);
+        
     })->name('dashboard');
 });
 
