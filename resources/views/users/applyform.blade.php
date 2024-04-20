@@ -51,6 +51,42 @@
             <!-- enctype="multipart/form-data"you ensure that the form data, including any uploaded files, is properly encoded and sent to the server for processing. This is essential for handling file uploads in your form. -->
             <form id="applicationForm" action="{{ route('submit-form') }}" method="post" enctype="multipart/form-data">
                 @csrf
+
+                <div class="row">
+                    <div class="col-25">
+                        <h2>
+                            <label style=" color:#595bd4;font-size: 25px;" for="college">College </label>
+                        </h2>
+                    </div>
+                    <div class="col-75">
+                        <select id="college_select" name="college">
+                            <option value="">---Select College---</option>
+                            @foreach ($colleges as $college)
+                            <option value="{{ $college }}">{{ $college }}</option>
+                            @endforeach
+                        </select>
+                        @error('college_select')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-25">
+                        <h2>
+                            <label style="color:#595bd4;font-size: 25px;" for="gender">Course</label>
+                        </h2>
+                    </div>
+                    <div class="col-75">
+                        <select id="course_select" name="course">
+                            <option value="">Select Course</option>
+                        </select>
+                        @error('course_select')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
                 <h2 onclick="toggleFields(this)" style="padding-top: 20px; color:#595bd4;font-size: 25px;">Personal
                     Information
                     <span style="margin-left: 48%; font-size: 25px;">+</span>
@@ -312,3 +348,35 @@
 
 </x-app-layout>
 <script src="{{ asset('jsfile/applyform.js') }}"></script>
+<script>
+document.getElementById('college_select').addEventListener('change', function() {
+    var college = this.value;
+    fetchCourses(college);
+});
+
+function fetchCourses(college) {
+    fetch('/get-courses', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                college: college
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            var courseSelect = document.getElementById('course_select');
+            courseSelect.innerHTML = '<option value="">Select Course</option>';
+            data.courses.forEach(course => {
+                var option = document.createElement('option');
+                option.value = course;
+                option.textContent = course;
+                courseSelect.appendChild(option);
+            });
+        });
+}
+</script>
+<script src="{{ asset('jsfile/applyform.js') }}"></script>
+

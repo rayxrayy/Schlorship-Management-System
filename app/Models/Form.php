@@ -27,5 +27,7 @@ class Form extends Model
         'document_transcript',
         'document',
         'description',
+        'college', // Include college attribute
+        'course',  // Include course attribute
         ];
 }

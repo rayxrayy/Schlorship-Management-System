@@ -14,6 +14,7 @@ class StudentController extends Controller
         return view('users.viewselectedstudent', compact('selectedstudents')); // Pass the form data to the view
     }
 
+
     public function viewsingleselectedstudent()  {
         $selectedstudents = Form::all();
         return view('singlepages.selectedstudent', compact('selectedstudents'));

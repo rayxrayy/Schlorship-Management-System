@@ -64,9 +64,11 @@
                 <div class="result-box" id="result-box">
                     <ul id="autocomplete-results"></ul>
                 </div>
-
             </div>
+            <button><img style=" max-width: 30px;" src="images/notification.png" alt="">
+
             <button style=""><img style=" max-width: 30px;" src="images/notification.png" alt="">
+
             </button>
 
 

@@ -9,28 +9,35 @@ class CourseController extends Controller
 {
     public function index(){
         $courses = Course::paginate(4); // Retrieve all courses from the database
+        // dd($coursess);
+      
         return view('users.courses', compact('courses'));
+
         // return view('users.courses');
     }
 
     public function store(Request $request){
-       $validatedData = $request->validate([
-            'coursename' => 'required|string',
-            'code' => 'required|string',
-            'module' => 'required|string',
-            'department' => 'required|string',
-            'fee' => 'required|numeric',
-            'description' => 'required|string',
-        ]);
+    $course = new Course();
+    $course->coursename = $request->coursename;
+    $course->code = $request->code;
+    $course->module = $request->module;
+    $course->department = $request->department;
+    $course->fee = $request->fee;
+    $course->description = $request->description;
 
-        Course::create($validatedData);
+    // Set the username to the name of the currently authenticated user
+    $course->user_name = auth()->user()->name;
+
+    // Save the course to the database
+    $course->save();
+
         return redirect()->back()->with('success', 'Course created successfully!');
     }
     
     public function update(Request $request, $id)
     {
         $course = Course::find($id);
-        var_dump($course);
+        
     if(!$course){
         return redirect('/course')->with(['message' => 'Course not found']);
     }

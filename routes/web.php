@@ -52,10 +52,12 @@ Route::post('/store/course',[CourseController::class,'store'])->name('store.cour
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 Route::patch('/course/{id}', [CourseController::class,'update'])->name('course.update');
 
-Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
 
+Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
 Route::get('/addcollege',[CollegeController::class,'addcollege'])->name("college");
+
 Route::get('/apply',[ApplyController::class,'index'])->name("apply");
+Route::post('/get-courses', [ApplyController::class, 'getCoursesByCollege']);
 
 //collegepart
 Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
