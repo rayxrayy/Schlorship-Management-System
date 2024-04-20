@@ -73,7 +73,7 @@
     <div>{{ $courses->links() }}</div>
     <div class="foot" style="padding-top:20%" ;></div>
 
-    <!-- <div id="popup-form" class="popup-form">
+    <div id="popup-form" class="popup-form">
 
         <form action="{{ route('store.course') }}" method="post">
             @csrf
@@ -149,7 +149,7 @@
         <x-button class="close-btn" onclick="closeForm()"> <img src="\images\cancel.png" alt="Close Icon"
                 style="max-width: 10px;">
             </x-buttton>
-    </div> -->
+    </div>
 
     <div id="popup-edit-form" class="popup-form">
         <form method="post" action="{{ route('course.update', $course->id) }}" class="form-container">
@@ -240,11 +240,11 @@
 </x-app-layout>
 <script>
 function openEditForm() {
-    document.getElementById('popup-edit-form').style.display = 'block';
+    document.getElementById('popup-form').style.display = 'block';
 }
 
 function closeEditForm() {
-    document.getElementById('popup-edit-form').style.display = 'none';
+    document.getElementById('popup-form').style.display = 'none';
 
 }
 
