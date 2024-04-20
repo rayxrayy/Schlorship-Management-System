@@ -60,11 +60,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
-    public function roles(){
-        return $this->belongsToMany(Role::class,'user-roles');
-     }
-
-    public function hasRole($role){
-        return $this->role->contains('name',$role);
+     public function hasRole($role)
+    {
+        // Assuming roles are stored in a column named 'role' in the users table
+        return $this->role === $role;
     }
 }

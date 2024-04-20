@@ -1,33 +1,3 @@
-// // HTML to Excel
-// function html_table_to_excel(type)
-//     {
-//         var data = document.getElementById('category_data');
-
-//         var file = XLSX.utils.table_to_book(data, {sheet: "sheet1"});
-
-//         XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
-
-//         XLSX.writeFile(file, 'file.' + type);
-//     }
-
-
-
-// //print bill from order page
-// // function printDiv(divName) {
-// //     var printContents = document.getElementById(divName).innerHTML;
-// //     var originalContents = document.body.innerHTML;
-
-// //     document.body.innerHTML = printContents;
-
-// //     window.print();
-
-// //     document.body.innerHTML = originalContents;
-// // }
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function() {
     const inputBox = document.getElementById("input-box");
     const resultBox = document.getElementById("result-box");
