@@ -18,43 +18,18 @@
             </thead>
 
             <tbody>
+                @foreach($selectedstudents as $student)
                 <tr>
-                    <td class="image-container"><img src="/images/college.png" alt=""
-                            style="border-radius: 50%; width: 50px; height: 50px;">
+                    <td class="image-container"><img src="/images/college.png" alt="">
                     </td>
-                    <td>Saugat Sharma</td>
-                    <td>Bsc hons. in informationtechnology</td>
-                    <td>9810000000</td>
+                    <td>{{ $student->fullname }}</td>
+                    <td>{{ $student->major }}</td>
+                    <td>{{ $student->number }}</td>
                     <td>
-                        <a href="">view more...</a>
+                        <a href="{{ route('viewsingleselectedstudents')}}">view more...</a>
                     </td>
                 </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td class="image-container"><img src="/images/college.png" alt=""
-                            style="border-radius: 50%; width: 50px; height: 50px;">
-                    </td>
-                    <td>Saugat Sharma</td>
-                    <td>Bsc hons. in informationtechnology</td>
-                    <td>9810000000</td>
-                    <td>
-                        <a href="">view more...</a>
-                    </td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td class="image-container"><img src="/images/college.png" alt=""
-                            style="border-radius: 50%; width: 50px; height: 50px;">
-                    </td>
-                    <td>Saugat Sharma</td>
-                    <td>Bsc hons. in informationtechnology</td>
-                    <td>9810000000</td>
-                    <td>
-                        <a href="">view more...</a>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

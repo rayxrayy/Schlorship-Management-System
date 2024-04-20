@@ -9,6 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\StudentController;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +33,12 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $studentCount = User::where('role', 'student')->count();
+        $collegecount = User::where('role', 'college')->count();
+        $publicCount = User::where('role', 'public')->count();
+        // Pass the count to the dashboard view
+        return view('dashboard', ['studentCount' => $studentCount, 'collegecount' => $collegecount, 'publicCount'=> $publicCount]);
+        
     })->name('dashboard');
 });
 
@@ -44,14 +50,22 @@ Route::get('/careers', [ReviewController::class, 'career']);
 Route::get('/course',[CourseController::class,'index'])->name("course");
 Route::post('/store/course',[CourseController::class,'store'])->name('store.course');;
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
-Route::patch('/course',[CourseController::class,'update']);
+Route::patch('/course/{id}', [CourseController::class,'update'])->name('course.update');
+
 
 Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
-
 Route::get('/addcollege',[CollegeController::class,'addcollege'])->name("college");
+
 Route::get('/apply',[ApplyController::class,'index'])->name("apply");
+Route::post('/get-courses', [ApplyController::class, 'getCoursesByCollege']);
 
 
+//collegepart
 Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
-Route::get('/selectedstudents',[StudentController::class,'viewselectedstudents']);
-Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsingleselectedstudent']);
+Route::get('/selectedstudents',[StudentController::class,'viewselectedstudents'])->name('selectedstudents');
+Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsingleselectedstudent'])->name('viewsingleselectedstudents');
+
+
+// publicpart
+Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');
+Route::get('khalti/verify',[StudentController::class, 'verify'])->name('ajax.khalti.verify_order');

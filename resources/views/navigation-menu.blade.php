@@ -12,21 +12,47 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if(auth()->user()->hasRole('student'))
                     <x-nav-link href="{{ route('course') }}" :active="request()->routeIs('course')">
                         {{ __('Courses') }}
                     </x-nav-link>
+
                     <x-nav-link href="{{ route('college') }}" :active="request()->routeIs('college')">
                         {{ __('Colleges') }}
                     </x-nav-link>
+
+
                     <x-nav-link href="{{ route('apply') }}" :active="request()->routeIs('apply')">
                         {{ __('Apply') }}
                     </x-nav-link>
+                    @endif
+                    @if(auth()->user()->hasRole('public'))
+                    <x-nav-link href="{{ route('donate') }}" :active="request()->routeIs('donate')">
+                        {{ __('Student') }}
+                    </x-nav-link>
+                    @endif
+
+                    @if(auth()->user()->hasRole('college'))
+
+                    <x-nav-link href="{{ route('selectedstudents') }}" :active="request()->routeIs('selectedstudents')">
+                        {{ __('Selected Students') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="{{ route('selectedstudents') }}" :active="request()->routeIs('selectedstudents')">
+                        {{ __('Cancled Students') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('selectedstudents') }}" :active="request()->routeIs('selectedstudents')">
+                        {{ __('Approved') }}
+                    </x-nav-link>
+                    @endif
                     <x-nav-link href="{{ route('blog') }}" :active="request()->routeIs('blog')">
                         {{ __('Blog') }}
                     </x-nav-link>
+
                 </div>
 
             </div>
@@ -38,10 +64,10 @@
                 <div class="result-box" id="result-box">
                     <ul id="autocomplete-results"></ul>
                 </div>
+
             </div>
-            <div>
-                <x-button>n</x-button>
-            </div>
+            <button><img style=" max-width: 30px;" src="images/notification.png" alt="">
+            </button>
 
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">

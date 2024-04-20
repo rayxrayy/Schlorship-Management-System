@@ -8,7 +8,7 @@
         </div>
         <div class="insights">
             <div class="sales">
-                <span class="material-icons-shar">student</span>
+                <span class="material-icons-shar">{{ $studentCount }}</span>
                 <div class="middle">
                     <div class="left">
                         <h2>Total Students</h2>
@@ -24,7 +24,7 @@
             </div>
 
             <div class="income a">
-                <span class="material-icons-shar">Colleges</span>
+                <span class="material-icons-shar">{{ $collegecount }}</span>
                 <div class="middle">
                     <div class="left">
                         <h2>Total Colleges </h2>
@@ -40,7 +40,7 @@
             </div>
 
             <div class="order a">
-                <span class="material-icons-shar">courses</span>
+                <span class="material-icons-shar">{{ \App\Models\Course::count() }}</span>
                 <div class="middle">
                     <div class="left">
                         <h2>Total Courses</h2>
@@ -53,8 +53,9 @@
                 </div>
 
             </div>
+            @if(auth()->user()->hasRole('student'))
             <div class="order a">
-                <span class="material-icons-shar">list</span>
+                <span class="material-icons-shar">{{ $publicCount }}</span>
                 <div class="middle">
                     <div class="left">
                         <h2>updates</h2>
@@ -65,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+            @endif
         </div>
 </x-app-layout>

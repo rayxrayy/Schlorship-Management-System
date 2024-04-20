@@ -16,4 +16,9 @@ class Course extends Model
         'department',
         'description',
     ];
+    //to retrive user name of user in different form
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_name', 'name');
+    }
 }
