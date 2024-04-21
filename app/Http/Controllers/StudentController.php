@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Form; 
 use Illuminate\Http\Request;
+use App\Models\Form;
+use App\Models\User;
 
 class StudentController extends Controller
 {
@@ -13,6 +15,12 @@ class StudentController extends Controller
         $photoPath = $student->profile_image;
         // dd($selectedstudents);
         return view('users.viewselectedstudent', compact('selectedstudents','photoPath')); // Pass the form data to the view
+    }
+
+
+    public function viewsingleselectedstudent()  {
+        $selectedstudents = Form::all();
+        return view('singlepages.selectedstudent', compact('selectedstudents'));
     }
 
     public function viewscholorstudent(){

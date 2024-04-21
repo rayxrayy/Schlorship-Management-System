@@ -19,6 +19,7 @@
                 <div class="d-flex py-4 gap-4 justify-content-center justify-content-lg-start">
                     @if (Route::has('login'))
 
+
                     @auth
                     <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_top"
                         href="{{ url('/apply') }}">Apply
@@ -30,11 +31,24 @@
                         href="{{ route('register') }}">Apply
                         Now</span></a>
 
+
+
+                    @auth
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_tab-menu"
+                        href="{{ route('register') }}">Apply Now</span></a>
+                    @else
+                    <a href="{{ route('login') }}" style=""></a>
+                    @if (Route::has('register'))
+
+
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_tab-menu"
+                        href="{{ route('register') }}">Apply Now
+                        </span></a>
+
                     @endif
                     @endauth
 
                     @endif
-
 
                 </div>
 
@@ -54,11 +68,11 @@
                     </div>
                     <div class="border-end border-light pe-3">
                         <div class="small">Application deadline:</div>
-                        <div class="fs-4 lh-sm">March 10 2024</div>
+                        <div class="fs-4 lh-sm">April 10 2024</div>
                     </div>
                     <div class="ps-3">
                         <div class="small">Class starts on:</div>
-                        <div class="fs-4 lh-sm">April 8 2024</div>
+                        <div class="fs-4 lh-sm">April 10 2025</div>
                     </div>
                 </div>
 
@@ -153,10 +167,19 @@
             @auth
             <a class="btn fill-button text-white py-2 lh-sm" style="background: linear-gradient(#595bd4, #595bd4);"
                 role="button" aria-disabled="true" id="apply_button_tab-menu"
+
                 href="{{ url('/dashboard') }}">Dashboard</span></a>
             @else
             <a href="{{ route('login') }}" style=""></a>
             @if (Route::has('register'))
+
+                href="{{ route('register') }}">Dashboard</span></a>
+            @else
+            <a href="{{ route('login') }}" style=""></a>
+            @if (Route::has('register'))
+
+
+
             <a class="btn fill-button text-white py-2 lh-sm" style="background: linear-gradient(#595bd4, #595bd4);"
                 role="button" aria-disabled="true" id="apply_button_tab-menu" href="{{ route('register') }}">Get
                 Started</span></a>
@@ -526,6 +549,7 @@
                     <li class="mt-2">You will be provided a review letter form the colleges.</li>
                 </ul>
 
+
                 <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
                     @if (Route::has('login'))
 
@@ -539,6 +563,21 @@
                     <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_top"
                         href="{{ route('register') }}">Apply
                         Now</span></a>
+
+                <div class="d-flex py-4 gap-4 justify-content-center justify-content-lg-start">
+                    @if (Route::has('login'))
+
+                    @auth
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_tab-menu"
+                        href="{{ route('register') }}">Apply Now</span></a>
+                    @else
+                    <a href="{{ route('login') }}" style=""></a>
+                    @if (Route::has('register'))
+
+
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_tab-menu"
+                        href="{{ route('register') }}">Apply Now
+                        </span></a>
 
                     @endif
                     @endauth
