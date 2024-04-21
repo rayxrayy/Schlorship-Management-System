@@ -14,9 +14,27 @@
                 <div class="fs-5 fw-semibold mt-3 col-lg-8">A comprehensive Full-Scholarship to help you
                     in
                     advancing your career to the next level.</div>
+
+
                 <div class="d-flex py-4 gap-4 justify-content-center justify-content-lg-start">
-                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_top" href="">Apply
+                    @if (Route::has('login'))
+
+                    @auth
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_top"
+                        href="{{ url('/apply') }}">Apply
                         Now</span></a>
+                    @else
+                    <a href="{{ route('login') }}" style=""></a>
+                    @if (Route::has('register'))
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_top"
+                        href="{{ route('register') }}">Apply
+                        Now</span></a>
+
+                    @endif
+                    @endauth
+
+                    @endif
+
 
                 </div>
 
@@ -129,9 +147,23 @@
             <div class="vr opacity-25"></div>
             <a class="h6 ai-section-titles" href="#section-faqs">FAQs</a>
             <div class="vr opacity-25"></div>
+
+            @if (Route::has('login'))
+
+            @auth
+            <a class="btn fill-button text-white py-2 lh-sm" style="background: linear-gradient(#595bd4, #595bd4);"
+                role="button" aria-disabled="true" id="apply_button_tab-menu"
+                href="{{ url('/dashboard') }}">Dashboard</span></a>
+            @else
+            <a href="{{ route('login') }}" style=""></a>
+            @if (Route::has('register'))
             <a class="btn fill-button text-white py-2 lh-sm" style="background: linear-gradient(#595bd4, #595bd4);"
                 role="button" aria-disabled="true" id="apply_button_tab-menu" href="{{ route('register') }}">Get
                 Started</span></a>
+            @endif
+            @endauth
+
+            @endif
         </nav>
     </div>
 </section>
@@ -495,9 +527,23 @@
                 </ul>
 
                 <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
-                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button-course-overview"
-                        href="">Apply
+                    @if (Route::has('login'))
+
+                    @auth
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_top"
+                        href="{{ url('/apply') }}">Apply
                         Now</span></a>
+                    @else
+                    <a href="{{ route('login') }}" style=""></a>
+                    @if (Route::has('register'))
+                    <a class="btn fill-button" role="button" aria-disabled="true" id="apply_button_top"
+                        href="{{ route('register') }}">Apply
+                        Now</span></a>
+
+                    @endif
+                    @endauth
+
+                    @endif
                 </div>
             </div>
         </div>

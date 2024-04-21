@@ -68,4 +68,10 @@ class CourseController extends Controller
         $courses->delete();
         return redirect('/course')->with(['message'   => 'Courses deleted successfully']);
     }
+
+    public function studentcourse(){
+        $courses = Course::paginate(4);
+        $images = ['cousrse1.png', 'course2.png', 'course3.png', '1.jpg'];
+        return view('users.studentcourses', ['images' => $images, 'courses' => $courses]);
+    }
 }
