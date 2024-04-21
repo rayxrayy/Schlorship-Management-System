@@ -17,9 +17,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @if(auth()->user()->hasRole('student'))
-                    <x-nav-link href="{{ route('course') }}" :active="request()->routeIs('course')">
-                        {{ __('Courses') }}
-                    </x-nav-link>
+
 
                     <x-nav-link href="{{ route('college') }}" :active="request()->routeIs('college')">
                         {{ __('Colleges') }}
@@ -37,6 +35,9 @@
                     @endif
 
                     @if(auth()->user()->hasRole('college'))
+                    <x-nav-link href="{{ route('course') }}" :active="request()->routeIs('course')">
+                        {{ __('Courses') }}
+                    </x-nav-link>
 
                     <x-nav-link href="{{ route('selectedstudents') }}" :active="request()->routeIs('selectedstudents')">
                         {{ __('Selected Students') }}

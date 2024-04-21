@@ -11,11 +11,7 @@ class ApplyController extends Controller
         $colleges = Course::distinct()->pluck('user_name'); //Retrieve unique user_names from the courses table
 
         $coursesByCollege = []; //to store each user
- 
-        
         // dd($colleges);
-   
-
         foreach ($colleges as $college) {
         // Retrieve course names for the current user name
         $courses = Course::where('user_name', $college)->pluck('coursename');

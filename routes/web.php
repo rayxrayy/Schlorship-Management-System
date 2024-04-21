@@ -54,6 +54,7 @@ Route::patch('/course/{id}', [CourseController::class,'update'])->name('course.u
 
 
 Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
+
 Route::get('/addcollege',[CollegeController::class,'addcollege'])->name("college");
 
 Route::get('/apply',[ApplyController::class,'index'])->name("apply");
@@ -61,7 +62,7 @@ Route::post('/get-courses', [ApplyController::class, 'getCoursesByCollege']);
 
 //collegepart
 Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
-Route::get('/selectedstudents',[StudentController::class,'viewselectedstudents'])->name('selectedstudents');
+Route::post('/selectedstudents',[StudentController::class,'viewselectedstudents'])->name('selectedstudents');
 Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsingleselectedstudent'])->name('viewsingleselectedstudents');
 
 
