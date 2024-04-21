@@ -53,10 +53,12 @@
                 @csrf
                 <div class="row">
                     <div class="col-25">
-                        <label for="profile_image">Profile Image</label>
+                        <h2>
+                            <label style=" color:#595bd4;font-size: 25px;" for="profile_image">Add Img</label>
+                        </h2>
                     </div>
                     <div class="col-75">
-                        <input type="file" id="profile_image" name="profile_image">
+                        <input type="file" id="profile_image" name="profile_image" required>
                         @error('profile_image')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror

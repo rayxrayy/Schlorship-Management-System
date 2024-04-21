@@ -47,24 +47,27 @@ Route::get('/college', [CollegeController::class, 'index']);
 Route::get('/review', [ReviewController::class, 'index']);
 Route::get('/careers', [ReviewController::class, 'career']);
 
+
+
+Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
+
+//studentpart
+Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
+Route::get('/apply',[ApplyController::class,'index'])->name("apply");
+Route::post('/get-courses', [ApplyController::class, 'getCoursesByCollege']);
+
+Route::get('/applycourses', [CourseController::class, 'studentcourse'])->name('applycourses');
+Route::get('/applycollege',[CollegeController::class,'applycollege'])->name("college");
+
+
+//collegepart
+Route::post('/selectedstudents',[StudentController::class,'viewselectedstudents'])->name('selectedstudents');
+Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsingleselectedstudent'])->name('viewsingleselectedstudents');
+
 Route::get('/course',[CourseController::class,'index'])->name("course");
 Route::post('/store/course',[CourseController::class,'store'])->name('store.course');;
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 Route::patch('/course/{id}', [CourseController::class,'update'])->name('course.update');
-
-
-Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
-
-Route::get('/addcollege',[CollegeController::class,'addcollege'])->name("college");
-
-Route::get('/apply',[ApplyController::class,'index'])->name("apply");
-Route::post('/get-courses', [ApplyController::class, 'getCoursesByCollege']);
-
-//collegepart
-Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
-Route::post('/selectedstudents',[StudentController::class,'viewselectedstudents'])->name('selectedstudents');
-Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsingleselectedstudent'])->name('viewsingleselectedstudents');
-
 
 // publicpart
 Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');
