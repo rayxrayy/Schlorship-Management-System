@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Form; 
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -9,13 +9,20 @@ class StudentController extends Controller
     public function viewselectedstudents(){
         
         $selectedstudents = Form::all();// Fetch the form data by ID
-        return view('users.viewselectedstudent', compact('selectedstudents')); // Pass the form data to the view
+        $student = Form::find($id); // Assuming $id is the student's ID
+        $photoPath = $student->profile_image;
+        // dd($selectedstudents);
+        return view('users.viewselectedstudent', compact('selectedstudents','photoPath')); // Pass the form data to the view
     }
 
     public function viewscholorstudent(){
         return view('public.scholorstudent');
     }
-
+     public function viewsingleselectedstudent()  {
+        $selectedstudents = Form::all();
+        return view('singlepages.selectedstudent', compact('selectedstudents'));
+    }
+    
     public function verify(Request $request){ //payload
         $args = http_build_query(array(
             'token' => $request->token,

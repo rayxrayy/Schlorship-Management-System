@@ -21,4 +21,8 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'user_name', 'name');
     }
+    public function modules()
+    {
+    return $this->hasMany(Module::class);
+    }
 }

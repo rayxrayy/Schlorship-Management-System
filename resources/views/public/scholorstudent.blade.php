@@ -4,8 +4,8 @@
 
 <x-app-layout>
 
-    <h1 style="font-weight:600">You can choose any student here to donate!</h1>
-    <h2>
+    <h1 style="font-size:41px;">You can choose any student here to donate!</h1>
+    <h2 style='font-size:18px;'>
         <p>Just make sure that you have extra courses from other so that student would get limitted options and easy
             to
             apply.</p>

@@ -30,6 +30,16 @@ class CourseController extends Controller
     // Save the course to the database
     $course->save();
 
+    $modules = $request->input('module');
+
+    // Check if $modules is not null and is an array before iterating over it
+    if (!is_null($modules) && is_array($modules)) {
+        foreach ($modules as $module) {
+            // Save each module to the database
+            $course->modules()->create(['name' => $module]);
+        }
+    }
+
         return redirect()->back()->with('success', 'Course created successfully!');
     }
     

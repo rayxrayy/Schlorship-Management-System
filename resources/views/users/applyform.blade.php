@@ -49,8 +49,20 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <!-- enctype="multipart/form-data"you ensure that the form data, including any uploaded files, is properly encoded and sent to the server for processing. This is essential for handling file uploads in your form. -->
-            <form id="applicationForm" action="{{ route('submit-form') }}" method="post" enctype="multipart/form-data">
+            <form id="applicationForm" action="{{ route('submit-form') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <div class="row">
+                    <div class="col-25">
+                        <label for="profile_image">Profile Image</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="file" id="profile_image" name="profile_image">
+                        @error('profile_image')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
 
                 <div class="row">
                     <div class="col-25">

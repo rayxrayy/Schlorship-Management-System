@@ -1,6 +1,6 @@
 <x-app-layout>
-    <h1>These are the students that got selected!</h1>
-    <h2>
+    <h1 style='font-size:30px;'>These are the students that got selected!</h1>
+    <h2 style='font-size:18px;'>
         <p>Just make sure that you have extra courses from other so that student would get limitted options and easy to
             apply.</p>
         <p>Don't forget to add all the details and description and make sure you add the actual fee.</p>
@@ -20,8 +20,15 @@
             <tbody>
                 @foreach($selectedstudents as $student)
                 <tr>
-                    <td class="image-container"><img src="/images/college.png" alt="">
-                    </td>
+
+                    <div class="container">
+                        <div class="profile">
+                            <div class="profile-image">
+                                <img src="{{ asset($photoPath) }}" alt="Student Image">
+                            </div>
+                            <!-- Other student details -->
+                        </div>
+                    </div>
                     <td>{{ $student->fullname }}</td>
                     <td>{{ $student->major }}</td>
                     <td>{{ $student->number }}</td>

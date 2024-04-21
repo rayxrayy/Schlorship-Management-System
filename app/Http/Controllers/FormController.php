@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Symfony\Component\Routing\Annotation\Route;
 use Illuminate\Http\Request;
 use App\Models\Form;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +28,7 @@ class FormController extends Controller
             'document_transcript' => 'required|file|mimes:pdf,jpg,jpeg,png|max:10240', // Example validation for file upload
             'document' => 'file|mimes:pdf,jpg,jpeg,png|max:10240', // Example validation for file upload
             'description' => 'nullable|string|max:100',
+            'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             
         ]);
   // Retrieve college and course from the request
@@ -47,7 +48,13 @@ class FormController extends Controller
         $validatedData['college'] = $college;
         $validatedData['course'] = $course;
 
-        // Store the form data in the database
+        // Check if a profile image is uploaded
+        if ($request->hasFile('profile_image')) {
+            $uploadedPhotoPath = $request->file('profile_image')->store('student-images'); // Store the uploaded photo
+
+        // Save the photo path to the user's profile_photo_path attribute
+            $validatedData['profile_image'] = $uploadedPhotoPath;
+        }
         Form::create($validatedData);
 
         // Redirect back with success message
