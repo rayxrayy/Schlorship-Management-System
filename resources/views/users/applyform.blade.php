@@ -392,3 +392,4 @@ function fetchCourses(college) {
         });
 }
 </script>
+<script src="{{ asset('jsfile/applyform.js') }}"></script>

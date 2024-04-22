@@ -49,6 +49,33 @@ class FormController extends Controller
         $validatedData['course'] = $course;
 
         // Check if a profile image is uploaded
+        if ($request->hasFile('document_citizenship')) {
+            $uploadedPhotoPath = $request->file('document_citizenship')->store('citizenship-images'); // Store the uploaded photo
+
+        // Save the photo path to the user's profile_photo_path attribute
+            $validatedData['document_citizenship'] = $uploadedPhotoPath;
+        }
+
+        if ($request->hasFile('document_sop')) {
+            $uploadedPhotoPath = $request->file('document_sop')->store('sop-images'); // Store the uploaded photo
+
+        // Save the photo path to the user's profile_photo_path attribute
+            $validatedData['document_sop'] = $uploadedPhotoPath;
+        }
+
+        if ($request->hasFile('document_transcript')) {
+            $uploadedPhotoPath = $request->file('document_transcript')->store('transcript-images'); // Store the uploaded photo
+
+        // Save the photo path to the user's profile_photo_path attribute
+            $validatedData['document_transcript'] = $uploadedPhotoPath;
+        }
+        if ($request->hasFile('document')) {
+            $uploadedPhotoPath = $request->file('document')->store('document-images'); // Store the uploaded photo
+
+        // Save the photo path to the user's profile_photo_path attribute
+            $validatedData['document'] = $uploadedPhotoPath;
+        }
+        // Check if a profile image is uploaded
         if ($request->hasFile('profile_image')) {
             $uploadedPhotoPath = $request->file('profile_image')->store('student-images'); // Store the uploaded photo
 
