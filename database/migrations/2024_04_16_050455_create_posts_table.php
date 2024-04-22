@@ -9,24 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up(): void
-{
-    if (!Schema::hasTable('user_roles')) {
-        Schema::create('user_roles', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->bigInteger('role_id')->unsigned()->nullable();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
-}
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('posts');
     }
 };
