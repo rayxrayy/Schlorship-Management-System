@@ -17,6 +17,9 @@ class CourseController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+        'description' => 'required|string|max:100' // Add a validation rule to ensure the description is not more than 100 characters
+    ]);
     $course = new Course();
     $course->coursename = $request->coursename;
     $course->code = $request->code;
@@ -72,7 +75,10 @@ class CourseController extends Controller
 
     public function studentcourse(){
         $courses = Course::paginate(4);
+        // dd($courses);
         $images = ['cousrse1.png', 'course2.png', 'course3.png', '1.jpg'];
         return view('users.studentcourses', ['images' => $images, 'courses' => $courses]);
     }
+
+    
 }

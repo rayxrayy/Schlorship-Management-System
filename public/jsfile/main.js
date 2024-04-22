@@ -65,8 +65,6 @@ function closeForm() {
     popupForm.style.visibility = 'hidden'; // Hide it
 }
 
-addCourseBtn.addEventListener('click', openForm);
-
 
 function toggleFields(header) {
     const personalinfo = header.nextElementSibling;

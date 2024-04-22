@@ -58,6 +58,8 @@ Route::post('/get-courses', [ApplyController::class, 'getCoursesByCollege']);
 
 Route::get('/applycourses', [CourseController::class, 'studentcourse'])->name('applycourses');
 Route::get('/applycollege',[CollegeController::class,'applycollege'])->name("college");
+Route::get('/courses/{collegeId}', 'CollegeController@getCoursesByCollegeId');
+
 
 
 //collegepart
