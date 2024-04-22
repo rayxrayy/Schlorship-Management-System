@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\Form; 
 use Illuminate\Http\Request;
-use App\Models\Form;
 use App\Models\User;
 
 class StudentController extends Controller
@@ -26,10 +25,7 @@ class StudentController extends Controller
     public function viewscholorstudent(){
         return view('public.scholorstudent');
     }
-     public function viewsingleselectedstudent()  {
-        $selectedstudents = Form::all();
-        return view('singlepages.selectedstudent', compact('selectedstudents'));
-    }
+
     
     public function verify(Request $request){ //payload
         $args = http_build_query(array(

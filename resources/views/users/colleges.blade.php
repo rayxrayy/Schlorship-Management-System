@@ -1,52 +1,4 @@
-
 <link rel="stylesheet" href="{{asset('cssfile/welcome.css')}}">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<style>
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 5px;
-    max-width: 600px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.college-details p {
-    margin: 5px 0;
-}
-
-.college-details p span {
-    color: #0c10f7;
-    font-weight: bold;
-}
-</style>
 <x-app-layout>
 
     <h1 style='font-size:41px;'>You can choose any college here to apply!</h1>
@@ -61,10 +13,9 @@
                 @foreach($colleges as $college)
                 <div class="col-sm-6 col-md-6 col-lg-3 my-3" data-aos="fade-up" data-aos-duration="1000">
                     <div class="benefits-list bg-white">
-                        <div class="image-container">
-                            <img src="{{ asset('storage/'.$college->profile_photo_path) }}" alt="College Photo"
-                                class="img-fluid " />
-                        </div>
+
+                        <img src="{{ asset('storage/'.$college->profile_photo_path) }}" alt="College Photo"
+                            class="img-fluid " />
                         <h1>{{ $college->name }}</h1>
                         <ul>
 
@@ -491,39 +442,3 @@ function closeApplyModal() {
     applyModal.style.display = "none";
 }
 </script>
-
-    </section>
-</x-app-layout>
-   <link rel="stylesheet" href="{{asset('cssfile/welcome.css')}}">
-   <x-app-layout>
-       <h1 style='font-size:41px;'>You can choose any college here to apply!</h1>
-       <h1 style='font-size:41px;'>You can choose any college here to apply!</h1>
-       <h2 style='font-size:18px;'>
-           <p>Just make sure that you have extra courses from other so that student would get limitted options and easy
-               to
-               apply.</p>
-           <p>Don't forget to add all the details and description and make sure you add the actual fee.</p>
-       </h2>
-
-
-       <section id="section-benefit" class="ai-fellowship--benefit py-5">
-           <article class="container-xxl">
-               <div class="row justify-content-center px-lg-5 px-xxl-0">
-                   <div class="col-sm-6 col-md-6 col-lg-3 my-3 custom-insights" data-aos="fade-up"
-                       data-aos-duration="1000">
-                       <div class="benefits-list bg-white">
-                           <img src="/images/colleges/c3.jpg" width="500" height="auto" alt="guest" class="img-fluid" />
-                           <div class="summery-title">
-                               <div class="font-semi-bold mt-4 mb-0 h6 font-semi-bold">Hanyang University (HYU)</div>
-                           </div>
-                           <div class="nav-link nav-btn" id="apply"><a href="">apply</a></div>
-                       </div>
-                   </div>
-
-               </div>
-           </article>
-
-       </section>
-   </x-app-layout>
-
-

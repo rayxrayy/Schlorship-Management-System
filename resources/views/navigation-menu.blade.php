@@ -69,9 +69,6 @@
                 </div>
             </div>
             <button><img style=" max-width: 30px;" src="images/notification.png" alt="">
-
-            <button style=""><img style=" max-width: 30px;" src="images/notification.png" alt="">
-
             </button>
 
 
