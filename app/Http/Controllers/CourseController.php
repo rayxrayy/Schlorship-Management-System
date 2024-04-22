@@ -10,6 +10,7 @@ class CourseController extends Controller
     public function index(){
         $courses = Course::paginate(4); // Retrieve all courses from the database
         // dd($coursess);
+      
         return view('users.courses', compact('courses'));
 
         // return view('users.courses');
@@ -49,7 +50,7 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         $course = Course::find($id);
-        var_dump($course);
+        
     if(!$course){
         return redirect('/course')->with(['message' => 'Course not found']);
     }
