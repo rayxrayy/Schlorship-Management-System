@@ -32,11 +32,9 @@ class CollegeController extends Controller
         // dd($collegeCourses);
         return view('users.colleges',compact('colleges','collegeCourses'));
     }
-
     public function getCoursesByCollegeId($collegeId) {
-        dd($collegeId); 
+        // dd($collegeId); 
     $courses = Course::where('college_id', $collegeId)->get();
     return response()->json($courses);
     }
-    
 }

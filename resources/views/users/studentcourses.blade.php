@@ -116,8 +116,6 @@
                 <h2><span id="description"></span></h2>
             </div>
         </div>
-
-
         <div id="applyModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeApplyModal()">&times;</span>

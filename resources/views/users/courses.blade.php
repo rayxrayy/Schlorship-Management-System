@@ -164,9 +164,6 @@
                     <div class="col-75">
                         <textarea id="description" name="description" placeholder="Write something .." required
                             style="height:150px"></textarea>
-                        @error('description')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
                 </div>
                 </section>
