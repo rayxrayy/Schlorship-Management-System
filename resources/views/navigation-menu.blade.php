@@ -41,16 +41,10 @@
                         {{ __('Courses') }}
                     </x-nav-link>
 
-                    <x-nav-link href="{{ route('selectedstudents') }}" :active="request()->routeIs('selectedstudents')">
-                        {{ __('Selected Students') }}
+                    <x-nav-link href="{{ route('approvelstudent') }}" :active="request()->routeIs('approvelstudent')">
+                        {{ __('Approvel Students') }}
                     </x-nav-link>
 
-                    <x-nav-link href="{{ route('selectedstudents') }}" :active="request()->routeIs('selectedstudents')">
-                        {{ __('Cancled Students') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('selectedstudents') }}" :active="request()->routeIs('selectedstudents')">
-                        {{ __('Approved') }}
-                    </x-nav-link>
                     @endif
                     <x-nav-link href="{{ route('blog') }}" :active="request()->routeIs('blog')">
                         {{ __('Blog') }}

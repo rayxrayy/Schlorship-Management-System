@@ -9,16 +9,31 @@ class StudentController extends Controller
 {
     public function viewselectedstudents(){
         
-        $selectedstudents = Form::all();// Fetch the form data by ID
-        $student = Form::find($id); // Assuming $id is the student's ID
-        $photoPath = $student->profile_image;
-        // dd($selectedstudents);
-        return view('users.viewselectedstudent', compact('selectedstudents','photoPath')); // Pass the form data to the view
+        // $selectedstudents = Form::paginate(4);// Fetch the form data by ID
+        // dd($selectedstudents); 
+        $user = auth()->user()->name; 
+        // dd($user);
+        $selectedstudents = Form::where('college', $user)->paginate(4);
+        $selectedStudentsCount = $selectedstudents->count();
+        // $student = Form::find($id); // Assuming $id is the student's ID
+        // $photoPath = $selectedstudents->profile_image;
+        // $profileImage = $selectedstudents->isEmpty() ? null : $selectedstudents->first()->profile_image;
+
+        // dd($profileImage);
+        return view('users.viewselectedstudent', compact('selectedstudents','selectedStudentsCount')); // Pass the form data to the view
     }
 
-
-    public function viewsingleselectedstudent()  {
-        $selectedstudents = Form::all();
+    public function finalstudent($id){
+        $finalstudent = Form::find($id)->paginate(4);
+        $finalstudentcount = $finalstudent->count();
+        $user = auth()->user()->name;
+        // Send an email to the selected student
+        // Mail::to($finalstudent->email)->send(new StudentApproved($finalstudent));
+        // return redirect()->route('finalstudent')->with('success', 'Student approved successfully.');
+        return view('singlepages.finalapprovedstudent',compact('finalstudent','user','finalstudentcount'));
+    }
+    public function viewsingleselectedstudent($id)  {
+        $selectedstudents = Form::find($id);
         return view('singlepages.selectedstudent', compact('selectedstudents'));
     }
 

@@ -31,8 +31,7 @@
         <div style="padding-bottom:50px" ;>
             <h1 style='font-size:30px;'>All Courses</h1>
             <h2 style='font-size:18px;'>
-                <p>Total number of courses: {{ \App\Models\Course::count() }}</p>
-
+                <p>Total number of courses: {{ auth()->user()->courses()->count() }}</p>
             </h2>
         </div>
 
@@ -41,7 +40,7 @@
                 <thead>
 
                     <tr>
-                        <th>S.N</th>
+
                         <th>Course Name</th>
                         <th>Course Code</th>
                         <th>Department</th>
@@ -49,12 +48,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                    $count = ($courses->currentPage() - 1) * $courses->perPage() + 1;
-                    @endphp
+
                     @foreach($courses as $course)
+                    @if($course->user_name === auth()->user()->name)
                     <tr>
-                        <td class="sn">{{ $count }}</td>
                         <td>{{ $course->coursename }}</td>
                         <td>{{ $course->code }}</td>
                         <td>{{ $course->department }}</td>
@@ -75,14 +72,12 @@
 
                         </td>
                     </tr>
-                    @php
-                    $count++;
-                    @endphp
+                    @endif
                     @endforeach
                 </tbody>
             </table>
         </div>
-        <div>{{ $courses->links() }}</div>
+
         <div class="foot" style="padding-top:20%" ;></div>
     </section>
     <div id="myModal" class="modal">
