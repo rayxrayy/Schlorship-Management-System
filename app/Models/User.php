@@ -65,5 +65,9 @@ class User extends Authenticatable implements MustVerifyEmail
         // Assuming roles are stored in a column named 'role' in the users table
         return $this->role === $role;
     }
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'user_name', 'name');
+    }
 
 }

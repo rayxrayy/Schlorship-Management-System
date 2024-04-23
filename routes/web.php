@@ -55,7 +55,6 @@ Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
 Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
 Route::get('/apply',[ApplyController::class,'index'])->name("apply");
 Route::post('/get-courses', [ApplyController::class, 'getCoursesByCollege']);
-
 Route::get('/applycourses', [CourseController::class, 'studentcourse'])->name('applycourses');
 Route::get('/applycollege',[CollegeController::class,'applycollege'])->name("college");
 Route::get('/courses/{collegeId}', 'CollegeController@getCoursesByCollegeId');
@@ -63,9 +62,9 @@ Route::get('/courses/{collegeId}', 'CollegeController@getCoursesByCollegeId');
 
 
 //collegepart
-Route::post('/selectedstudents',[StudentController::class,'viewselectedstudents'])->name('selectedstudents');
-Route::get('/viewsingleselectedstudents',[StudentController::class,'viewsingleselectedstudent'])->name('viewsingleselectedstudents');
-
+Route::get('/approvelstudent', [StudentController::class, 'viewselectedstudents'])->name("approvelstudent");
+Route::get('/selectedstudents/{id}', [StudentController::class, 'finalstudent'])->name("selectedstudents");
+Route::get('/viewsingleselectedstudents/{id}',[StudentController::class,'viewsingleselectedstudent'])->name('viewsingleselectedstudents');
 Route::get('/course',[CourseController::class,'index'])->name("course");
 Route::post('/store/course',[CourseController::class,'store'])->name('store.course');;
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');

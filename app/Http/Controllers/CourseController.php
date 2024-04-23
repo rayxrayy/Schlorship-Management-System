@@ -8,7 +8,7 @@ use App\Models\Course;
 class CourseController extends Controller
 {
     public function index(){
-        $courses = Course::paginate(4); // Retrieve all courses from the database
+        $courses = Course::all(); // Retrieve all courses from the database
         // dd($coursess);
       
         return view('users.courses', compact('courses'));
