@@ -18,12 +18,12 @@
                     <th>Image</th>
                     <th>Name</th>
                     <th>Course</th>
-                    <th>Number</th>
+                    <th>Description</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach($finalstudent as $key => $student)
+                @foreach($finalstudentview as $key => $student)
                 <tr>
 
                     <div class="container">
@@ -34,17 +34,17 @@
                             <!-- Other student details -->
                         </div>
                     </div>
-                    <td>{{ $key + $finalstudent->firstItem() }}</td>
+                    <td>{{ $key + $finalstudentview->firstItem() }}</td>
                     <td>
-                        @if ($student->profile_image)
+                        @if ($student->image)
                         <img src="{{ asset('storage/app/student-images/'.$student->profile_image) }}"
                             alt="Profile Image" style="max-width: 100px;">
 
                         @endif
                     </td>
                     <td>{{ $student->fullname }}</td>
-                    <td>{{ $student->major }}</td>
-                    <td>{{ $student->number }}</td>
+                    <td>{{ $student->course }}</td>
+                    <td>{{ $student->description }}</td>
                     <td>
                     <td>
                         <a href="{{ route('viewsingleselectedstudents', ['id' => $student->id]) }}">All Details</a>
@@ -57,6 +57,6 @@
         </table>
 
     </div>
-    <div>{{ $finalstudent->links() }}</div>
+    <div>{{ $finalstudentview->links() }}</div>
     <div class="foot" style="padding-top:20%" ;></div>
 </x-app-layout>

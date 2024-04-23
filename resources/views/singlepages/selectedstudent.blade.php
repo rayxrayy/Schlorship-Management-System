@@ -107,7 +107,6 @@
 </head>
 
 <body>
-
     <div class="container">
 
         <button style="font-size:28px; background:white; border-color:white;"
@@ -132,7 +131,8 @@
         <div class="section">
             <h2 class="section-title">Education</h2>
             <p class="education">
-                <span class="running"> Running: <span class="edu-course">{{ $selectedstudents->major }}</span> </span>
+                <span class="running"> Running: <span class="edu-course">{{ $selectedstudents->major }}</span>
+                </span>
 
 
                 <span class="edu-college">{{ $selectedstudents->currentedu }}</span>
@@ -168,13 +168,27 @@
         <h3>Make a desision !</h3>
         <p> if you want to select the student just click the approve button if not then click the cancel button.</p>
         <div class="button">
-            <a href="{{ route('selectedstudents',['id' => $selectedstudents ->id ]) }}" class="fill-button">Approve</a>
+            <form action="{{ route('approve-student', ['id' => $selectedstudents->id]) }}" method="POST">
+                @csrf
+                <x-button class="fill-button" onclick="approveStudent({{ $selectedstudents->id }})">Approve</x-button>
+                </td>
+
+            </form>
             <x-button class="fill-button" onclick="window.print()">Print</x-button>
             <x-button class="fill-button" onclick="window.history.back()">Cancel</x-button>
         </div>
 
+
     </div>
 
 </body>
+<script>
+function approveStudent(studentId) {
+    // Find the closest <tr> element containing the button and hide it
+    var row = document.querySelector('button[data-selectedstudents-id="' + studentId + '"]').closest('tr');
+    row.style.display = 'none';
+    // You may also want to send an AJAX request to the server to handle the approval process
+}
+</script>
 
 </html>

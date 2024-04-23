@@ -63,7 +63,8 @@ Route::get('/courses/{collegeId}', 'CollegeController@getCoursesByCollegeId');
 
 //collegepart
 Route::get('/approvelstudent', [StudentController::class, 'viewselectedstudents'])->name("approvelstudent");
-Route::get('/selectedstudents/{id}', [StudentController::class, 'finalstudent'])->name("selectedstudents");
+Route::post('/approve-student/{id}', [StudentController::class, 'finalstudent'])->name("approve-student");
+Route::get('/finalstudent', [StudentController::class, 'viewfinalstudent'])->name("finalstudent");
 Route::get('/viewsingleselectedstudents/{id}',[StudentController::class,'viewsingleselectedstudent'])->name('viewsingleselectedstudents');
 Route::get('/course',[CourseController::class,'index'])->name("course");
 Route::post('/store/course',[CourseController::class,'store'])->name('store.course');;
