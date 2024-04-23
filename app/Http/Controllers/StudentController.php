@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Form; 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use App\Models\ApprovedStudents;
 class StudentController extends Controller
 {
     public function viewselectedstudents(){
@@ -24,14 +24,40 @@ class StudentController extends Controller
     }
 
     public function finalstudent($id){
-        $finalstudent = Form::find($id)->paginate(4);
+        $finalstudent = Form::findOrFail($id);
         $finalstudentcount = $finalstudent->count();
+
         $user = auth()->user()->name;
+
+        try{ ApprovedStudents::create([
+        'student_id' => $finalstudent->id,
+        'image' =>$finalstudent-> profile_image,
+        'fullname' =>$finalstudent-> fullname,
+        'description'=>$finalstudent-> description,
+        'fee'=> 100,
+        'course'=>$finalstudent-> course,
+        'approved_by'=>$user,
+        ]);}
+        catch (\Exception $e) {
+    // Log the database error
+            \Log::error('Database error: ' . $e->getMessage());
+    // Optionally, handle the error or return a response indicating failure
+        }
+        // $finalstudent->delete();
         // Send an email to the selected student
         // Mail::to($finalstudent->email)->send(new StudentApproved($finalstudent));
-        // return redirect()->route('finalstudent')->with('success', 'Student approved successfully.');
-        return view('singlepages.finalapprovedstudent',compact('finalstudent','user','finalstudentcount'));
+        return redirect()->route('finalstudent')->with('success', 'Student approved successfully.');
+        // return view('singlepages.finalapprovedstudent',compact('finalstudent','user','finalstudentcount'));
     }
+
+    public function viewfinalstudent(){
+        $user = auth()->user()->name;
+        $finalstudentview =  ApprovedStudents::where('approved_by', $user)->paginate(4);
+        // dd($finalstudentview);
+        $finalstudentcount = $finalstudentview->count();
+        return view('singlepages.finalapprovedstudent',compact('user','finalstudentview','finalstudentcount'));
+    }
+    
     public function viewsingleselectedstudent($id)  {
         $selectedstudents = Form::find($id);
         return view('singlepages.selectedstudent', compact('selectedstudents'));

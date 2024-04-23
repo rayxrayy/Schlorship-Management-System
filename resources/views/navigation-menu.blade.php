@@ -44,6 +44,9 @@
                     <x-nav-link href="{{ route('approvelstudent') }}" :active="request()->routeIs('approvelstudent')">
                         {{ __('Approvel Students') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('finalstudent') }}" :active="request()->routeIs('finalstudent')">
+                        {{ __('Selected Students') }}
+                    </x-nav-link>
 
                     @endif
                     <x-nav-link href="{{ route('blog') }}" :active="request()->routeIs('blog')">
