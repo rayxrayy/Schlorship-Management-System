@@ -23,7 +23,7 @@
         <article class="container-xxl py-5">
             <div class="row align-items-center px-lg-5 px-xxl-0">
                 <div class="col-lg-5 offset-lg-1 my-5 order-lg-1" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="/images/s3.jpg" class="img-fluid" alt="Course Overview" />
+                    <img src="/images/ssss.jpg" class="img-fluid" alt="Course Overview" />
                 </div>
 
                 <div class="col-lg-6 my-5 order-lg-0" data-aos="fade-zoom-in" data-aos-easing="ease-in-back"

@@ -11,29 +11,30 @@
             apply.</p>
         <p>Don't forget to add all the details and description and make sure you add the actual fee.</p>
     </h2>
+    @foreach ($finalstudents as $student)
     <section id="section-course" class="ai-felpx;lowship--course bg-white">
         <article class="container-xxl py-5">
             <div class="row align-items-center px-lg-5 px-xxl-0">
                 <div class="col-lg-5 offset-lg-1 my-5 order-lg-1" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="/images/s3.jpg" class="img-fluid" alt="Course Overview" />
+                    <img src="{{ asset('storage/'.$student->image) }}" class="img-fluid" alt="student image" />
                 </div>
 
                 <div class="col-lg-6 my-5 order-lg-0" data-aos="fade-zoom-in" data-aos-easing="ease-in-back"
                     data-aos-duration="500">
-                    <div class="fs-3 fw-bold lh-sm">Gayatri Banset
+                    <div class="fs-3 fw-bold lh-sm">{{ $student->fullname }}
                     </div>
                     <p>np03cs4a210022@gmail.com</p>
-                    <div class="fw-bold mt-4 lh-sm" id='description'> ''It is designed to help Students, colleges and
-                        the
-                        public to help
-                        growing better future. For that what should a student have to do:''</div>
+                    <div class="fw-bold mt-4 lh-sm" id='description'> ''I am currently in the process of getting
+                        enrollment in the <span>{{ $student->course }}</span> course offered by
+                        <span>{{ $student->approved_by }}</span>.''
+                    </div>
                     <hr>
                     <ul class="my-2 fill-tick">
-                        <li class="mt-2">Have a good academic result.</li>
+                        <li class="mt-2">{{ $student->description }}</li>
 
                     </ul>
                     <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
-                        <h2>Total fee: $500</h2>
+                        <h2>Total fee: ${{ $student->fee }}</h2>
                         <h2>Raised:$200.21</h2>
                     </div>
 
@@ -46,10 +47,11 @@
             </div>
         </article>
     </section>
-    <div style="text-align: center; padding-top: 20px; font-size: 25px; color:red;"><a href=""> View All Students
-            <!-- <x-button>View All Colleges</x-button>   -->
-        </a>
-    </div>
+    @endforeach
+    <!-- <form id="paid-amount-form" style="display: none;">
+        <input type="" name="paid_amount" id="paid_amount">
+        
+    </form> -->
 </x-app-layout>
 <script>
 var config = {
@@ -110,4 +112,29 @@ btn.onclick = function() {
         amount: 1000
     });
 }
+
+// var paidAmount;
+// var form = document.getElementById("paid-amount-form");
+
+// var onSuccess = function(payload) {
+//     // Get the paid amount from the payload
+//     paidAmount = payload.amount;
+
+//     // Open the form with the paid amount
+//     form.style.display = "block";
+// };
+
+// var onError = function(error) {
+//     console.log(error);
+// };
+
+// var onClose = function() {
+//     console.log('Widget is closing');
+// };
+
+// var eventHandler = {
+//     onSuccess: onSuccess,
+//     onError: onError,
+//     onClose: onClose
+// };
 </script>

@@ -65,7 +65,6 @@ Route::get('/viewsingleselectedstudents/{id}',[StudentController::class,'viewsin
 Route::get('/course',[CourseController::class,'index'])->name("course");
 Route::post('/store/course',[CourseController::class,'store'])->name('store.course');;
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
-Route::patch('/course/{id}', [CourseController::class,'update'])->name('course.update');
 Route::patch('/course',[CourseController::class,'update']);
 
 // publicpart
