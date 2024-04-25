@@ -18,7 +18,7 @@ class ApplyController extends Controller
         // Store the course names in the array indexed by the user name
         $coursesByCollege[$college] = $courses;
         //  var_dump($coursesByCollege);
-        // var_dum($colleges);
+        // var_dum($colleges); 
         // var_dump($coursesByCollege);
     }
     

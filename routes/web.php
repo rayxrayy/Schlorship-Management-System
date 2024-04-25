@@ -37,8 +37,7 @@ Route::middleware([
         $collegecount = User::where('role', 'college')->count();
         $publicCount = User::where('role', 'public')->count();
         // Pass the count to the dashboard view
-        return view('dashboard', ['studentCount' => $studentCount, 'collegecount' => $collegecount, 'publicCount'=> $publicCount]);
-        
+        return view('dashboard', ['studentCount' => $studentCount, 'collegecount' => $collegecount, 'publicCount'=> $publicCount]);   
     })->name('dashboard');
 });
 
@@ -46,9 +45,6 @@ Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/college', [CollegeController::class, 'index']);
 Route::get('/review', [ReviewController::class, 'index']);
 Route::get('/careers', [ReviewController::class, 'career']);
-
-
-
 Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
 
 //studentpart
@@ -70,6 +66,7 @@ Route::get('/course',[CourseController::class,'index'])->name("course");
 Route::post('/store/course',[CourseController::class,'store'])->name('store.course');;
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 Route::patch('/course/{id}', [CourseController::class,'update'])->name('course.update');
+Route::patch('/course',[CourseController::class,'update']);
 
 // publicpart
 Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');

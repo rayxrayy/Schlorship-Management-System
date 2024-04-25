@@ -15,6 +15,11 @@
             {{ session('message') }}
         </div>
         @endif
+        @if (session('error'))
+        <div class="alert alert-success">
+            {{ session('error') }}
+        </div>
+        @endif
         <article class="container-xxl py-5">
             <div class="row align-items-center px-lg-5 px-xxl-0">
                 <div class="col-lg-5 offset-lg-1 my-5 order-lg-1" data-aos="fade-up" data-aos-duration="1000">
@@ -392,4 +397,3 @@ function fetchCourses(college) {
         });
 }
 </script>
-
