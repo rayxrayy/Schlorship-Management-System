@@ -393,7 +393,9 @@ function fetchCourses(college) {
                 option.value = course;
                 option.textContent = course;
                 courseSelect.appendChild(option);
+                console.log(courseSelect);
             });
         });
+
 }
 </script>

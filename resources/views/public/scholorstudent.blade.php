@@ -2,6 +2,11 @@
 <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<style>
+#post-button {
+    color: blue;
+}
+</style>
 <x-app-layout>
 
     <h1 style="font-size:41px;">You can choose any student here to donate!</h1>
@@ -37,11 +42,13 @@
                         <h2>Total fee: ${{ $student->fee }}</h2>
                         <h2>Raised:$200.21</h2>
                     </div>
+                    <div id="review-area">
+                        <textarea id="review-input" rows="1" cols="40" placeholder="Add a comment..."></textarea>
+                    </div>
+                    <div id="comment-message" style="display: none;">Commented!</div>
 
                     <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
                         <button class="btn fill-button" id="payment-button">Donate</button>
-                        <a class="btn fill-button" role="button" id="" href="">Review</a>
-
                     </div>
                 </div>
             </div>
@@ -137,4 +144,36 @@ btn.onclick = function() {
 //     onError: onError,
 //     onClose: onClose
 // };
+
+document.getElementById("review-input").addEventListener("input", function() {
+    var textarea = document.getElementById("review-input");
+    var postButton = document.getElementById("post-button");
+
+    if (textarea.value.trim() !== "") {
+        if (!postButton) {
+            postButton = document.createElement("button");
+            postButton.id = "post-button";
+            postButton.textContent = "Post";
+            postButton.addEventListener("click", function() {
+                // Add functionality to post the comment here
+                console.log("Posting comment: " + textarea.value.trim());
+                // For demonstration purposes, this logs the comment to the console
+                textarea.value = ""; // Clear the textarea after posting
+                postButton.remove(); // Remove the button after posting
+                document.getElementById("comment-message").style.display =
+                    "block"; // Show the comment message
+                setTimeout(function() {
+                    document.getElementById("comment-message").style.display =
+                        "none"; // Hide the comment message after 5 seconds
+                }, 1000); // 5000 milliseconds = 5 seconds
+
+            });
+            document.getElementById("review-area").appendChild(postButton);
+        }
+    } else {
+        if (postButton) {
+            postButton.remove();
+        }
+    }
+});
 </script>
