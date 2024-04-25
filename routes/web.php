@@ -49,6 +49,7 @@ Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
 
 //studentpart
 Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
+Route::post('/applycourses/submit-form', [FormController::class,'storecourseform'])->name('submit-form');
 Route::get('/apply',[ApplyController::class,'index'])->name("apply");
 Route::post('/get-courses', [ApplyController::class, 'getCoursesByCollege']);
 Route::get('/applycourses', [CourseController::class, 'studentcourse'])->name('applycourses');

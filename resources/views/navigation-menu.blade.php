@@ -50,7 +50,7 @@
 
                     @endif
                     <x-nav-link href="{{ route('blog') }}" :active="request()->routeIs('blog')">
-                        {{ __('Blog') }}
+                        {{ __('Reviews') }}
                     </x-nav-link>
 
                 </div>

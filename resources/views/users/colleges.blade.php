@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="{{asset('cssfile/welcome.css')}}">
 <x-app-layout>
-
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <h1 style='font-size:41px;'>You can choose any college here to apply!</h1>
     <h2 style='font-size:18px;'>
         <p>Just make sure that you have extra courses from other so that student would get limitted options and easy
@@ -77,17 +81,16 @@
                     @csrf
 
                     <h2>Apply for <span id="collegeField"></span> which provides
-                        different courses.</h2>
+                        different courses.
 
+                        <input type="hidden" name="college" id="collegeInput">
+                    </h2>
                     <div class="row">
                         <div class="col-25">
                             <label for="course">course</label>
                         </div>
                         <div class="col-75">
-                            <select id="courseSelect"></select>
-
-
-
+                            <select id="courseSelect" name="course">
                             </select>
                             @error('course')
                             <span class="text-danger">{{ $message }}</span>
@@ -414,8 +417,12 @@ function openApplyModal(collegeName, courses) {
     var applyModal = document.getElementById("applyModal");
     var collegeField = document.getElementById("collegeField");
     var courseSelect = document.getElementById("courseSelect");
-
+    var collegeInput = document.getElementById("collegeInput");
     collegeField.textContent = collegeName;
+
+    collegeInput.value = collegeName;
+    console.log(collegeName);
+
     // Clear existing options
     courseSelect.innerHTML = "";
 
@@ -430,10 +437,11 @@ function openApplyModal(collegeName, courses) {
         courses.forEach(function(course) {
             var option = document.createElement("option");
             option.textContent = course.coursename;
-            option.value = course.id; // Set the value to the course ID or any other identifier
+            option.value = course.coursename; // Set the value to the course ID or any other identifier
             courseSelect.appendChild(option);
         });
     }
+    console.log(courseSelect);
     applyModal.style.display = "block";
 }
 
