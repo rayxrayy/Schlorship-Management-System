@@ -64,7 +64,9 @@ class StudentController extends Controller
     }
 
     public function viewscholorstudent(){
-        return view('public.scholorstudent');
+        $finalstudents = ApprovedStudents::all();
+        // dd($finalstudents);
+        return view('public.scholorstudent',compact('finalstudents'));
     }
 
     

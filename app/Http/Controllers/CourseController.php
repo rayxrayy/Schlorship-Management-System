@@ -42,7 +42,6 @@ class CourseController extends Controller
         }
 
         $course = Course::find($request->input('id'));
-        // dd($course);
         $course->coursename = $request->input('coursename') ?? $course->coursename;
         $course->code = $request->input('code') ?? $course->code;
         $course->department = $request->input('department') ?? $course->department;

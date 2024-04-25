@@ -8,11 +8,6 @@
             {{ session('success') }}
         </div>
         @endif
-        @if (session('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-        @endif
         <h1 style='font-size:41px;'>You can add any courses here!</h1>
         <h2 style='font-size:18px;'>
             <p>Just make sure that you have extra courses from other so that student would get limitted options and easy
@@ -34,7 +29,11 @@
                 <p>Total number of courses: {{ auth()->user()->courses()->count() }}</p>
             </h2>
         </div>
-
+        @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+        @endif
         <div class="recent-orders">
             <table id="category_data">
                 <thead>
