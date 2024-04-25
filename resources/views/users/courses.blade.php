@@ -56,7 +56,8 @@
                         <td>{{ $course->code }}</td>
                         <td>{{ $course->department }}</td>
                         <td class="action">
-                            <x-button onclick=" openEditForm()"><span class="material-icons-sharp">edit</span>
+                            <x-button onclick="openeditModal({{ $course }})"><span
+                                    class="material-icons-sharp">edit</span>
                             </x-button>
                             <a href="{{ route('courses.destroy', $course->id) }}"
                                 onclick="event.preventDefault(); if(confirm('Are you sure?')) { document.getElementById('delete-course-{{ $course->id }}').submit(); }"
@@ -77,7 +78,6 @@
                 </tbody>
             </table>
         </div>
-
         <div class="foot" style="padding-top:20%" ;></div>
     </section>
     <div id="myModal" class="modal">
@@ -93,8 +93,7 @@
                         <label for="name">Course Name</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="coursename" name="coursename" placeholder="Enter the Course name.."
-                            required>
+                        <input type="text" name="coursename" placeholder="Enter the Course name.." required>
                     </div>
                 </div>
                 <div class="row">
@@ -102,7 +101,7 @@
                         <label for="code">Course Code</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="code" name="code" placeholder="Enter the course code .." required>
+                        <input type="text" name="code" placeholder="Enter the course code .." required>
                     </div>
                 </div>
                 <div id="moduleContainer">
@@ -148,6 +147,95 @@
                         <label for="fee">Fee Details</label>
                     </div>
                     <div class="col-75">
+                        <input type="text" name="fee" placeholder="Enter the amount of fee..." required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-25">
+                        <label for="description">Description</label>
+                    </div>
+                    <div class="col-75">
+                        <textarea name="description" placeholder="Write something .." required
+                            style="height:150px"></textarea>
+                    </div>
+                </div>
+                </section>
+                <div style="padding-top: 20px">
+                    <x-button type="submit" value="Submit">submit
+                    </x-button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeeditModal()">&times;</span>
+            <!-- enctype="multipart/form-data"you ensure that the form data, including any uploaded files, is properly encoded and sent to the server for processing. This is essential for handling file uploads in your form. -->
+            <form id="applicationForm" action="" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                <input id="course-id" type="hidden" name="id" />
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name">Course Name</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="coursename" name="coursename" placeholder="Enter the Course name.."
+                            required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="code">Course Code</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="code" name="code" placeholder="Enter the course code .." required>
+                    </div>
+                </div>
+                <div id="editmoduleContainer">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="module">Modules</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="module" class="module[]" name="module"
+                                placeholder="Enter the modules .." required>
+
+                            <button style="font-size:28px;" type="button" class="add-module-btn"
+                                onclick="addeditModule()">+</button>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class=" row">
+                    <div class="col-25">
+                        <label for="department">Department</label>
+                    </div>
+                    <div class="col-75">
+                        <select id="department" name="department">
+                            <option value="science">---Select department---</option>
+                            <option value="science">Science</option>
+                            <option value="management">Management</option>
+                            <option value="humanities">Humanities</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="socialsciences">Social Sciences</option>
+                            <option value="business">Business</option>
+                            <option value="arts">Arts</option>
+                            <option value="healthsciences">Health Sciences</option>
+                            <option value="education">Education</option>
+                            <option value="informationtechnology">Information Technology</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fee">Fee Details</label>
+                    </div>
+                    <div class="col-75">
                         <input type="text" id="fee" name="fee" placeholder="Enter the amount of fee..." required>
                     </div>
                 </div>
@@ -162,8 +250,8 @@
                     </div>
                 </div>
                 </section>
-                <div class="row" style="padding-top: 20px">
-                    <x-button type="submit" value="Submit">submit
+                <div style="padding-top: 20px">
+                    <x-button type="submit" class='btn'>Save changes
                     </x-button>
                 </div>
             </form>
@@ -192,16 +280,51 @@ function addModule() {
     var newRow = document.createElement('div');
     newRow.className = 'row';
     newRow.innerHTML = `
-            <div class="col-25">
-                <label for="module">Modules</label>
-            </div>
-            <div class="col-75">
-                <input type="text" class="module" name="module" placeholder="Enter the modules ..">
-            </div>
-            <div class="col-10">
-                <button style="font-size:28px; padding-left:10px;" type="button" class="add-module-btn" onclick="addModule()">+</button>
-            </div>
+            <div style="padding-left: 10pc;">
+            <input type="text" class="module" name="module[]" placeholder="Enter the modules .."
+                                required>
+                                </div>
         `;
     moduleContainer.appendChild(newRow);
+}
+
+function addeditModule() {
+    var moduleContainer = document.getElementById('editmoduleContainer');
+    var newRow = document.createElement('div');
+    newRow.className = 'row';
+    newRow.innerHTML = `
+            <div style="padding-left: 10pc;">
+            <input type="text" class="module" name="module[]" placeholder="Enter the modules .."
+                                required>
+                                </div>
+        `;
+    moduleContainer.appendChild(newRow);
+}
+
+function closeeditModal() {
+    var modal = document.getElementById("editModal");
+    modal.style.display = "none";
+}
+
+
+
+function openeditModal(course) {
+    document.getElementById('course-id').value = course.id;
+    document.getElementById('coursename').value = course.coursename;
+    document.getElementById('code').value = course.code;
+    document.getElementById('fee').value = course.fee;
+    document.getElementById('description').value = course.description;
+    document.getElementById('module').value = course.module;
+    document.getElementById('department').value = course.department;
+    document.getElementById('editModal').style.display = "block";
+
+    console.log(course.id);
+    console.log(course.coursename);
+    console.log(course.code);
+    console.log(course.fee);
+    console.log(course.description);
+    console.log(course.module);
+    console.log(course.department);
+
 }
 </script>

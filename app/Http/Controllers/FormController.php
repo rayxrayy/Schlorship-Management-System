@@ -31,6 +31,7 @@ class FormController extends Controller
             'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             
         ]);
+        try {
   // Retrieve college and course from the request
         $college = $request->input('college');
         $course = $request->input('course');
@@ -82,9 +83,14 @@ class FormController extends Controller
         // Save the photo path to the user's profile_photo_path attribute
             $validatedData['profile_image'] = $uploadedPhotoPath;
         }
+        
         Form::create($validatedData);
 
         // Redirect back with success message
         return redirect()->back()->with('success', 'Form data submitted successfully!');
+        }catch (\Exception $e) {
+        // If an exception occurs during form submission, redirect back with an error message
+        return redirect()->back()->with('error', 'Form submission failed. Please try again later.');
+        }
     }
 }

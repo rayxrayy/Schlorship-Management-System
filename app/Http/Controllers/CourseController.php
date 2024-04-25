@@ -12,7 +12,7 @@ class CourseController extends Controller
         // dd($coursess);
       
         return view('users.courses', compact('courses'));
-
+        
         // return view('users.courses');
     }
 
@@ -23,47 +23,36 @@ class CourseController extends Controller
     $course = new Course();
     $course->coursename = $request->coursename;
     $course->code = $request->code;
-    $course->module = $request->module;
     $course->department = $request->department;
     $course->fee = $request->fee;
     $course->description = $request->description;
-
     // Set the username to the name of the currently authenticated user
     $course->user_name = auth()->user()->name;
-
+    $modules = $request->input('module');
+    $course->module = implode(', ', $modules);
     // Save the course to the database
     $course->save();
-
-    $modules = $request->input('module');
-
-    // Check if $modules is not null and is an array before iterating over it
-    if (!is_null($modules) && is_array($modules)) {
-        foreach ($modules as $module) {
-            // Save each module to the database
-            $course->modules()->create(['name' => $module]);
-        }
-    }
-
         return redirect()->back()->with('success', 'Course created successfully!');
     }
     
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $course = Course::find($id);
-        
-    if(!$course){
-        return redirect('/course')->with(['message' => 'Course not found']);
-    }
+        if(!$request->has('id')){
+            return redirect('/course')->with(['message' => 'Oops.. Something went wrong']);
+        }
 
-    $course->coursename = $request->input('coursename') ?? $course->coursename;
-    $course->code = $request->input('code') ?? $course->code;
-    $course->module = $request->input('module') ?? $course->module;
-    $course->department = $request->input('department') ?? $course->department;
-    $course->fee = $request->input('fee') ?? $course->fee;
-    $course->description = $request->input('description') ?? $course->description;
-    $course->save();
+        $course = Course::find($request->input('id'));
+        // dd($course);
+        $course->coursename = $request->input('coursename') ?? $course->coursename;
+        $course->code = $request->input('code') ?? $course->code;
+        $course->department = $request->input('department') ?? $course->department;
+        $modules = $request->input('module') ?? $course->module;
+        $course->module = implode(', ', $modules);
+        $course->fee = $request->input('fee') ?? $course->fee;
+        $course->description = $request->input('description') ?? $course->description;
+        $course->save();
 
-    return redirect('/course')->with(['message' => 'Course updated successfully']);
+        return redirect('/course')->with(['message' => 'Course updated successfully']);
     }
 
     public function destroy($id)

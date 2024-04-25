@@ -81,12 +81,6 @@ function toggleFieldsDoc(header) {
     documentation.style.display = documentation.style.display === 'none' ? 'block' : 'none';
 }
 
-
-//to get apply form
-// function toggleFormVisibility() {
-//         var form = document.getElementById("applicationForm");
-//         form.style.display = (form.style.display === "none") ? "block" : "none";
-//     }
 function openModal() {
   var modal = document.getElementById("myModal");
   modal.style.display = "block";
