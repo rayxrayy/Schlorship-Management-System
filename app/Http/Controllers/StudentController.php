@@ -5,6 +5,7 @@ use App\Models\Form;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ApprovedStudents;
+use App\Models\Post;
 class StudentController extends Controller
 {
     public function viewselectedstudents(){
@@ -69,6 +70,18 @@ class StudentController extends Controller
         return view('public.scholorstudent',compact('finalstudents'));
     }
 
+    public function store(Request $request)
+    {
+
+        $studentName = $request->input('student_name');
+        $comment = $request->input('post');
+        $post = new Post();
+        $post->description = $comment;
+        $post->title = $studentName;
+        $post->save();
+        // Optionally, you can redirect back or return a response
+        return redirect()->back()->with('success', 'Comment submitted successfully!');
+    }
     
     public function verify(Request $request){ //payload
         $args = http_build_query(array(
