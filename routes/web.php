@@ -9,6 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\PaymentController;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -70,5 +71,5 @@ Route::patch('/course',[CourseController::class,'update']);
 
 // publicpart
 Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');
-Route::get('khalti/verify',[StudentController::class, 'verify'])->name('ajax.khalti.verify_order');
-Route::post('/scholorstudent', [StudentController::class, 'store'])->name('submit-comment');
+Route::get('khalti/verify',[PaymentController::class, 'verify'])->name('ajax.khalti.verify_order');
+Route::post('/scholorstudent/comment', [StudentController::class, 'store'])->name('submit-comment');

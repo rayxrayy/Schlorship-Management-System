@@ -53,17 +53,24 @@
                         <div class="review-area" data-student-id="{{ $student->id }}">
                             <input type="hidden" name="student_name" value="{{ $student->fullname }}">
                             <textarea class="review-input" rows="1" cols="40" placeholder="Add a comment..."></textarea>
-                            <button class="post-button" data-student-id="{{ $student->id }}" style="display: none;"
-                                type="submit">Post</button>
+                            <button class="post-button" style="display: none;" type="submit">Post</button>
                             <div class="comment-message" style="display: none;">Commented!</div>
                             <input type="hidden" name="post" id="postinput">
+                            <input type="hidden" name="username" value="{{$user}}">
+
                         </div>
                     </form>
 
                     <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
-                        <button class="btn fill-button payment-button"
+                        <button class="btn fill-button payment-button" type="submit"
                             data-student-id="{{ $student->id }}">Donate</button>
+
                     </div>
+                    <form action="" method="post">
+                        <h1>You have sucessfully done payment.</h1>
+                        <input type="hidden" name="student_name" value="{{ $student->fullname }}">
+                        <input type="hidden" name="username" value="{{$user}}">
+                    </form>
                 </div>
             </div>
         </article>

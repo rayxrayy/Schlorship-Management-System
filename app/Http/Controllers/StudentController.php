@@ -14,20 +14,28 @@ class StudentController extends Controller
         // dd($selectedstudents); 
         $user = auth()->user()->name; 
         // dd($user);
-        $selectedstudents = Form::where('college', $user)->paginate(4);
+        $selectedstudents = Form::where('college', $user)->where('is_approved', false)->paginate(4);
+        // dd($selectedstudents); 
         $selectedStudentsCount = $selectedstudents->count();
         // $student = Form::find($id); // Assuming $id is the student's ID
         // $photoPath = $selectedstudents->profile_image;
         // $profileImage = $selectedstudents->isEmpty() ? null : $selectedstudents->first()->profile_image;
 
         // dd($profileImage);
+        // if ($form->is_approved = 0) {
         return view('users.viewselectedstudent', compact('selectedstudents','selectedStudentsCount')); // Pass the form data to the view
+        // }
     }
 
     public function finalstudent($id){
-        $finalstudent = Form::findOrFail($id);
+        $finalstudent = Form::findOrFail($id); 
         $finalstudentcount = $finalstudent->count();
-
+        $finalstudent->is_approved = true;
+        $finalstudent->save();
+        // if (!$form->is_approved) {
+        // // Update the is_approved column to true
+        // $form->is_approved = true;
+        // $form->save();
         $user = auth()->user()->name;
 
         try{ ApprovedStudents::create([
@@ -55,6 +63,7 @@ class StudentController extends Controller
         $user = auth()->user()->name;
         $finalstudentview =  ApprovedStudents::where('approved_by', $user)->paginate(4);
         // dd($finalstudentview);
+        // dd($finalstudentview);
         $finalstudentcount = $finalstudentview->count();
         return view('singlepages.finalapprovedstudent',compact('user','finalstudentview','finalstudentcount'));
     }
@@ -66,8 +75,10 @@ class StudentController extends Controller
 
     public function viewscholorstudent(){
         $finalstudents = ApprovedStudents::all();
+        $user = auth()->user()->name;
+        // dd($user);
         // dd($finalstudents);
-        return view('public.scholorstudent',compact('finalstudents'));
+        return view('public.scholorstudent',compact('finalstudents','user'));
     }
 
     public function store(Request $request)
@@ -75,43 +86,14 @@ class StudentController extends Controller
 
         $studentName = $request->input('student_name');
         $comment = $request->input('post');
+        $user_name = $request->input('username');
         $post = new Post();
         $post->description = $comment;
         $post->title = $studentName;
+        $post->image = $user_name;
         $post->save();
         // Optionally, you can redirect back or return a response
         return redirect()->back()->with('success', 'Comment submitted successfully!');
     }
     
-    public function verify(Request $request){ //payload
-        $args = http_build_query(array(
-            'token' => $request->token,
-            'amount'  => 1000
-        ));
-        
-        $url = "https://khalti.com/api/v2/payment/verify/";
- 
-        #  Make the call using API.
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,$args);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        $headers = ['Authorization: Key test_secret_key_d953a542b1f3400384bc831078a2509c'];
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        // Response
-        $response = curl_exec($ch);
-        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch); 
-
-        if($status_code == 2000){
-            return response()->json(['sucess'=>1, 'redirecto' => route('donate')]);
-        }
-        else{
-            return response()->json(['error' => 1, 'message' => 'payment failed']);
-
-        }
-    }
 }
