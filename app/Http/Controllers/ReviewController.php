@@ -13,4 +13,5 @@ class ReviewController extends Controller
     public function career(){
         return view('careers');
     }
+    
 }

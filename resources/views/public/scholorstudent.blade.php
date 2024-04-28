@@ -3,8 +3,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
-#post-button {
+.post-button {
     color: blue;
+}
+
+.comment-message {
+    color: red;
 }
 </style>
 <x-app-layout>
@@ -16,6 +20,7 @@
             apply.</p>
         <p>Don't forget to add all the details and description and make sure you add the actual fee.</p>
     </h2>
+
     @foreach ($finalstudents as $student)
     <section id="section-course" class="ai-felpx;lowship--course bg-white">
         <article class="container-xxl py-5">
@@ -28,6 +33,7 @@
                     data-aos-duration="500">
                     <div class="fs-3 fw-bold lh-sm">{{ $student->fullname }}
                     </div>
+
                     <p>np03cs4a210022@gmail.com</p>
                     <div class="fw-bold mt-4 lh-sm" id='description'> ''I am currently in the process of getting
                         enrollment in the <span>{{ $student->course }}</span> course offered by
@@ -39,26 +45,31 @@
 
                     </ul>
                     <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
-                        <h2>Total fee: ${{ $student->fee }}</h2>
-                        <h2>Raised:$200.21</h2>
+                        <h2>Total fee: Rs.{{ $student->fee }}</h2>
+                        <h2>Raised:Rs.200.21</h2>
                     </div>
-                    <div id="review-area">
-                        <textarea id="review-input" rows="1" cols="40" placeholder="Add a comment..."></textarea>
-                    </div>
-                    <div id="comment-message" style="display: none;">Commented!</div>
+                    <form action="{{ route('submit-comment') }}" method='POST'>
+                        @csrf
+                        <div class="review-area" data-student-id="{{ $student->id }}">
+                            <input type="hidden" name="student_name" value="{{ $student->fullname }}">
+                            <textarea class="review-input" rows="1" cols="40" placeholder="Add a comment..."></textarea>
+                            <button class="post-button" data-student-id="{{ $student->id }}" style="display: none;"
+                                type="submit">Post</button>
+                            <div class="comment-message" style="display: none;">Commented!</div>
+                            <input type="hidden" name="post" id="postinput">
+                        </div>
+                    </form>
 
                     <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
-                        <button class="btn fill-button" id="payment-button">Donate</button>
+                        <button class="btn fill-button payment-button"
+                            data-student-id="{{ $student->id }}">Donate</button>
                     </div>
                 </div>
             </div>
         </article>
     </section>
     @endforeach
-    <!-- <form id="paid-amount-form" style="display: none;">
-        <input type="" name="paid_amount" id="paid_amount">
-        
-    </form> -->
+
 </x-app-layout>
 <script>
 var config = {
@@ -112,68 +123,55 @@ var config = {
 };
 
 var checkout = new KhaltiCheckout(config);
-var btn = document.getElementById("payment-button");
-btn.onclick = function() {
-    // minimum transaction amount must be 10, i.e 1000 in paisa.
-    checkout.show({
-        amount: 1000
+document.querySelectorAll('.payment-button').forEach(function(button) {
+    button.addEventListener('click', function() {
+        var studentId = this.getAttribute('data-student-id');
+        checkout.show({
+            amount: 1000,
+            productId: studentId // Use student's ID as productId
+        });
     });
-}
+});
 
-// var paidAmount;
-// var form = document.getElementById("paid-amount-form");
 
-// var onSuccess = function(payload) {
-//     // Get the paid amount from the payload
-//     paidAmount = payload.amount;
+document.querySelectorAll('.review-input').forEach(function(textarea) {
+    textarea.addEventListener('input', function() {
+        var postButton = this.nextElementSibling;
+        var commentMessage = postButton.nextElementSibling;
 
-//     // Open the form with the paid amount
-//     form.style.display = "block";
-// };
-
-// var onError = function(error) {
-//     console.log(error);
-// };
-
-// var onClose = function() {
-//     console.log('Widget is closing');
-// };
-
-// var eventHandler = {
-//     onSuccess: onSuccess,
-//     onError: onError,
-//     onClose: onClose
-// };
-
-document.getElementById("review-input").addEventListener("input", function() {
-    var textarea = document.getElementById("review-input");
-    var postButton = document.getElementById("post-button");
-
-    if (textarea.value.trim() !== "") {
-        if (!postButton) {
-            postButton = document.createElement("button");
-            postButton.id = "post-button";
-            postButton.textContent = "Post";
-            postButton.addEventListener("click", function() {
-                // Add functionality to post the comment here
-                console.log("Posting comment: " + textarea.value.trim());
-                // For demonstration purposes, this logs the comment to the console
-                textarea.value = ""; // Clear the textarea after posting
-                postButton.remove(); // Remove the button after posting
-                document.getElementById("comment-message").style.display =
-                    "block"; // Show the comment message
-                setTimeout(function() {
-                    document.getElementById("comment-message").style.display =
-                        "none"; // Hide the comment message after 5 seconds
-                }, 1000); // 5000 milliseconds = 5 seconds
-
-            });
-            document.getElementById("review-area").appendChild(postButton);
+        if (this.value.trim() !== "") {
+            if (!postButton) {
+                postButton = document.createElement("button");
+                postButton.classList.add("post-button");
+                postButton.textContent = "Post";
+                this.parentNode.appendChild(postButton); // Append the button to the parent
+            }
+            postButton.style.display = "block"; // Show the button
+        } else {
+            if (postButton) {
+                postButton.style.display = "none"; // Hide the button if textarea is empty
+            }
         }
-    } else {
-        if (postButton) {
-            postButton.remove();
-        }
+    });
+});
+
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('post-button')) {
+        var textarea = event.target.previousElementSibling; // Get the textarea element
+        var commentMessage = event.target.nextElementSibling; // Get the comment message element
+        var comment = textarea.value.trim();
+
+        // Append the new comment to the existing value of the hidden input field
+        var postInput = document.getElementById("postinput");
+        postInput.value = comment;
+
+        console.log("Posting comment: " + comment);
+        textarea.value = ""; // Clear the textarea after posting
+        event.target.style.display = "none"; // Hide the button after posting
+        commentMessage.style.display = "block"; // Show the comment message
+        setTimeout(function() {
+            commentMessage.style.display = "none"; // Hide the comment message after 1 second
+        }, 1000);
     }
 });
 </script>

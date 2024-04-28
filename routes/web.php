@@ -64,10 +64,11 @@ Route::post('/approve-student/{id}', [StudentController::class, 'finalstudent'])
 Route::get('/finalstudent', [StudentController::class, 'viewfinalstudent'])->name("finalstudent");
 Route::get('/viewsingleselectedstudents/{id}',[StudentController::class,'viewsingleselectedstudent'])->name('viewsingleselectedstudents');
 Route::get('/course',[CourseController::class,'index'])->name("course");
-Route::post('/store/course',[CourseController::class,'store'])->name('store.course');;
+Route::post('/store/course',[CourseController::class,'store'])->name('store.course');
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 Route::patch('/course',[CourseController::class,'update']);
 
 // publicpart
 Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');
 Route::get('khalti/verify',[StudentController::class, 'verify'])->name('ajax.khalti.verify_order');
+Route::post('/scholorstudent', [StudentController::class, 'store'])->name('submit-comment');
