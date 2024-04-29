@@ -67,7 +67,7 @@
 
                     </div>
                     <form action="" method="post">
-                        <h1>You have sucessfully done payment.</h1>
+                        <!-- <h1>You have sucessfully done payment.</h1> -->
                         <input type="hidden" name="student_name" value="{{ $student->fullname }}">
                         <input type="hidden" name="username" value="{{$user}}">
                     </form>
@@ -79,6 +79,7 @@
 
 </x-app-layout>
 <script>
+var amount = 0;
 var config = {
     // replace the publicKey with yours
     "publicKey": "test_public_key_6db8a752c48745fdbfa77ac3a5051096",
@@ -95,7 +96,7 @@ var config = {
     "eventHandler": {
         onSuccess(payload) {
             // hit merchant api for initiating verfication
-
+            amount = payload.amount;
             if (payload.idx) {
                 $.ajaxSetup({
                     headers: {
@@ -103,12 +104,13 @@ var config = {
                     }
                 });
                 $.ajax({
-                    method: 'post',
+                    method: 'get',
                     url: "{{route('ajax.khalti.verify_order')}}",
                     data: payload,
 
                     sucess: function(response) {
                         if (response.sucess == 1) {
+
                             window.location = response.redirecto;
                         } else {
                             checkout.hide();
@@ -128,7 +130,7 @@ var config = {
         }
     }
 };
-
+// function banayera ajax call garne
 var checkout = new KhaltiCheckout(config);
 document.querySelectorAll('.payment-button').forEach(function(button) {
     button.addEventListener('click', function() {

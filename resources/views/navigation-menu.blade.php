@@ -52,23 +52,36 @@
                     <x-nav-link href="{{ route('blog') }}" :active="request()->routeIs('blog')">
                         {{ __('Reviews') }}
                     </x-nav-link>
-
                 </div>
 
             </div>
-            <div class="search-box">
-                <div class="row">
-                    <input type="text" id="input-box" placeholder="Search..." autocomplete="off">
-                    <button class="search-btn"><i class="ph-magnifying-glass-bold"></i></button>
+
+            <form action="{{ route('search') }}" method="GET">
+                <div class="search-box">
+                    <div class="row">
+                        <input type="text" id="input-box" name="query"
+                            placeholder="Search by student, college and course ..." autocomplete="off">
+                        <button type="submit" class="search-btn"><i class="ph-magnifying-glass-bold"></i></button>
+                    </div>
                 </div>
-                <div class="result-box" id="result-box">
-                    <ul id="autocomplete-results"></ul>
-                </div>
-            </div>
-            <button><img style=" max-width: 30px;" src="images/notification.png" alt="">
+            </form>
+
+            <button onclick="opennotificationModal()"><img style=" max-width: 25px; padding-top: 5px;"
+                    src="images/notification.png" alt="">
             </button>
-
-
+            <!-- The modal -->
+            <div id="notificationModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closenotificationModal()">&times;</span>
+                    <h2 style="color: red; font-size:18px;"> All Notifications</h2>
+                    <!-- Container for notifications -->
+                    <div id="notificationContainer">
+                        @foreach(auth()->user()->unreadNotifications as $notification)
+                        <div style="font-size: 16px;">{{ $notification->data['message'] }}</div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())

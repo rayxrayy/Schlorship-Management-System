@@ -1,9 +1,13 @@
 <x-app-layout>
     <div class="right">
         <div class="recent-updates">
-            <h1>Status</h1>
+            <h1 style="font-size:18px; ">Status</h1>
             <div class="updates">
-                <h2>You have just Applied </h2>
+                <div id="notificationContainer">
+                    @foreach(auth()->user()->unreadNotifications as $notification)
+                    <div style="font-size: 16px;">{{ $notification->data['message'] }}</div>
+                    @endforeach
+                </div>
             </div>
         </div>
         <div class="insights">
@@ -20,7 +24,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="income a">
