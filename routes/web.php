@@ -75,4 +75,6 @@ Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->n
 Route::get('khalti/verify',[PaymentController::class, 'verify'])->name('ajax.khalti.verify_order');
 Route::post('/scholorstudent/comment', [StudentController::class, 'store'])->name('submit-comment');
 
-Route::get('/search', [ReviewController::class, 'search'])->name('search');
+Route::get('/searchcourse', [ReviewController::class, 'searchcourse'])->name('search');
+Route::get('/searchstudent', [ReviewController::class, 'searchstudent'])->name('searchstudent');
+Route::get('/searchfinalstudent', [ReviewController::class, 'searchfinalstudent'])->name('searchfinal');
