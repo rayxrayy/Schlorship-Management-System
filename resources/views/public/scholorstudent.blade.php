@@ -20,7 +20,9 @@
             apply.</p>
         <p>Don't forget to add all the details and description and make sure you add the actual fee.</p>
     </h2>
-
+    @if(isset($message))
+    <p style="color:red;">{{ $message }}</p>
+    @endif
     @foreach ($finalstudents as $student)
     <section id="section-course" class="ai-felpx;lowship--course bg-white">
         <article class="container-xxl py-5">

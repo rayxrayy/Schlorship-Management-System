@@ -1,4 +1,7 @@
 <x-app-layout>
+    @if(isset($message))
+    <p style="color:red;">{{ $message }}</p>
+    @endif
     <h1 style='font-size:30px;'>These are the students that got selected for <span style="color:
             red;">{{ auth()->user()->name }}</span> !
     </h1>
@@ -10,6 +13,7 @@
     <h1>
         <p style='font-size:18px; color:#595bd4;'>Total selected students: {{ $selectedStudentsCount }}</p>
     </h1>
+
     <div class="recent-orders">
         <table id="category_data">
             <thead>
