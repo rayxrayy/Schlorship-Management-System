@@ -23,6 +23,13 @@ class ReviewController extends Controller
     {
     $query = $request->input('query');
     $courses = Course::where('coursename', 'LIKE', "%{$query}%")->paginate(4);
+
+    if ($courses->isEmpty()){
+        $message = 'No course found matching the search criteria.'; 
+        $images = ['cousrse1.png', 'course2.png', 'course3.png', '1.jpg']; 
+        return view('users.studentcourses', compact('courses','images','message'));
+    }
+    
     $images = ['cousrse1.png', 'course2.png', 'course3.png', '1.jpg']; 
     return view('users.studentcourses', compact('courses','images'));
     }
@@ -31,6 +38,12 @@ class ReviewController extends Controller
     {
     $query = $request->input('query');
     $selectedstudents = Form::where('fullname', 'LIKE', "%{$query}%")->paginate(4);
+    
+    if ($selectedstudents->isEmpty()){
+        $message = 'No students found matching the search criteria.'; 
+        $selectedStudentsCount = $selectedstudents->count();
+        return view('users.viewselectedstudent', compact('selectedstudents','selectedStudentsCount','message'));
+    }
     $selectedStudentsCount = $selectedstudents->count();
     return view('users.viewselectedstudent', compact('selectedstudents','selectedStudentsCount'));
     }
@@ -39,6 +52,11 @@ class ReviewController extends Controller
     {
     $query = $request->input('query');
     $finalstudents = ApprovedStudents::where('fullname', 'LIKE', "%{$query}%")->get();
+
+    if ($finalstudents->isEmpty()) {
+        $message = 'No students found matching the search criteria.';
+        return view('public.scholorstudent', compact('message','finalstudents'));
+    }
     $user = auth()->user()->name;
     return view('public.scholorstudent', compact('finalstudents','user'));
     }
