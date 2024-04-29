@@ -55,17 +55,39 @@
                 </div>
 
             </div>
-
+            @if(auth()->user()->hasRole('student'))
             <form action="{{ route('search') }}" method="GET">
                 <div class="search-box">
                     <div class="row">
-                        <input type="text" id="input-box" name="query"
-                            placeholder="Search by student, college and course ..." autocomplete="off">
+                        <input type="text" id="input-box" name="query" placeholder="Search by course ..."
+                            autocomplete="off">
                         <button type="submit" class="search-btn"><i class="ph-magnifying-glass-bold"></i></button>
                     </div>
                 </div>
             </form>
-
+            @endif
+            @if(auth()->user()->hasRole('college'))
+            <form action="{{ route('searchstudent') }}" method="GET">
+                <div class="search-box">
+                    <div class="row">
+                        <input type="text" id="input-box" name="query" placeholder="Search by student ..."
+                            autocomplete="off">
+                        <button type="submit" class="search-btn"><i class="ph-magnifying-glass-bold"></i></button>
+                    </div>
+                </div>
+            </form>
+            @endif
+            @if(auth()->user()->hasRole('public'))
+            <form action="{{ route('searchfinal') }}" method="GET">
+                <div class="search-box">
+                    <div class="row">
+                        <input type="text" id="input-box" name="query" placeholder="Search by student ..."
+                            autocomplete="off">
+                        <button type="submit" class="search-btn"><i class="ph-magnifying-glass-bold"></i></button>
+                    </div>
+                </div>
+            </form>
+            @endif
             <button onclick="opennotificationModal()"><img style=" max-width: 25px; padding-top: 5px;"
                     src="images/notification.png" alt="">
             </button>

@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Form;
 use App\Models\User;
 use App\Models\ApprovedStudents;
+use App\Http\Controllers\CourseController;
 
 class ReviewController extends Controller
 {
@@ -18,21 +19,28 @@ class ReviewController extends Controller
         return view('careers');
     }
     
-    public function search(Request $request)
+    public function searchcourse(Request $request)
     {
     $query = $request->input('query');
-
-    // Search for courses
-    $courses = Course::where('coursename', 'LIKE', "%{$query}%")->get();
-    // dd($courses);
-    // Search for colleges
-    $colleges = User::where('name', 'LIKE', "%{$query}%")->get();
-
-    // Search for students
-    $students = Form::where('fullname', 'LIKE', "%{$query}%")->get();
-
-    $selectedstudents = ApprovedStudents::where('fullname', 'LIKE', "%{$query}%")->get();
-
-    return view('users.postblog', compact('courses', 'colleges', 'students','selectedstudents'));
+    $courses = Course::where('coursename', 'LIKE', "%{$query}%")->paginate(4);
+    $images = ['cousrse1.png', 'course2.png', 'course3.png', '1.jpg']; 
+    return view('users.studentcourses', compact('courses','images'));
     }
+
+    public function searchstudent(Request $request)
+    {
+    $query = $request->input('query');
+    $selectedstudents = Form::where('fullname', 'LIKE', "%{$query}%")->paginate(4);
+    $selectedStudentsCount = $selectedstudents->count();
+    return view('users.viewselectedstudent', compact('selectedstudents','selectedStudentsCount'));
+    }
+    
+    public function searchfinalstudent(Request $request)
+    {
+    $query = $request->input('query');
+    $finalstudents = ApprovedStudents::where('fullname', 'LIKE', "%{$query}%")->get();
+    $user = auth()->user()->name;
+    return view('public.scholorstudent', compact('finalstudents','user'));
+    }
+
 }
