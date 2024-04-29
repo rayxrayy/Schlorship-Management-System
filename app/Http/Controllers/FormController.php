@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 use Symfony\Component\Routing\Annotation\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Form;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\NewFormNotification;
+
 class FormController extends Controller
 {
     public function store(Request $request)
     {
+
         // Validate the form data
         $validatedData = $request->validate([
             'fullname' => 'required|string|max:255',
@@ -84,8 +88,10 @@ class FormController extends Controller
             $validatedData['profile_image'] = $uploadedPhotoPath;
         }
         
-        Form::create($validatedData);
-
+        
+        $form = Form::create($validatedData);
+        // dd($college);
+        Auth::user()->notify(new NewFormNotification($form)); // Pass $form to the notification constructor
         // Redirect back with success message
         return redirect()->back()->with('success', 'Form data submitted successfully!');
         }catch (\Exception $e) {
@@ -157,8 +163,9 @@ class FormController extends Controller
         $course = $request->input('course');
         $validatedData['college'] = $college;
         $validatedData['course'] = $course;
-        Form::create($validatedData);
-
+        $form = Form::create($validatedData);
+        Auth::user()->notify(new NewFormNotification($form)); 
+        // dd($form);
         // Redirect back with success message
         return redirect()->back()->with('success', 'Form data submitted successfully!');
     }

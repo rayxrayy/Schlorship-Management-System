@@ -76,7 +76,7 @@
                 <span class="close" onclick="closeApplyModal()">&times;</span>
 
                 <!-- enctype="multipart/form-data"you ensure that the form data, including any uploaded files, is properly encoded and sent to the server for processing. This is essential for handling file uploads in your form. -->
-                <form id="applicationForm" action="{{ route('submit-form') }}" method="POST"
+                <form id="applicationForm" action="{{ route('coursesubmit-form') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
 

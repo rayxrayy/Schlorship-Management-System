@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Notifications\CollegeFormNotification;
 
 class CourseController extends Controller
 {
@@ -31,7 +32,8 @@ class CourseController extends Controller
     $modules = $request->input('module');
     $course->module = implode(', ', $modules);
     // Save the course to the database
-    $course->save();
+    $viewcourse = $course->save();
+    Auth::user()->notify(new NewFormNotification($viewcourse));
         return redirect()->back()->with('success', 'Course created successfully!');
     }
     

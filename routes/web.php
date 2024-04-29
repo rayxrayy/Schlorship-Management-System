@@ -10,6 +10,7 @@ use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\NotificationController;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,7 @@ Route::get('/addblog',[BlogController::class,'addblog'])->name("blog");
 
 //studentpart
 Route::post('/submit-form', [FormController::class,'store'])->name('submit-form');
-Route::post('/applycourses/submit-form', [FormController::class,'storecourseform'])->name('submit-form');
+Route::post('/applycourses/submit-form', [FormController::class,'storecourseform'])->name('coursesubmit-form');
 Route::get('/apply',[ApplyController::class,'index'])->name("apply");
 Route::post('/get-courses', [ApplyController::class, 'getCoursesByCollege']);
 Route::get('/applycourses', [CourseController::class, 'studentcourse'])->name('applycourses');
@@ -73,3 +74,5 @@ Route::patch('/course',[CourseController::class,'update']);
 Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');
 Route::get('khalti/verify',[PaymentController::class, 'verify'])->name('ajax.khalti.verify_order');
 Route::post('/scholorstudent/comment', [StudentController::class, 'store'])->name('submit-comment');
+
+Route::get('/search', [ReviewController::class, 'search'])->name('search');
