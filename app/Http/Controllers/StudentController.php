@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ApprovedStudents;
 use App\Models\Post;
+use App\Notifications\NewCourseNotification;
 class StudentController extends Controller
 {
     public function viewselectedstudents(){
@@ -94,6 +95,18 @@ class StudentController extends Controller
         $post->save();
         // Optionally, you can redirect back or return a response
         return redirect()->back()->with('success', 'Comment submitted successfully!');
+    }
+
+    public function studentDashboard()
+    {
+    // Retrieve notifications for the authenticated student
+    $student = User::find(auth()->id());
+    $notifications = $student->notifications()->orderBy('created_at', 'desc')->get();
+
+    // Mark notifications as read
+    $student->unreadNotifications->markAsRead();
+
+    return view('navigation-menu', ['notifications' => $notifications]);
     }
     
 }

@@ -1,4 +1,9 @@
 <x-app-layout>
+    <h1 style="font-size: 40px;">
+        <p> This is my college project so there are limited features, will update you guys if it
+            got deployed in real. </p>
+    </h1>
+    @if(auth()->user()->hasRole('student'))
     <div class="right">
         <div class="recent-updates">
             <h1 style="font-size:18px; ">Status</h1>
@@ -10,6 +15,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <div class="insights">
             <div class="sales">
                 <span class="material-icons-shar">{{ $studentCount }}</span>
@@ -56,7 +62,7 @@
                 </div>
 
             </div>
-            @if(auth()->user()->hasRole('student'))
+
             <div class="order a">
                 <span class="material-icons-shar">{{ $publicCount }}</span>
                 <div class="middle">
@@ -65,11 +71,11 @@
                     </div>
                     <div class="progress">
                         <div class="number">
-                            <img src="./images/order.jpg" alt="">
+                            <img src="/images/images.png" alt="">
                         </div>
                     </div>
                 </div>
             </div>
-            @endif
+
         </div>
 </x-app-layout>
