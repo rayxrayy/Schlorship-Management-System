@@ -30,5 +30,5 @@ class Form extends Model
         'college', // Include college attribute
         'course',  // Include course attribute
         'profile_image',
-        ];
+    ];
 }

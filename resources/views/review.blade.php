@@ -62,11 +62,7 @@
                                 March 1 </span>
                         </div>
                         <div class="my-2">
-                            <p>The Fusemachines AI Fellowship isn&#8217;t just about getting into AI; it&#8217;s about
-                                personal growth. Through practical projects, intensive training, and mentorship from
-                                industry leaders, fellows gain the skills to thrive in AI&#8217;s evolving landscape.
-                                We&#8217;re delving into the journey of Pawan S. Sharma, showing how setbacks can lead
-                                to success within this esteemed fellowship.</p>
+                            <p></p>
                         </div>
                     </div>
                     <div class="card-footer bg-white border-0">

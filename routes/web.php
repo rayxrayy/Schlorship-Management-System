@@ -11,6 +11,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\CancelReviewController;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,7 @@ Route::get('/course',[CourseController::class,'index'])->name("course");
 Route::post('/store/course',[CourseController::class,'store'])->name('store.course');
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 Route::patch('/course',[CourseController::class,'update']);
+Route::post('//viewsingleselectedstudents/submitmessage/{id}', [CancelReviewController::class, 'store'])->name('submit.cancelform');
 
 // publicpart
 Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');
@@ -78,4 +80,4 @@ Route::post('/scholorstudent/comment', [StudentController::class, 'store'])->nam
 //search part
 Route::get('/searchcourse', [ReviewController::class, 'searchcourse'])->name('search');
 Route::get('/searchstudent', [ReviewController::class, 'searchstudent'])->name('searchstudent');
-Route::get('/searchfinalstudent', [ReviewController::class, 'searchfinalstudent'])->name('searchfinal');
+Route::get('/searchfinalstudent', [ReviewController::class, 'searchfinalstudent'])->name('searchfinal'); 

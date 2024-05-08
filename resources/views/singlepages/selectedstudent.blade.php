@@ -103,6 +103,52 @@
         border-radius: 5px;
         height: fit-content;
     }
+
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+        /* Could be more or less, depending on screen size */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    /* Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
     </style>
 </head>
 
@@ -125,6 +171,9 @@
 
         <div class="section">
             <h2 class="section-title">Description</h2>
+            <p>I am applying for the {{ $selectedstudents->course }} course which is offered by
+                {{ $selectedstudents->college }}
+            </p>
             <p>{{ $selectedstudents->description }}</p>
         </div>
 
@@ -167,18 +216,34 @@
 
         <h3>Make a desision !</h3>
         <p> if you want to select the student just click the approve button if not then click the cancel button.</p>
+
         <div class="button">
             <form action="{{ route('approve-student', ['id' => $selectedstudents->id]) }}" method="POST">
                 @csrf
                 <x-button class="fill-button" onclick="approveStudent({{ $selectedstudents->id }})">Approve</x-button>
                 </td>
-
             </form>
             <x-button class="fill-button" onclick="window.print()">Print</x-button>
-            <x-button class="fill-button" onclick="window.history.back()">Cancel</x-button>
         </div>
-
-
+        <x-button class="fill-button" onclick="openModal()">Cancel</x-button>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <form id="myForm" action="{{ route('submit.cancelform', ['id' => $selectedstudents->id]) }}"
+                    method="post">
+                    @csrf
+                    <input type="hidden" name="username" id="username" value="{{$selectedstudents->fullname}}">
+                    <input type="hidden" name="collegename" id="collegename" value="{{$selectedstudents->college}}">
+                    <input type="hidden" name="coursename" id="coursename" value="{{$selectedstudents->course}}">
+                    <label for="message" style="color:red;">Message:</label>
+                    <textarea id="message" name="conmment" rows="10" cols="50"></textarea>
+                    <br>
+                    <x-button type="submit">Submit</x-button>
+                </form>
+            </div>
+        </div>
     </div>
 
 </body>
@@ -187,7 +252,17 @@ function approveStudent(studentId) {
     // Find the closest <tr> element containing the button and hide it
     var row = document.querySelector('button[data-selectedstudents-id="' + studentId + '"]').closest('tr');
     row.style.display = 'none';
-    // You may also want to send an AJAX request to the server to handle the approval process
+}
+
+function openModal() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+}
+
+
+function closeModal() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
 }
 </script>
 

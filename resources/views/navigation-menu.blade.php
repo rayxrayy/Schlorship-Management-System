@@ -101,6 +101,7 @@
                         @foreach(auth()->user()->unreadNotifications as $notification)
                         <div style="font-size: 16px;">{{ $notification->data['message'] }}</div>
                         @endforeach
+
                     </div>
                 </div>
             </div>
