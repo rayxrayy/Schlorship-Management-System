@@ -99,7 +99,7 @@
                     <!-- Container for notifications -->
                     <div id="notificationContainer">
                         @foreach(auth()->user()->unreadNotifications as $notification)
-                        <div style="font-size: 16px;">{{ $notification->data['message'] }}</div>
+                        <div style="font-size: 16px;">{{ $notification->data['message'] }}</div><br>
                         @endforeach
 
                     </div>

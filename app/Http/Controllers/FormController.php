@@ -39,7 +39,7 @@ class FormController extends Controller
         // Retrieve college and course from the request
         $college = $request->input('college');
         $course = $request->input('course');
-
+        
         // Check if the college and course are valid
         $validCollege = DB::table('courses')->where('user_name', $college)->exists();
         $validCourse = DB::table('courses')->where('coursename', $course)->exists();
@@ -55,27 +55,27 @@ class FormController extends Controller
 
         // Check if a profile image is uploaded
         if ($request->hasFile('document_citizenship')) {
-            $uploadedPhotoPath = $request->file('document_citizenship')->store('citizenship-images'); // Store the uploaded photo
+            $uploadedPhotoPath = $request->file('document_citizenship')->storeAs('student-citizenship', $request->file('document_citizenship')->getClientOriginalName(), 'public');
 
         // Save the photo path to the user's profile_photo_path attribute
             $validatedData['document_citizenship'] = $uploadedPhotoPath;
         }
 
         if ($request->hasFile('document_sop')) {
-            $uploadedPhotoPath = $request->file('document_sop')->store('sop-images'); // Store the uploaded photo
+            $uploadedPhotoPath = $request->file('document_sop')->storeAs('student-sop', $request->file('document_sop')->getClientOriginalName(), 'public');
 
         // Save the photo path to the user's profile_photo_path attribute
             $validatedData['document_sop'] = $uploadedPhotoPath;
         }
 
         if ($request->hasFile('document_transcript')) {
-            $uploadedPhotoPath = $request->file('document_transcript')->store('transcript-images'); // Store the uploaded photo
+            $uploadedPhotoPath = $request->file('document_transcript')->storeAs('student-transcript', $request->file('document_transcript')->getClientOriginalName(), 'public');
 
         // Save the photo path to the user's profile_photo_path attribute
             $validatedData['document_transcript'] = $uploadedPhotoPath;
         }
         if ($request->hasFile('document')) {
-            $uploadedPhotoPath = $request->file('document')->store('document-images'); // Store the uploaded photo
+            $uploadedPhotoPath = $request->file('document')->storeAs('student-document', $request->file('document')->getClientOriginalName(), 'public');
 
         // Save the photo path to the user's profile_photo_path attribute
             $validatedData['document'] = $uploadedPhotoPath;
@@ -127,38 +127,39 @@ class FormController extends Controller
 
         // Check if a profile image is uploaded
         if ($request->hasFile('document_citizenship')) {
-            $uploadedPhotoPath = $request->file('document_citizenship')->store('citizenship-images'); // Store the uploaded photo
+            $uploadedPhotoPath = $request->file('document_citizenship')->storeAs('student-citizenship', $request->file('document_citizenship')->getClientOriginalName(), 'public');
 
         // Save the photo path to the user's profile_photo_path attribute
             $validatedData['document_citizenship'] = $uploadedPhotoPath;
         }
 
         if ($request->hasFile('document_sop')) {
-            $uploadedPhotoPath = $request->file('document_sop')->store('sop-images'); // Store the uploaded photo
+            $uploadedPhotoPath = $request->file('document_sop')->storeAs('student-sop', $request->file('document_sop')->getClientOriginalName(), 'public');
 
         // Save the photo path to the user's profile_photo_path attribute
             $validatedData['document_sop'] = $uploadedPhotoPath;
         }
 
         if ($request->hasFile('document_transcript')) {
-            $uploadedPhotoPath = $request->file('document_transcript')->store('transcript-images'); // Store the uploaded photo
+            $uploadedPhotoPath = $request->file('document_transcript')->storeAs('student-transcript', $request->file('document_transcript')->getClientOriginalName(), 'public');
 
         // Save the photo path to the user's profile_photo_path attribute
             $validatedData['document_transcript'] = $uploadedPhotoPath;
         }
         if ($request->hasFile('document')) {
-            $uploadedPhotoPath = $request->file('document')->store('document-images'); // Store the uploaded photo
-
-        // Save the photo path to the user's profile_photo_path attribute
+    // Store the uploaded file directly in the 'public' directory
+            $uploadedPhotoPath = $request->file('document')->storeAs('student-document', $request->file('document')->getClientOriginalName(), 'public');
+    // Save the photo path to the user's profile_photo_path attribute
             $validatedData['document'] = $uploadedPhotoPath;
         }
+
         // Check if a profile image is uploaded
         if ($request->hasFile('profile_image')) {
-            $uploadedPhotoPath = $request->file('profile_image')->store('student-images'); // Store the uploaded photo
-
-        // Save the photo path to the user's profile_photo_path attribute
+            $uploadedPhotoPath = $request->file('profile_image')->storeAs('student-images', $request->file('profile_image')->getClientOriginalName());
+            // Save the photo path to the user's profile_photo_path attribute
             $validatedData['profile_image'] = $uploadedPhotoPath;
         }
+        
         $college = $request->input('college');
         $course = $request->input('course');
         $validatedData['college'] = $college;

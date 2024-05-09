@@ -28,7 +28,8 @@
         <article class="container-xxl py-5">
             <div class="row align-items-center px-lg-5 px-xxl-0">
                 <div class="col-lg-5 offset-lg-1 my-5 order-lg-1" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="{{ asset('storage/'.$student->image) }}" class="img-fluid" alt="student image" />
+                    <img src="{{ asset('storage/'.$student->image) }}" class="img-fluid" alt="student image"
+                        style="border-radius:30px;" />
                 </div>
 
                 <div class="col-lg-6 my-5 order-lg-0" data-aos="fade-zoom-in" data-aos-easing="ease-in-back"
@@ -70,8 +71,8 @@
                     </div>
                     <form action="{{route('ajax.khalti.verify_order')}}" method="post">
                         <!-- <h1>You have sucessfully done payment.</h1> -->
-                        <input type="text" name="student_name" value="{{ $student->fullname }}">
-                        <input type="text" name="username" value="{{$user}}">
+                        <input type="hidden" name="student_name" value="{{ $student->fullname }}">
+                        <input type="hidden" name="username" value="{{$user}}">
                     </form>
                 </div>
             </div>
