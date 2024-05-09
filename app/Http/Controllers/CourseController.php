@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\User;
 use App\Notifications\NewCourseNotification;
 
 class CourseController extends Controller
@@ -33,7 +34,10 @@ class CourseController extends Controller
     $course->module = implode(', ', $modules);
     // Save the course to the database
     $course->save();
-    $course->notify(new NewCourseNotification());
+    $students = User::where('role', 'student')->get(); // Assuming students are users with 'student' role
+    foreach ($students as $student) {
+        $student->notify(new NewCourseNotification($course));
+    }
         return redirect()->back()->with('success', 'Course created successfully!');
     }
     

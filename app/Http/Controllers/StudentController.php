@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\ApprovedStudents;
 use App\Models\Post;
 use App\Notifications\NewCourseNotification;
+use App\Notifications\StudentApprovedNotification; 
 class StudentController extends Controller
 {
     public function viewselectedstudents(){
@@ -56,6 +57,7 @@ class StudentController extends Controller
         // $finalstudent->delete();
         // Send an email to the selected student
         // Mail::to($finalstudent->email)->send(new StudentApproved($finalstudent));
+        $finalstudent->notify(new StudentApprovedNotification($finalstudent));
         return redirect()->route('finalstudent')->with('success', 'Student approved successfully.');
         // return view('singlepages.finalapprovedstudent',compact('finalstudent','user','finalstudentcount'));
     }
@@ -68,9 +70,10 @@ class StudentController extends Controller
         $finalstudentcount = $finalstudentview->count();
         return view('singlepages.finalapprovedstudent',compact('user','finalstudentview','finalstudentcount'));
     }
-    
+     
     public function viewsingleselectedstudent($id)  {
         $selectedstudents = Form::find($id);
+        // dd($selectedstudents);
         return view('singlepages.selectedstudent', compact('selectedstudents'));
     }
 

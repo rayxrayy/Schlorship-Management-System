@@ -159,7 +159,7 @@
             onclick="window.history.back()">&times;</button>
 
         <div class="profile">
-            <img src="/images/student.jpg" alt="Student Image">
+            <img src="{{ asset('storage/'.$selectedstudents->profile_image) }}" alt="Student Image">
             <div class="profile-details">
                 <h2>{{ $selectedstudents->fullname }}</h2>
                 <p>Address: {{ $selectedstudents->address }}</p>
@@ -206,11 +206,14 @@
 
         <div class="section">
             <h2 class="section-title">Documents</h2>
-            <p>Copy of citizenship: {{ $selectedstudents->document_citizenship }}</p>
-            <p>Copy of Transcript: {{ $selectedstudents->document_transcript }}</p>
-            <p>Copy of Sop: {{ $selectedstudents->document_sop }}</p>
-            <p>Other document: {{ $selectedstudents->document }}</p>
+            <p><a href="{{ asset('storage/'.$selectedstudents->document_citizenship) }}" target="_blank">Copy of
+                    citizenship</a></p>
+            <p><a href="{{ asset('storage/'.$selectedstudents->document_transcript) }}" target="_blank">Copy of
+                    Transcript</a></p>
+            <p><a href="{{ asset('storage/'.$selectedstudents->document_sop) }}" target="_blank">Copy of Sop</a></p>
+            <p><a href="{{ asset('storage/'.$selectedstudents->document) }}" target="_blank">Other document</a></p>
         </div>
+
 
 
 
