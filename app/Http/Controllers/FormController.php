@@ -81,12 +81,12 @@ class FormController extends Controller
             $validatedData['document'] = $uploadedPhotoPath;
         }
         // Check if a profile image is uploaded
-        if ($request->hasFile('profile_image')) {
-            $uploadedPhotoPath = $request->file('profile_image')->store('student-images'); // Store the uploaded photo
-
-        // Save the photo path to the user's profile_photo_path attribute
+       if ($request->hasFile('profile_image')) {
+            $uploadedPhotoPath = $request->file('profile_image')->storeAs('student-images', $request->file('profile_image')->getClientOriginalName());
+            // Save the photo path to the user's profile_photo_path attribute
             $validatedData['profile_image'] = $uploadedPhotoPath;
         }
+
         
         
         $form = Form::create($validatedData);

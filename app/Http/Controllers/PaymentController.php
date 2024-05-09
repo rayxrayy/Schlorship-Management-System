@@ -8,13 +8,7 @@ class PaymentController extends Controller
 {
 
     public function store(Request $request){
-        $studentName = $request->input('student_name');
-        $username = $request->input('username');
-        $payment = new Payment();
-        $payment->amount = 10;
-        $payment->user_name = $username;
-        $payment->student_name = $studentName;  
-        $payment->save();
+        
         return response()->json(['success' => true, 'message' => 'Payment successful']);
     }
 
@@ -25,7 +19,14 @@ class PaymentController extends Controller
         ));
         
         $url = "https://khalti.com/api/v2/payment/verify/";
- 
+        
+        $studentName = $request->input('student_name');
+        $username = $request->input('username');
+        $payment = new Payment();
+        $payment->amount = 10;
+        $payment->user_name = $username;
+        $payment->student_name = $studentName;  
+        $payment->save();
         #  Make the call using API.
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -51,3 +52,4 @@ class PaymentController extends Controller
     }
 
 }
+// Route::post('khalti/verify/store', [PaymentController::class, 'store'])->name('store.donate_amount');

@@ -68,10 +68,10 @@
                             data-student-id="{{ $student->id }}">Donate</button>
 
                     </div>
-                    <form action="" method="post">
+                    <form action="{{route('ajax.khalti.verify_order')}}" method="post">
                         <!-- <h1>You have sucessfully done payment.</h1> -->
-                        <input type="hidden" name="student_name" value="{{ $student->fullname }}">
-                        <input type="hidden" name="username" value="{{$user}}">
+                        <input type="text" name="student_name" value="{{ $student->fullname }}">
+                        <input type="text" name="username" value="{{$user}}">
                     </form>
                 </div>
             </div>
@@ -106,7 +106,7 @@ var config = {
                     }
                 });
                 $.ajax({
-                    method: 'get',
+                    method: 'post',
                     url: "{{route('ajax.khalti.verify_order')}}",
                     data: payload,
 

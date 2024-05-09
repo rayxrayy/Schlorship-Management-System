@@ -41,8 +41,8 @@
                     <td>{{ $key + $selectedstudents->firstItem() }}</td>
                     <td>
                         @if ($student->profile_image)
-                        <img src="{{ asset('storage/app/student-images/'.$student->profile_image) }}"
-                            alt="Profile Image" style="max-width: 100px;">
+                        <img src="{{ asset('storage/'.$student->profile_image) }}" alt="Profile Image"
+                            style="max-width: 200px; display: inline;border-radius: 50%;">
 
                         @endif
                     </td>

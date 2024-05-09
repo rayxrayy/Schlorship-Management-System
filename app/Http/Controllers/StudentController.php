@@ -15,7 +15,7 @@ class StudentController extends Controller
         // dd($selectedstudents); 
         $user = auth()->user()->name; 
         // dd($user);
-        $selectedstudents = Form::where('college', $user)->where('is_approved', false)->paginate(4);
+        $selectedstudents = Form::where('college', $user)->where('is_approved', false)->paginate(2);
         // dd($selectedstudents); 
         $selectedStudentsCount = $selectedstudents->count();
         // $student = Form::find($id); // Assuming $id is the student's ID
