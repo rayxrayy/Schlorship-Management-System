@@ -70,12 +70,13 @@ Route::get('/course',[CourseController::class,'index'])->name("course");
 Route::post('/store/course',[CourseController::class,'store'])->name('store.course');
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 Route::patch('/course',[CourseController::class,'update']);
-Route::post('//viewsingleselectedstudents/submitmessage/{id}', [CancelReviewController::class, 'store'])->name('submit.cancelform');
+Route::post('/viewsingleselectedstudents/submitmessage/{id}', [CancelReviewController::class, 'store'])->name('submit.cancelform');
 
 // publicpart
 Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');
 Route::get('khalti/verify',[PaymentController::class, 'verify'])->name('ajax.khalti.verify_order');
 Route::post('/scholorstudent/comment', [StudentController::class, 'store'])->name('submit-comment');
+
 
 //search part
 Route::get('/searchcourse', [ReviewController::class, 'searchcourse'])->name('search');

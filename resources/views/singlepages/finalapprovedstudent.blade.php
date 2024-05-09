@@ -42,8 +42,8 @@
                     <td>{{ $key + $finalstudentview->firstItem() }}</td>
                     <td>
                         @if ($student->image)
-                        <img src="{{ asset('storage/app/student-images/'.$student->profile_image) }}"
-                            alt="Profile Image" style="max-width: 100px;">
+                        <img src="{{ asset('storage/'.$student->image) }}" alt="Profile Image"
+                            style="max-width: 200px;display: inline;">
 
                         @endif
                     </td>
@@ -67,7 +67,7 @@
                 <span class="close" onclick="closeModal()">&times;</span>
                 <div>
                     <h1>Total Fee: Rs.100</h1>
-                    <h1></h1>
+                    <h1>Raised Amount: Rs.</h1>
                 </div>
             </div>
         </div>
