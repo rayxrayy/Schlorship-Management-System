@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\ApprovedStudents;
 use App\Models\Post;
 use App\Notifications\NewCourseNotification;
+use App\Notifications\PostNotification;
 use App\Notifications\StudentApprovedNotification; 
 class StudentController extends Controller
 {
@@ -80,24 +81,35 @@ class StudentController extends Controller
     public function viewscholorstudent(){
         $finalstudents = ApprovedStudents::all();
         $user = auth()->user()->name;
-        // dd($user);
+        $form = Form::all();
+        $studentEmails = $form->pluck('email', 'id');
+        $finalstudentcount = $finalstudents->count();
+        // dd($form);
         // dd($finalstudents);
-        return view('public.scholorstudent',compact('finalstudents','user'));
+        return view('public.scholorstudent',compact('finalstudents','user','studentEmails','finalstudentcount'));
     }
 
     public function store(Request $request)
     {
-
-        $studentName = $request->input('student_name');
-        $comment = $request->input('post');
-        $user_name = $request->input('username');
+        // Create a new Post instance
         $post = new Post();
-        $post->description = $comment;
-        $post->title = $studentName;
-        $post->image = $user_name;
+        $post->description = $request->input('post');
+        $post->image = $request->input('username');
+        $post->title = $request->input('student_name');
+    
+        // Save the post to the database
         $post->save();
+        $student = User::where('name', $request->input('student_name'))->first();
+
+        if ($student) {
+        // Send notification to the student
+        $student->notify(new PostNotification($post));
+        } else {
+        // Handle the case where the student with the given name is not found
+        // For example, you can log an error or provide feedback to the user
+        }
         // Optionally, you can redirect back or return a response
-        return redirect()->back()->with('success', 'Comment submitted successfully!');
+        return redirect()->back()->with('success', 'Commented!');
     }
 
     public function studentDashboard()
@@ -111,5 +123,10 @@ class StudentController extends Controller
 
     return view('navigation-menu', ['notifications' => $notifications]);
     }
+
+    // pubilc function storepayment(){
+        
+        
+    // }
     
 }
