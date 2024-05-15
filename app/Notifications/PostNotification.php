@@ -6,17 +6,17 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\URL;
 
-class NewFormNotification extends Notification
+class PostNotification extends Notification
 {
-    public $viewcourse;
-    /** 
+    use Queueable;
+    public $post;
+    /**
      * Create a new notification instance.
      */
-    public function __construct($viewcourse)
+    public function __construct($post)
     {
-        $this->form = $viewcourse;
+        $this->comment = $post;
     }
 
     /**
@@ -29,7 +29,6 @@ class NewFormNotification extends Notification
         return ['database']; //kun channel ma pathaune
     }
 
-    
     /**
      * Get the array representation of the notification.
      *
@@ -38,8 +37,8 @@ class NewFormNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => 'You have just applied for '. $this->form->course . ' course at ' . $this->form->college,
-            'form_id' => $this->form->id,
+            'message' => 'You have got a review from '. $this->comment->image. " : ". $this->comment->description,
+            'form_id' => $this->comment->id,
             'created_at' => now()->format('Y-m-d H:i:s'),
         ];
     }

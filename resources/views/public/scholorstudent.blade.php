@@ -20,6 +20,8 @@
             apply.</p>
         <p>Don't forget to add all the details and description and make sure you add the actual fee.</p>
     </h2>
+    <p>Total Scholor student: {{$finalstudentcount}} </p>
+
     @if(isset($message))
     <p style="color:red;">{{ $message }}</p>
     @endif
@@ -37,7 +39,8 @@
                     <div class="fs-3 fw-bold lh-sm">{{ $student->fullname }}
                     </div>
 
-                    <p>np03cs4a210022@gmail.com</p>
+                    <p>{{ $studentEmails[$student->student_id] }}</p>
+
                     <div class="fw-bold mt-4 lh-sm" id='description'> ''I am currently in the process of getting
                         enrollment in the <span>{{ $student->course }}</span> course offered by
                         <span>{{ $student->approved_by }}</span>.''
@@ -51,18 +54,18 @@
                         <h2>Total fee: Rs.{{ $student->fee }}</h2>
                         <h2>Raised:Rs.200.21</h2>
                     </div>
-                    <form action="{{ route('submit-comment') }}" method='POST'>
+                    <form id="commentForm" action="{{ route('submit-comment') }}" method="POST">
                         @csrf
                         <div class="review-area" data-student-id="{{ $student->id }}">
                             <input type="hidden" name="student_name" value="{{ $student->fullname }}">
-                            <textarea class="review-input" rows="1" cols="40" placeholder="Add a comment..."></textarea>
+                            <textarea class="review-input" name="post" rows="1" cols="40"
+                                placeholder="Add a comment..."></textarea>
                             <button class="post-button" style="display: none;" type="submit">Post</button>
                             <div class="comment-message" style="display: none;">Commented!</div>
-                            <input type="hidden" name="post" id="postinput">
-                            <input type="hidden" name="username" value="{{$user}}">
-
+                            <input type="hidden" name="username" value="{{ $user }}">
                         </div>
                     </form>
+
 
                     <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
                         <button class="btn fill-button payment-button" type="submit"
@@ -106,15 +109,15 @@ var config = {
                         'X-CSRF-TOKEN': '{{csrf_token()}}',
                     }
                 });
+
                 $.ajax({
                     method: 'post',
-                    url: "{{route('ajax.khalti.verify_order')}}",
+                    url: "{{ route('ajax.khalti.verify_order') }}",
                     data: payload,
-
-                    sucess: function(response) {
-                        if (response.sucess == 1) {
-
-                            window.location = response.redirecto;
+                    success: function(response) {
+                        if (response.success == 1) {
+                            // Submit the form to save data to the database
+                            $('#paymentForm').submit();
                         } else {
                             checkout.hide();
                         }
@@ -145,45 +148,62 @@ document.querySelectorAll('.payment-button').forEach(function(button) {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const reviewInput = document.querySelector('.review-input');
+    const postButtons = document.querySelectorAll('.post-button');
+    const commentMessages = document.querySelectorAll('.comment-message');
+    const reviewInputs = document.querySelectorAll('.review-input');
 
-document.querySelectorAll('.review-input').forEach(function(textarea) {
-    textarea.addEventListener('input', function() {
-        var postButton = this.nextElementSibling;
-        var commentMessage = postButton.nextElementSibling;
-
-        if (this.value.trim() !== "") {
-            if (!postButton) {
-                postButton = document.createElement("button");
-                postButton.classList.add("post-button");
-                postButton.textContent = "Post";
-                this.parentNode.appendChild(postButton); // Append the button to the parent
+    reviewInputs.forEach(function(reviewInput, index) {
+        reviewInput.addEventListener('input', function() {
+            const postButton = this.nextElementSibling;
+            if (reviewInput.value.trim() !== '') {
+                postButton.style.display = 'inline-block';
+            } else {
+                postButton.style.display = 'none';
             }
-            postButton.style.display = "block"; // Show the button
-        } else {
-            if (postButton) {
-                postButton.style.display = "none"; // Hide the button if textarea is empty
-            }
-        }
+        });
     });
-});
 
-document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('post-button')) {
-        var textarea = event.target.previousElementSibling; // Get the textarea element
-        var commentMessage = event.target.nextElementSibling; // Get the comment message element
-        var comment = textarea.value.trim();
+    document.querySelectorAll('#commentForm').forEach(function(form, index) {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
 
-        // Append the new comment to the existing value of the hidden input field
-        var postInput = document.getElementById("postinput");
-        postInput.value = comment;
+            // Store the current scroll position
+            const scrollPosition = window.scrollY;
 
-        console.log("Posting comment: " + comment);
-        textarea.value = ""; // Clear the textarea after posting
-        event.target.style.display = "none"; // Hide the button after posting
-        commentMessage.style.display = "block"; // Show the comment message
-        setTimeout(function() {
-            commentMessage.style.display = "none"; // Hide the comment message after 1 second
-        }, 1000);
-    }
+            // Make Ajax request to submit comment
+            const formData = new FormData(this);
+            // let textareaValue = form.querySelector('.review-input').value;
+            fetch(this.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Show comment message
+                        commentMessages[index].style.display = 'block';
+                        setTimeout(function() {
+                            commentMessages[index].style.display = 'none';
+                        }, 1000); // Hide the comment message after 5 seconds
+                        // Optionally, clear the textarea
+                        console.log("Textarea value:", reviewInputs[index].value);
+                        reviewInputs[index].value = '';
+                        // form.querySelector('.review-input').value = '';
+                        postButtons[index].style.display = 'none';
+                    } else {
+                        throw new Error('Network response was not ok');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Handle error if needed
+                })
+                .finally(() => {
+                    // Scroll back to the previous position
+                    window.scrollTo(0, scrollPosition);
+                });
+        });
+    });
 });
 </script>

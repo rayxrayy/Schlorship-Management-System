@@ -220,15 +220,21 @@
         <h3>Make a desision !</h3>
         <p> if you want to select the student just click the approve button if not then click the cancel button.</p>
 
-        <div class="button">
+        <div class="button" style="
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center;
+">
             <form action="{{ route('approve-student', ['id' => $selectedstudents->id]) }}" method="POST">
                 @csrf
                 <x-button class="fill-button" onclick="approveStudent({{ $selectedstudents->id }})">Approve</x-button>
                 </td>
             </form>
+            <x-button class="fill-button" onclick="openModal()">Cancel</x-button>
             <x-button class="fill-button" onclick="window.print()">Print</x-button>
         </div>
-        <x-button class="fill-button" onclick="openModal()">Cancel</x-button>
+
         <!-- The Modal -->
         <div id="myModal" class="modal">
             <!-- Modal content -->
