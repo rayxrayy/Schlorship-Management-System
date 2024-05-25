@@ -74,7 +74,7 @@ Route::post('/viewsingleselectedstudents/submitmessage/{id}', [CancelReviewContr
 
 // publicpart
 Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');
-Route::get('khalti/verify',[PaymentController::class, 'verify'])->name('ajax.khalti.verify_order');
+Route::post('/ajax/khalti/store_payment', [PaymentController::class, 'store'])->name('store_payment');
 Route::post('/scholorstudent/comment', [StudentController::class, 'store'])->name('submit-comment');
 
 

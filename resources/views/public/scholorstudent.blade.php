@@ -25,6 +25,7 @@
     @if(isset($message))
     <p style="color:red;">{{ $message }}</p>
     @endif
+
     @foreach ($finalstudents as $student)
     <section id="section-course" class="ai-felpx;lowship--course bg-white">
         <article class="container-xxl py-5">
@@ -52,7 +53,8 @@
                     </ul>
                     <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
                         <h2>Total fee: Rs.{{ $student->fee }}</h2>
-                        <h2>Raised:Rs.200.21</h2>
+                        <h2>Raised:Rs.{{ $studentPayments[$student->id] ?? 0 }}</h2>
+
                     </div>
                     <form id="commentForm" action="{{ route('submit-comment') }}" method="POST">
                         @csrf
@@ -63,29 +65,37 @@
                             <button class="post-button" style="display: none;" type="submit">Post</button>
                             <div class="comment-message" style="display: none;">Commented!</div>
                             <input type="hidden" name="username" value="{{ $user }}">
+                            <input type="hidden" id="student_id" name="student_id" value="{{ $student->id }}">
                         </div>
                     </form>
 
 
                     <div class="d-flex mt-5 gap-4 justify-content-center justify-content-lg-start">
-                        <button class="btn fill-button payment-button" type="submit"
+                        <button class="btn fill-button payment-button" type="button"
                             data-student-id="{{ $student->id }}">Donate</button>
 
+                        <form id="paymentForm">
+                            <input type="hidden" id="student_id_{{ $student->id }}" name="student_id"
+                                value="{{ $student->id }}">
+                            <input type="hidden" id="student_name_{{ $student->id }}" name="student_name"
+                                value="{{ $student->fullname }}">
+                            <input type="hidden" id="username_{{ $student->id }}" name="username" value="{{ $user }}">
+                        </form>
+
                     </div>
-                    <form action="{{route('ajax.khalti.verify_order')}}" method="post">
-                        <!-- <h1>You have sucessfully done payment.</h1> -->
-                        <input type="hidden" name="student_name" value="{{ $student->fullname }}">
-                        <input type="hidden" name="username" value="{{$user}}">
-                    </form>
+
                 </div>
-            </div>
         </article>
     </section>
     @endforeach
 
 </x-app-layout>
+
 <script>
-var amount = 0;
+// var studentId = $('#username').val();
+// console.log("Student ID: ", studentId);
+var paymentSuccessful = false;
+
 var config = {
     // replace the publicKey with yours
     "publicKey": "test_public_key_6db8a752c48745fdbfa77ac3a5051096",
@@ -101,32 +111,37 @@ var config = {
     ],
     "eventHandler": {
         onSuccess(payload) {
-            // hit merchant api for initiating verfication
-            amount = payload.amount;
-            if (payload.idx) {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': '{{csrf_token()}}',
-                    }
-                });
+            paymentSuccessful = true;
 
-                $.ajax({
-                    method: 'post',
-                    url: "{{ route('ajax.khalti.verify_order') }}",
-                    data: payload,
-                    success: function(response) {
-                        if (response.success == 1) {
-                            // Submit the form to save data to the database
-                            $('#paymentForm').submit();
-                        } else {
-                            checkout.hide();
-                        }
-                    },
-                    error: function(data) {
-                        console.log('Error:', data);
-                    }
-                });
-            }
+            var studentId = payload.product_identity;
+            var studentName = document.querySelector(`#student_name_${studentId}`).value;
+            var username = document.querySelector(`#username_${studentId}`).value;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                }
+            });
+
+            $.ajax({
+                method: 'post',
+                url: "{{ route('store_payment') }}",
+                data: {
+                    student_id: studentId,
+                    student_name: studentName,
+                    username: username,
+                },
+                success: function(response) {
+                    console.log('Payment data saved successfully');
+                    localStorage.setItem('paymentSuccess', 'Payment successful!');
+                    setTimeout(function() {
+                        location.reload();
+                    }); // Adjust the delay as needed
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                }
+            });
         },
         onError(error) {
             console.log(error);
@@ -136,17 +151,39 @@ var config = {
         }
     }
 };
-// function banayera ajax call garne
+// Check if there is a payment success message in localStorage
+document.addEventListener('DOMContentLoaded', function() {
+    if (localStorage.getItem('paymentSuccess')) {
+        var message = localStorage.getItem('paymentSuccess');
+        var paymentButtons = document.querySelectorAll('.payment-button');
+        paymentButtons.forEach(function(button) {
+            var studentId = button.getAttribute('data-student-id');
+            var messageElement = document.createElement('span');
+            messageElement.style.color = 'red';
+            messageElement.style.marginLeft = '20px';
+            messageElement.innerText = message;
+            button.parentNode.insertBefore(messageElement, button.nextSibling);
+            setTimeout(function() {
+                messageElement.remove();
+            }, 1000);
+        });
+        // Clear the payment success message from localStorage
+        localStorage.removeItem('paymentSuccess');
+    }
+});
+
 var checkout = new KhaltiCheckout(config);
 document.querySelectorAll('.payment-button').forEach(function(button) {
     button.addEventListener('click', function() {
         var studentId = this.getAttribute('data-student-id');
         checkout.show({
-            amount: 1000,
-            productId: studentId // Use student's ID as productId
+            amount: 1000, // Replace with the actual amount
+            productIdentity: studentId // Use student's ID as productIdentity
         });
     });
 });
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const reviewInput = document.querySelector('.review-input');
@@ -184,10 +221,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Show comment message
                         commentMessages[index].style.display = 'block';
                         setTimeout(function() {
-                            commentMessages[index].style.display = 'none';
+                            commentMessages[index].style.display =
+                                'none';
                         }, 1000); // Hide the comment message after 5 seconds
                         // Optionally, clear the textarea
-                        console.log("Textarea value:", reviewInputs[index].value);
+                        console.log("Textarea value:", reviewInputs[index]
+                            .value);
                         reviewInputs[index].value = '';
                         // form.querySelector('.review-input').value = '';
                         postButtons[index].style.display = 'none';
