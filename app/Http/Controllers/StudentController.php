@@ -8,6 +8,7 @@ use App\Models\ApprovedStudents;
 use App\Models\Post;
 use App\Notifications\NewCourseNotification;
 use App\Notifications\PostNotification;
+use App\Models\Payment;
 use App\Notifications\StudentApprovedNotification; 
 class StudentController extends Controller
 {
@@ -84,9 +85,16 @@ class StudentController extends Controller
         $form = Form::all();
         $studentEmails = $form->pluck('email', 'id');
         $finalstudentcount = $finalstudents->count();
-        // dd($form);
+        // Retrieve and group payment amounts by student_id
+        $payments = Payment::select('student_id', \DB::raw('SUM(amount) as total_amount'))
+                        ->groupBy('student_id')
+                        ->get();
+
+        // Convert the collection to an associative array
+        $studentPayments = $payments->pluck('total_amount', 'student_id')->toArray();
+        // dd($studentPayments);
         // dd($finalstudents);
-        return view('public.scholorstudent',compact('finalstudents','user','studentEmails','finalstudentcount'));
+        return view('public.scholorstudent',compact('finalstudents','user','studentEmails','finalstudentcount','studentPayments'));
     }
 
     public function store(Request $request)
@@ -96,6 +104,7 @@ class StudentController extends Controller
         $post->description = $request->input('post');
         $post->image = $request->input('username');
         $post->title = $request->input('student_name');
+        $post->student_id = $request->input('student_id');
     
         // Save the post to the database
         $post->save();
@@ -123,10 +132,5 @@ class StudentController extends Controller
 
     return view('navigation-menu', ['notifications' => $notifications]);
     }
-
-    // pubilc function storepayment(){
-        
-        
-    // }
     
 }
