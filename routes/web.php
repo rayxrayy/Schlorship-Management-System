@@ -72,6 +72,7 @@ Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('cour
 Route::patch('/course',[CourseController::class,'update']);
 Route::post('/viewsingleselectedstudents/submitmessage/{id}', [CancelReviewController::class, 'store'])->name('submit.cancelform');
 
+
 // publicpart
 Route::get('/scholorstudent',[StudentController::class,'viewscholorstudent'])->name('donate');
 Route::post('/ajax/khalti/store_payment', [PaymentController::class, 'store'])->name('store_payment');

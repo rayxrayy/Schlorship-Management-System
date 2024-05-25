@@ -67,10 +67,17 @@ class StudentController extends Controller
     public function viewfinalstudent(){
         $user = auth()->user()->name;
         $finalstudentview =  ApprovedStudents::where('approved_by', $user)->paginate(4);
+
+        $payments = Payment::select('student_id', \DB::raw('SUM(amount) as total_amount'))
+                        ->groupBy('student_id')
+                        ->get();
+        $raisedamt = $payments->pluck('total_amount', 'student_id')->toArray();
+        // dd($raisedamt);
+        
         // dd($finalstudentview);
         // dd($finalstudentview);
         $finalstudentcount = $finalstudentview->count();
-        return view('singlepages.finalapprovedstudent',compact('user','finalstudentview','finalstudentcount'));
+        return view('singlepages.finalapprovedstudent',compact('user','finalstudentview','finalstudentcount','raisedamt'));
     }
      
     public function viewsingleselectedstudent($id)  {
@@ -80,7 +87,8 @@ class StudentController extends Controller
     }
 
     public function viewscholorstudent(){
-        $finalstudents = ApprovedStudents::all();
+        $finalstudents = ApprovedStudents::where('is_raised', 0)->get();
+        // dd($finalstudents);
         $user = auth()->user()->name;
         $form = Form::all();
         $studentEmails = $form->pluck('email', 'id');
@@ -89,6 +97,14 @@ class StudentController extends Controller
         $payments = Payment::select('student_id', \DB::raw('SUM(amount) as total_amount'))
                         ->groupBy('student_id')
                         ->get();
+        // Update the is_raised column based on the total payments
+        foreach ($payments as $payment) {
+        $student = ApprovedStudents::find($payment->student_id);
+            if ($student) {
+                $student->is_raised = ($payment->total_amount >= 100) ? 1 : 0;
+                $student->save();
+            }
+        }
 
         // Convert the collection to an associative array
         $studentPayments = $payments->pluck('total_amount', 'student_id')->toArray();

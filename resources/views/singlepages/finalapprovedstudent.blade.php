@@ -50,12 +50,11 @@
                     <td>{{ $student->fullname }}</td>
                     <td>{{ $student->course }}</td>
                     <td>{{ $student->description }}</td>
-                    <td>
-                    <td>
-                        <button style="color:#595bd4; " onclick="openModal()">View More</button>
 
-                    </td>
-
+                    <td>
+                        <button style="color:#595bd4;"
+                            onclick="openModal({{ $student->id }}, {{ $student->student_id }}, {{ $raisedamt[$student->id] ?? 0 }})">View
+                            More</button>
                     </td>
                 </tr>
                 @endforeach
@@ -66,8 +65,9 @@
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
                 <div>
+                    <h1 style="display: none;">Student ID: <span id="modalStudentId"></span></h1>
                     <h1>Total Fee: Rs.100</h1>
-                    <h1>Raised Amount: Rs.</h1>
+                    <h1>Raised Amount: <span id="modalRaisedAmount"></span></h1>
                 </div>
             </div>
         </div>
@@ -76,9 +76,10 @@
     <div class="foot" style="padding-top:20%" ;></div>
 </x-app-layout>
 <script>
-function openModal() {
-    var modal = document.getElementById("myModal");
-    modal.style.display = "block";
+function openModal(id, studentId, raisedAmount) {
+    document.getElementById('modalStudentId').innerText = id;
+    document.getElementById('modalRaisedAmount').innerText = raisedAmount;
+    document.getElementById('myModal').style.display = 'block';
 }
 
 
