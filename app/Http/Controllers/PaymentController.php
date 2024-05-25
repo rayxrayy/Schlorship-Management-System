@@ -14,6 +14,7 @@ class PaymentController extends Controller
         $payment->student_name = $request->student_name;
         $payment->student_id = $request->student_id;
         $payment->save();
+        
         return with(['message'   => 'Donated successfully!']);
     }
 }

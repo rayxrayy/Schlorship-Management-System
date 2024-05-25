@@ -60,5 +60,5 @@ class ReviewController extends Controller
     $user = auth()->user()->name;
     return view('public.scholorstudent', compact('finalstudents','user'));
     }
-
+    
 }
