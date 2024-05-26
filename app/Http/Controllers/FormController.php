@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 use Symfony\Component\Routing\Annotation\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Form;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Notifications\NewFormNotification;
+use App\Notifications\CollegeFormNotification;
 
 class FormController extends Controller
 {
     public function store(Request $request)
     {
-
         // Validate the form data
         $validatedData = $request->validate([
             'fullname' => 'required|string|max:255',
@@ -81,20 +83,28 @@ class FormController extends Controller
             $validatedData['document'] = $uploadedPhotoPath;
         }
         // Check if a profile image is uploaded
-       if ($request->hasFile('profile_image')) {
+       if ($request->hasFile('profile_image')) {  
             $uploadedPhotoPath = $request->file('profile_image')->storeAs('student-images', $request->file('profile_image')->getClientOriginalName());
             // Save the photo path to the user's profile_photo_path attribute
             $validatedData['profile_image'] = $uploadedPhotoPath;
         }
 
-        
+        $validatedData['student_id'] = Auth::id();
         
         $form = Form::create($validatedData);
-        // dd($college);
+        // dd($form);
+
         Auth::user()->notify(new NewFormNotification($form)); // Pass $form to the notification constructor
+        // Notify the applied college
+        $appliedCollege = User::where('name', $college)->where('role', 'college')->first();
+        if ($appliedCollege) {
+            $appliedCollege->notify(new CollegeFormNotification($form));
+        }
         // Redirect back with success message
         return redirect()->back()->with('success', 'Form data submitted successfully!');
         }catch (\Exception $e) {
+            // Log::error('Form submission failed: ' . $e->getMessage());
+            // Log::error($e->getTraceAsString());
         // If an exception occurs during form submission, redirect back with an error message
         return redirect()->back()->with('error', 'Form submission failed. Please try again later.');
         }
@@ -164,8 +174,16 @@ class FormController extends Controller
         $course = $request->input('course');
         $validatedData['college'] = $college;
         $validatedData['course'] = $course;
+        
+        $validatedData['student_id'] = Auth::id();
+        
         $form = Form::create($validatedData);
+        // dd($form);
         Auth::user()->notify(new NewFormNotification($form)); 
+        $appliedCollege = User::where('name', $college)->where('role', 'college')->first();
+        if ($appliedCollege) {
+            $appliedCollege->notify(new CollegeFormNotification($form));
+        }
         // dd($form);
         // Redirect back with success message
         return redirect()->back()->with('success', 'Form data submitted successfully!');

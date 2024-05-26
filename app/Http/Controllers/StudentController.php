@@ -32,6 +32,7 @@ class StudentController extends Controller
     }
 
     public function finalstudent($id){
+        // Find the student form by ID, or fail if not found
         $finalstudent = Form::findOrFail($id); 
         $finalstudentcount = $finalstudent->count();
         $finalstudent->is_approved = true;
@@ -51,15 +52,18 @@ class StudentController extends Controller
         'course'=>$finalstudent-> course,
         'approved_by'=>$user,
         ]);}
+
+
         catch (\Exception $e) {
-    // Log the database error
+        // Log the database error
             \Log::error('Database error: ' . $e->getMessage());
-    // Optionally, handle the error or return a response indicating failure
+        // Optionally, handle the error or return a response indicating failure
         }
-        // $finalstudent->delete();
-        // Send an email to the selected student
-        // Mail::to($finalstudent->email)->send(new StudentApproved($finalstudent));
-        $finalstudent->notify(new StudentApprovedNotification($finalstudent));
+        
+        // $studentUser = $finalstudent->fullname;
+        $user = User::findOrFail($finalstudent->student_id);
+        $user->notify(new StudentApprovedNotification($finalstudent));
+        
         return redirect()->route('finalstudent')->with('success', 'Student approved successfully.');
         // return view('singlepages.finalapprovedstudent',compact('finalstudent','user','finalstudentcount'));
     }
