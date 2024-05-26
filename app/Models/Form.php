@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Form extends Model
 {
     use HasFactory;
-
     protected $fillable = [
+        'student_id',
         'fullname',
         'dob',
         'gender',
@@ -31,4 +32,11 @@ class Form extends Model
         'course',  // Include course attribute
         'profile_image',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+
+    }
+    
 }

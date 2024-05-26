@@ -2,22 +2,21 @@
 
 namespace App\Notifications;
 
-use App\Models\ApprovedStudents;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\CancelStudent;
 
-class StudentApprovedNotification extends Notification
+class FormCancelNotification extends Notification
 {
-    
-    public $finalstudent;
+    public $cancelstudent;
     /**
      * Create a new notification instance.
      */
-    public function __construct($finalstudent)
+    public function __construct($cancelstudent)
     {
-        $this->finalstudent = $finalstudent;
-        // dump($finalstudent);
+        $this->cancelstudent = $cancelstudent;
     }
 
     /**
@@ -36,23 +35,24 @@ class StudentApprovedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('Congratulations! '. $this->finalstudent->fullname)
+                    ->line('We are sorry! '. $this->cancelstudent->username)
                     ->action('Notification Action', url('/'))
-                    ->line('You have been selected for the course '. $this->finalstudent->course. ' offered by '. $this->finalstudent->college )
+                    ->line('You have not been selected for the course '. $this->cancelstudent->coursename. ' offered by '. $this->cancelstudent->collegename )
+                    ->line('College Comments: ' .$this->cancelstudent->conmment )
                     ->line('Thank you for applying!')
                     ->line('Good Luck for your future!');
     }
-
     /**
      * Get the array representation of the notification.
      *
      * @return array<string, mixed>
      */
+
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => 'You have been selected for the course '. $this->finalstudent->course . ' offered by ' . $this->finalstudent->college,
-            'student_id' => $this->finalstudent->id,
+            'message' => 'You have not been selected for the course '. $this->cancelstudent->coursename . ' offered by ' . $this->cancelstudent->collegename,
+            'student_id' => $this->cancelstudent->id,
             'created_at' => now()->format('Y-m-d H:i:s'),
         ];
     }

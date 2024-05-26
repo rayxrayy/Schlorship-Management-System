@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Form;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -10,11 +11,12 @@ use Illuminate\Support\Facades\URL;
 
 class CollegeFormNotification extends Notification
 {
+    use Queueable;
     public $form;
     /**
      * Create a new notification instance.
      */
-    public function __construct($form)
+    public function __construct(Form $form)
     {
         $this->form = $form;
     }
@@ -31,7 +33,7 @@ class CollegeFormNotification extends Notification
    public function toArray($notifiable)
     {
         return [
-            'message' => 'A student has applied for your course: ' . $this->form->course,
+            'message' => $this->form->fullname. ' has applied for your course ' . $this->form->course,
             'form_id' => $this->form->id,
             'created_at' => now()->format('Y-m-d H:i:s')
         ];

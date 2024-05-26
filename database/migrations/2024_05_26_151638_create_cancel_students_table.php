@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cancel_reviews', function (Blueprint $table) {
+        Schema::create('cancel_students', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('student_id');
             $table->string('username');
             $table->string('collegename');
             $table->string('coursename');
             $table->text('conmment');
             $table->timestamps();
+
+            $table->foreign('student_id')->references('id')->on('forms');
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cancel_reviews');
+        Schema::dropIfExists('cancel_students');
     }
 };
